@@ -1,0 +1,62 @@
+{
+  "name": "Saka Bar",
+  "version": "0.1",
+  "author": "Sufyan Dawoodjee",
+  "description": "Saka Bar - elegent searching and tab management. An omnibar and tabs replacement.",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["event_page.js"],
+    "persistent": false
+  },
+  "commands": {
+    "toggleSakaBar": {
+      "suggested_key": {
+        "default": "Alt+Space"
+      },
+      "description": "Toggle Saka Bar"
+    },
+    "toggleSakaBar2": {
+      "suggested_key": {
+        "default": "Ctrl+K"
+      },
+      "description": "Toggle Saka Bar"
+    },
+    "toggleSakaBar3": {
+      "suggested_key": {
+        "default": "Ctrl+E"
+      },
+      "description": "Toggle Saka Bar"
+    },
+    "toggleSakaBar4": {
+      "description": "Toggle Saka Bar"
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "logo.png"
+    }
+  },
+  "_____options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+    },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "history",
+    "bookmarks",
+    "chrome",
+    "chrome://favicon/"
+  ],
+  "web_accessible_resources": [
+    "sakabar.html",
+    "material-icons.css",
+    "MaterialIcons-Regular.woff2"
+  ]
+}

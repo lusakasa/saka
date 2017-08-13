@@ -1,0 +1,21 @@
+#settings-bar {
+  display: flex;
+  flex-flow: row no-wrap;
+  justify-content: space-around;
+  width: 100%;
+  height: 12px;
+  font-size: 10px;
+  line-height: 10px;
+  color: rgba(0, 0, 0, 0.34);
+  border-bottom: 1px solid rgba(0,0,0,.12);
+
+}
+
+.settings-item {
+  cursor: pointer;
+  opacity: 0.44;
+}
+
+.settings-item:hover {
+  opacity: 1;
+}

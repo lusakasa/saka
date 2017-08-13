@@ -1,0 +1,15 @@
+section.search-field-wrapper {
+  font-size: 26px;
+  padding-left: 16px;
+  display: flex;
+  width: 624px;
+  border-bottom: none;
+}
+
+#search-bar {
+  color: #000000;
+}
+
+#search-bar::selection {
+  background-color: rgba(63, 81, 245, 0.15);
+}
