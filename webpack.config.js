@@ -11,11 +11,11 @@ module.exports = function (env) {
   const config = {
     entry: {
       'event_page': './src/event_page/index.js',
-      'toggle_sakabar': './src/content_script/toggle_sakabar.js',
+      'toggle_saka': './src/content_script/toggle_saka.js',
       // 'extensions': './src/pages/extensions/index.js',
       // 'info': './src/pages/info/index.js',
       // 'options': './src/pages/options/index.js',
-      'sakabar': './src/sakabar/index.js'
+      'saka': './src/saka/index.js'
     },
     output: {
       path: __dirname + '/dist',

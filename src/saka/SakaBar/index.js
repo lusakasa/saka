@@ -14,7 +14,7 @@ import './style.css';
 //   1. retain contents when hidden then reopened
 //   2. contain current url highlighted
 // Saka Bar should stay rendered even when the tab switches
-// multiple tabs: 1. general search, 1.5  saved marks, 2. tabs, 3. bookmarks, 4. history, 5. possibly find, 6. exit
+// multiple tabs: 1. general search, 1.5  saved marks, 2. tabs, 3. bookmarks, 4. history, 5. possibly find, 6. current page search
 // make tab order configurable
 // make prefix string for each
 // make commands for entering each
@@ -107,8 +107,8 @@ export default class SakaBar extends Component {
   decrementSelectedIndex = () => {
     const { suggestions, selectedIndex } = this.state;
     const newIndex = selectedIndex === 0
-        ? 0
-        : selectedIndex - 1;
+      ? 0
+      : selectedIndex - 1;
     const newsearchText = suggestions[newIndex] && suggestions[newIndex].text || '';
     this.setState({
       selectedIndex: newIndex,

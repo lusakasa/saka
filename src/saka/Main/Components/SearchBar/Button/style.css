@@ -1,0 +1,23 @@
+#action-button {
+  height: 56px;
+  width: 56px;
+  min-width: 56px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(63, 81, 245, 0.6);
+  background-color: rgba(63, 81, 245, 0.0);
+  cursor: pointer
+}
+
+#action-button:hover {
+  color: #ffffff;
+  background-color: rgba(63, 81, 245, 1.0);
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+#action-button > i {
+  font-size: 32px;
+}

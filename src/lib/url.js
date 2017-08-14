@@ -1,3 +1,19 @@
+
+/**
+ * Given the URL of a suggestion and the search text, makes the URL nicer
+ * @param {string} url - the suggestion URL
+ * @param {string} searchString - the text in the search bar
+ */
+export function prettifyURL (url, searchString) {
+  if (url.endsWith('/')) {
+    url = url.substr(0, url.length - 1);
+  }
+  if (!searchString.startsWith('http://') && url.startsWith('http://')) {
+    url = url.substr(7);
+  }
+  return url;
+}
+
 /**
  * Returns true only if str is a valid url
  * @param {string} str

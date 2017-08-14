@@ -1,0 +1,23 @@
+span.kbd-end-detail {
+  white-space: nowrap;
+  color: gray;
+  text-decoration: none;
+  margin-right: 6px;
+}
+
+.search-item {
+  padding-left: 10px !important;
+  border-left: 6px solid;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  background-color: rgb(237, 237, 237) !important;
+}
+
+.suggestion-wrap-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 530px;
+  overflow-x: scroll;
+}

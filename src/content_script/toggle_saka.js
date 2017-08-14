@@ -1,16 +1,20 @@
 // this file is dynamically loaded by the event page into the active tab of the active window
-// Search for an existing Saka Bar
+// Search for an existing Saka
 //   * if found, remove it
 //   * if not found, create and show it
 
-const oldSakaBarRoot = document.querySelector('#saka-bar-root');
-if (oldSakaBarRoot) {
-  oldSakaBarRoot.remove();
+const oldSakaRoot = document.querySelector('#saka-root');
+if (oldSakaRoot) {
+  if (SAKA_DEBUG) {
+    console.log('REMOVING SAKA');
+  }
+  oldSakaRoot.remove();
 } else {
+  console.log('APPENDING SAKA');
   // create container div
-  const newSakaBarRoot = document.createElement('div');
-  newSakaBarRoot.id = 'saka-bar-root';
-  newSakaBarRoot.style = (
+  const newSakaRoot = document.createElement('div');
+  newSakaRoot.id = 'saka-root';
+  newSakaRoot.style = (
   `position: absolute;
   left: 0;
   top: 0;
@@ -19,10 +23,10 @@ if (oldSakaBarRoot) {
   z-index: 2147483647;
   opacity: 1;
   pointer-events: none;`);
-  // create SakaBar iframe
+  // create Saka iframe
   const iframe = document.createElement('iframe');
-  iframe.id = 'sakabar';
-  iframe.src = chrome.runtime.getURL('sakabar.html');
+  iframe.id = 'saka';
+  iframe.src = chrome.runtime.getURL('saka.html');
   iframe.style = (
   `z-index: 2147483647;
   position: fixed;
@@ -37,6 +41,6 @@ if (oldSakaBarRoot) {
   iframe.scroling = 'no';
   iframe.frameBorder = 0;
   // mount to DOM
-  newSakaBarRoot.appendChild(iframe);
-  document.documentElement.appendChild(newSakaBarRoot);
+  newSakaRoot.appendChild(iframe);
+  document.documentElement.appendChild(newSakaRoot);
 }

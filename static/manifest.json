@@ -1,34 +1,38 @@
 {
-  "name": "Saka Bar",
-  "version": "0.1",
+  "name": "Saka",
+  "version": "0.1.0",
   "author": "Sufyan Dawoodjee",
-  "description": "Saka Bar - elegent searching and tab management. An omnibar and tabs replacement.",
+  "description": "Saka - elegent tab search, selection, and beyond",
   "manifest_version": 2,
   "background": {
     "scripts": ["event_page.js"],
     "persistent": false
   },
   "commands": {
-    "toggleSakaBar": {
+    "toggleSaka": {
       "suggested_key": {
         "default": "Alt+Space"
       },
-      "description": "Toggle Saka Bar"
+      "description": "Toggle Saka"
     },
-    "toggleSakaBar2": {
+    "toggleSaka2": {
       "suggested_key": {
         "default": "Ctrl+K"
       },
-      "description": "Toggle Saka Bar"
+      "description": "Toggle Saka"
     },
-    "toggleSakaBar3": {
+    "toggleSaka3": {
       "suggested_key": {
         "default": "Ctrl+E"
       },
-      "description": "Toggle Saka Bar"
+      "description": "Toggle Saka"
     },
-    "toggleSakaBar4": {
-      "description": "Toggle Saka Bar"
+    "toggleSaka4": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Toggle Saka",
+      "global": true
     }
   },
   "browser_action": {
@@ -36,7 +40,7 @@
       "48": "logo.png"
     }
   },
-  "_____options_ui": {
+  "__options_ui": {
     "page": "options.html",
     "chrome_style": false,
     "open_in_tab": true
@@ -51,11 +55,10 @@
     "tabs",
     "history",
     "bookmarks",
-    "chrome",
     "chrome://favicon/"
   ],
   "web_accessible_resources": [
-    "sakabar.html",
+    "saka.html",
     "material-icons.css",
     "MaterialIcons-Regular.woff2"
   ]
