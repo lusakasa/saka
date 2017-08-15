@@ -45,15 +45,27 @@ async function toggleSaka (tabId) {
     // If the current tab is Saka, switch to the previous tab (if it exists) and close the current tab
     if (currentTab.url === browser.runtime.getURL('saka.html')) {
       if (lastTabId) {
-        const lastTab = (await browser.tabs.get(lastTabId));
-        if (lastTab) {
-          await browser.tabs.update(lastTabId, { active: true });
-          if (SAKA_DEBUG) console.log(`Switched to tab ${lastTab.url}`);
+        try {
+          const lastTab = (await browser.tabs.get(lastTabId));
+          if (lastTab) {
+            try {
+              await browser.tabs.update(lastTabId, { active: true });
+              if (SAKA_DEBUG) console.log(`Switched to tab ${lastTab.url}`);
+            } catch (e) {
+              if (SAKA_DEBUG) console.log(`Failed to switch to tab ${lastTab.url}`);
+            }
+          }
+          lastTabId = undefined;
+        } catch (e) {
+          if (SAKA_DEBUG) console.log(`Cannot return to tab ${lastTabId} because it no longer exists`);
         }
-        lastTabId = undefined;
       }
-      await browser.tabs.remove(currentTab.id);
-      if (SAKA_DEBUG) console.log(`Removed tab ${currentTab.url}`);
+      try {
+        await browser.tabs.remove(currentTab.id);
+        if (SAKA_DEBUG) console.log(`Removed tab ${currentTab.url}`);
+      } catch (e) {
+        if (SAKA_DEBUG) console.log(`Failed to remove tab ${currentTab.url}`);
+      }
     // Otherwise, try to load Saka into the current tab
     } else {
       try {
