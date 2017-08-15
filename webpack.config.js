@@ -10,7 +10,7 @@ var renderer = new marked.Renderer();
 module.exports = function (env) {
   const config = {
     entry: {
-      'event_page': './src/event_page/index.js',
+      'background_page': './src/background_page/index.js',
       'toggle_saka': './src/content_script/toggle_saka.js',
       // 'extensions': './src/pages/extensions/index.js',
       // 'info': './src/pages/info/index.js',
@@ -19,8 +19,7 @@ module.exports = function (env) {
     },
     output: {
       path: __dirname + '/dist',
-      filename: '[name].js',
-      sourceMapFilename: '[name].js.map' // always generate source maps
+      filename: '[name].js'
     },
     devtool: 'source-map',
     module: {
@@ -107,6 +106,7 @@ module.exports = function (env) {
       })
     ]);
   } else {
+    config.output.sourceMapFilename = '[name].js.map';
     config.plugins = config.plugins.concat([
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),

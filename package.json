@@ -1,5 +1,5 @@
 {
-  "name": "saka-bar",
+  "name": "saka",
   "description": "A keyboard interface to the web",
   "scripts": {
     "build": "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:firefox\"",

@@ -5,8 +5,8 @@
   "description": "Saka - elegent tab search, selection, and beyond",
   "manifest_version": 2,
   "background": {
-    "scripts": ["event_page.js"],
-    "persistent": false
+    "scripts": ["background_page.js"],
+    "persistent": true
   },
   "commands": {
     "toggleSaka": {
@@ -40,11 +40,6 @@
       "48": "logo.png"
     }
   },
-  "__options_ui": {
-    "page": "options.html",
-    "chrome_style": false,
-    "open_in_tab": true
-  },
   "icons": {
     "16": "logo.png",
     "48": "logo.png",
@@ -53,6 +48,7 @@
   "permissions": [
     "<all_urls>",
     "tabs",
+    "activeTab",
     "history",
     "bookmarks",
     "chrome://favicon/"

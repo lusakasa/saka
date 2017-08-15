@@ -9,7 +9,8 @@ export default ({
   icon,
   onKeyDown,
   onInput,
-  onBlur
+  onBlur,
+  onButtonClick
 }) => (
   <section class='search-bar-container'>
     <Input
@@ -21,6 +22,7 @@ export default ({
     />
     <Button
       icon={icon}
+      onClick={onButtonClick}
     />
   </section>
 );

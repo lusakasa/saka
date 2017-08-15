@@ -5,7 +5,8 @@ export default ({
   suggestion: { type, title, isURL, prettyURL },
   searchText,
   selected,
-  index
+  index,
+  onClick
 }) =>
   <Suggestion
     type={'search'}
@@ -21,4 +22,5 @@ export default ({
     }
     selected={selected}
     index={index}
+    onClick={onClick}
   />;

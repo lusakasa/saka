@@ -19,5 +19,5 @@ span.kbd-end-detail {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 530px;
-  overflow-x: scroll;
+  overflow-x: hidden;
 }

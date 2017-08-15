@@ -14,7 +14,8 @@ export default ({
   url,
   icon,
   selected,
-  index
+  index,
+  onClick
 }) => (
   <li
     class='mdc-list-item search-item'
@@ -22,6 +23,7 @@ export default ({
       backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
       borderLeftColor: fadedColorMap[type]
     }}
+    onClick={() => onClick(index)}
   >
     <span class='mdc-list-item__start-detail search-icon' role='presentation'>
       { url ? (

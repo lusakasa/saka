@@ -5,7 +5,8 @@ export default ({
   suggestion: { type, title, url, prettyURL },
   searchText,
   selected,
-  index
+  index,
+  onClick
 }) =>
   <Suggestion
     type={'bookmark'}
@@ -17,4 +18,5 @@ export default ({
     icon={'star_border'}
     selected={selected}
     index={index}
+    onClick={onClick}
   />;

@@ -43,7 +43,7 @@ async function toggleSaka (tabId) {
     : await browser.tabs.get(tabId);
   if (currentTab) {
     // If the current tab is Saka, switch to the previous tab (if it exists) and close the current tab
-    if (currentTab.url === 'chrome-extension://codmmifoppafgbpinhbbijbilkhjlflf/saka.html') {
+    if (currentTab.url === browser.runtime.getURL('saka.html')) {
       if (lastTabId) {
         const lastTab = (await browser.tabs.get(lastTabId));
         if (lastTab) {
@@ -87,7 +87,7 @@ async function toggleSaka (tabId) {
 
 async function closeSaka (tab) {
   if (tab) {
-    if (tab.url === 'chrome-extension://codmmifoppafgbpinhbbijbilkhjlflf/saka.html') {
+    if (tab.url === browser.runtime.getURL('saka.html')) {
       await browser.tabs.remove(tab.id);
     } else {
       await browser.tabs.executeScript(tab.id, {

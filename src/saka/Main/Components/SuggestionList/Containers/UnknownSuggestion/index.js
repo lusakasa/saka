@@ -4,7 +4,8 @@ import Suggestion from '../../Components/Suggestion';
 export default ({
   suggestion: { title, type },
   selected,
-  index
+  index,
+  onClick
 }) =>
   <Suggestion
     type={'unknown'}
@@ -13,4 +14,5 @@ export default ({
     titleColor={'red'}
     selected={selected}
     index={index}
+    onClick={onClick}
   />;

@@ -5,7 +5,8 @@ export default ({
   suggestion: { type, title, url },
   searchText,
   selected,
-  index
+  index,
+  onClick
 }) =>
   <Suggestion
     type={'command'}
@@ -14,4 +15,5 @@ export default ({
     titleColor={'rgb(75, 165, 75)'}
     selected={selected}
     index={index}
+    onClick={onClick}
   />;

@@ -4,9 +4,12 @@ import SuggestionList from '../../Components/SuggestionList';
 import BackgroundImage from '../../Components/BackgroundImage';
 import { tabSuggestions } from 'suggestions/get';
 import { preprocessSuggestion } from 'suggestions/preprocess';
+import { isMac } from 'lib/utils';
 
 // background should change to selected tab
 // chrome.tabs.captureVisibleTab
+
+// if no input selected, show tabs in MRU order 
 
 export default class TabSearch extends Component {
   state = {
@@ -29,6 +32,8 @@ export default class TabSearch extends Component {
             onKeyDown={this.handleKeyDown}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
+            onButtonClick={this.handleButtonClick}
+            onSuggestionClick={this.handleSuggestionClick}
           />
           <SuggestionList
             searchString={searchString}
@@ -43,11 +48,11 @@ export default class TabSearch extends Component {
   handleKeyDown = (e) => {
     switch (e.key) {
       case 'Escape':
-        chrome.runtime.sendMessage('toggleSaka');
+        browser.runtime.sendMessage('closeSaka');
         break;
       case 'Backspace':
         if (!e.repeat && e.target.value === '') {
-          chrome.runtime.sendMessage('toggleSaka');
+          browser.runtime.sendMessage('closeSaka');
         }
         break;
       case 'ArrowLeft':
@@ -72,9 +77,9 @@ export default class TabSearch extends Component {
       case '4':
       case '5':
       case '6':
-        if (e.metaKey) {
+        if (isMac ? e.metaKey : e.ctrlKey) {
           e.preventDefault();
-          this.trySetIndex(Number.parseInt(e.key) - 1);
+          this.tryActivateTab(Number.parseInt(e.key) - 1);
         }
         break;
       case 'Enter':
@@ -132,9 +137,9 @@ export default class TabSearch extends Component {
     e.target.focus();
   }
   handleButtonClick = (e) => {
-
+    this.tryActivateTab();
   }
-  handleSuggestionClick = (suggestion) => {
-
+  handleSuggestionClick = (index) => {
+    this.tryActivateTab(index);
   }
 }
