@@ -77,11 +77,19 @@ async function toggleSaka (tabId) {
         if (SAKA_DEBUG) console.log(`Loaded Saka into tab ${currentTab.url}`);
       // If loading Saka into the current tab fails, create a new tab
       } catch (e) {
+        try {
+          const screenshot = await browser.tabs.captureVisibleTab();
+          await browser.storage.local.set({ screenshot });
+        } catch (e) {
+          if (SAKA_DEBUG) console.log('Failed to capture visible tab');
+        }
         lastTabId = currentTab.id;
         await browser.tabs.create({
           url: '/saka.html',
-          index: currentTab.index + 1
+          index: currentTab.index + 1,
+          active: false
         });
+
         if (SAKA_DEBUG) console.log(`Failed to execute Saka into tab. Instead, created new Saka tab after ${currentTab.url}`);
       }
     }
@@ -94,7 +102,7 @@ async function toggleSaka (tabId) {
   }
   const window = await browser.windows.getLastFocused();
   await browser.windows.update(window.id, { focused: true });
-  console.groupEnd();
+  if (SAKA_DEBUG) console.groupEnd();
 }
 
 async function closeSaka (tab) {

@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
 import SearchBar from '../../Components/SearchBar';
 import SuggestionList from '../../Components/SuggestionList';
+import GUIContainer from '../../Components/GUIContainer';
 import BackgroundImage from '../../Components/BackgroundImage';
 import { tabSuggestions } from 'suggestions/get';
 import { preprocessSuggestion } from 'suggestions/preprocess';
@@ -24,7 +25,7 @@ export default class TabSearch extends Component {
     const suggestion = suggestions[selectedIndex];
     return (
       <BackgroundImage suggestion={suggestion}>
-        <main>
+        <GUIContainer>
           <SearchBar
             searchString={searchString}
             suggestion={suggestion}
@@ -41,7 +42,7 @@ export default class TabSearch extends Component {
             selectedIndex={selectedIndex}
             onSuggestionClick={this.handleSuggestionClick}
           />
-        </main>
+        </GUIContainer>
       </BackgroundImage>
     );
   }

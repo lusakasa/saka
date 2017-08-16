@@ -3,17 +3,29 @@ import './style.css';
 
 export default class BackgroundImage extends Component {
   state = {
-    image: undefined
+    screenshot: undefined
   }
-  render ({ children, suggestion }) {
+  render () {
+    const { children } = this.props;
+    const { screenshot } = this.state;
     return (
       <div
         id='background-image'
-        style={this.state.image && ''}
+        style={screenshot && `background-image: url("${screenshot}")`}
       >
         { children }
       </div>
     );
+  }
+  componentDidMount () {
+    (async () => {
+      const { screenshot } = await browser.storage.local.get('screenshot');
+      console.log('screenshot', screenshot);
+      this.setState({ screenshot });
+      const { id } = await browser.tabs.getCurrent();
+      await browser.tabs.update(id, { active: true });
+      await browser.storage.local.remove('screenshot');
+    })();
   }
   // componentWillReceiveProps (nextProps) {
   //   if (nextProps.suggestion.tabId !== this.props.suggestion.tabId) {

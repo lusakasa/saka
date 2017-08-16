@@ -51,7 +51,8 @@
     "activeTab",
     "history",
     "bookmarks",
-    "chrome://favicon/"
+    "chrome://favicon/",
+    "storage"
   ],
   "web_accessible_resources": [
     "saka.html",

@@ -19,9 +19,9 @@ module.exports = function (env) {
     },
     output: {
       path: __dirname + '/dist',
-      filename: '[name].js'
+      filename: '[name].js',
+      sourceMapFilename: '[name].js.map'
     },
-    devtool: 'source-map',
     module: {
       loaders: [
         {
@@ -106,7 +106,7 @@ module.exports = function (env) {
       })
     ]);
   } else {
-    config.output.sourceMapFilename = '[name].js.map';
+    config.devtool = 'source-map';
     config.plugins = config.plugins.concat([
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),

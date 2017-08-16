@@ -19,6 +19,7 @@ export default ({
       onKeyDown={onKeyDown}
       onInput={onInput}
       onBlur={onBlur}
+      autofocus
     />
     <Button
       icon={icon}
