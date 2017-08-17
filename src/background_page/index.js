@@ -30,6 +30,16 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
+chrome.runtime.onMessageExternal.addListener((message) => {
+  switch (message) {
+    case 'toggleSaka':
+      toggleSaka();
+      break;
+    default:
+      console.error(`Unknown message: '${message}'`);
+  }
+});
+
 let lastTabId;
 
 async function toggleSaka (tabId) {

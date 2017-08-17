@@ -16,9 +16,6 @@
       "description": "Toggle Saka"
     },
     "toggleSaka2": {
-      "suggested_key": {
-        "default": "Ctrl+K"
-      },
       "description": "Toggle Saka"
     },
     "toggleSaka3": {
@@ -58,5 +55,6 @@
     "saka.html",
     "material-icons.css",
     "MaterialIcons-Regular.woff2"
-  ]
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsgFNwezxiHxK/AIKh9K4LVefUPIDisRzQLmmRBjFftr3yrxJuLBaO1LvMISsRlvbFmbZ0B6KHzyGDEnmOMIo3X9wUxBwSV+q3kigp3XFryllhOHbKcl+FUVMRQabBs49CS6ttq2l4Jx+ULEsmprqub+IV+cvY3slXxxuyMF0TjmnRwDYnSREgbfzK7g/msZ8e0gi+hrPETNVKOibbVwd8S7gSy0hDug71WOA338FGe08DiXpnVoKLL0fmd+TO6Z4fAhH+oSqr15WIt6qCglYmZi2BEydL0zhUcidkis0zJjNX5nQi0xzggmxwsMJyfmfGoniwsUg3rAy+M0v5gaSUQIDAQAB"
 }

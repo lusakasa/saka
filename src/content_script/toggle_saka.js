@@ -5,12 +5,10 @@
 
 const oldSakaRoot = document.querySelector('#saka-root');
 if (oldSakaRoot) {
-  if (SAKA_DEBUG) {
-    console.log('REMOVING SAKA');
-  }
+  if (SAKA_DEBUG) console.log('REMOVING SAKA');
   oldSakaRoot.remove();
 } else {
-  console.log('APPENDING SAKA');
+  if (SAKA_DEBUG) console.log('APPENDING SAKA');
   // create container div
   const newSakaRoot = document.createElement('div');
   newSakaRoot.id = 'saka-root';

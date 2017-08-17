@@ -20,7 +20,6 @@ export default class BackgroundImage extends Component {
   componentDidMount () {
     (async () => {
       const { screenshot } = await browser.storage.local.get('screenshot');
-      console.log('screenshot', screenshot);
       this.setState({ screenshot });
       const { id } = await browser.tabs.getCurrent();
       await browser.tabs.update(id, { active: true });

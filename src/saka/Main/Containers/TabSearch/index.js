@@ -87,6 +87,11 @@ export default class TabSearch extends Component {
         e.preventDefault();
         this.tryActivateTab();
         break;
+      case 'k':
+        if (isMac ? e.metaKey : e.ctrlKey) {
+          e.preventDefault();
+          this.setState({ searchString: '' });
+        }
     }
   }
   incrementSelectedIndex = (increment) => {
