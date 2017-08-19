@@ -1,4 +1,7 @@
 import 'lib/browser_polyfill';
+import { tabHistory } from './tabHistory';
+
+window.tabHistory = tabHistory;
 
 chrome.browserAction.onClicked.addListener((tab) => {
   toggleSaka();

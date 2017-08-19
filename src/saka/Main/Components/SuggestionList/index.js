@@ -8,7 +8,7 @@ export default class SuggestionList extends Component {
     const { searchString, suggestions, selectedIndex, onSuggestionClick } = this.props;
     return (
       <ul class='mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container'>
-        { suggestions.map((suggestion, index) => (
+        { suggestions.map((suggestion, index) =>
           <Suggestion
             key={index}
             suggestion={suggestion}
@@ -17,7 +17,7 @@ export default class SuggestionList extends Component {
             index={index}
             onClick={onSuggestionClick}
           />
-        )) }
+        )}
       </ul>
     );
   }

@@ -3,14 +3,10 @@ import SearchBar from '../../Components/SearchBar';
 import SuggestionList from '../../Components/SuggestionList';
 import GUIContainer from '../../Components/GUIContainer';
 import BackgroundImage from '../../Components/BackgroundImage';
-import { tabSuggestions } from 'suggestions/get';
+import tabSuggestions from 'suggestions/tabs';
+import recentTabSuggestions from 'suggestions/recentTabs';
 import { preprocessSuggestion } from 'suggestions/preprocess';
 import { isMac } from 'lib/utils';
-
-// background should change to selected tab
-// chrome.tabs.captureVisibleTab
-
-// if no input selected, show tabs in MRU order 
 
 export default class TabSearch extends Component {
   state = {
@@ -23,6 +19,7 @@ export default class TabSearch extends Component {
   render () {
     const { searchString, suggestions, selectedIndex } = this.state;
     const suggestion = suggestions[selectedIndex];
+    // console.log('render suggestions', suggestions);
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer>
@@ -45,6 +42,9 @@ export default class TabSearch extends Component {
         </GUIContainer>
       </BackgroundImage>
     );
+  }
+  componentDidMount () {
+    this.updateAutocompleteSuggestions('');
   }
   handleKeyDown = (e) => {
     switch (e.key) {
@@ -91,6 +91,7 @@ export default class TabSearch extends Component {
         if (isMac ? e.metaKey : e.ctrlKey) {
           e.preventDefault();
           this.setState({ searchString: '' });
+          this.updateAutocompleteSuggestions('');
         }
     }
   }
@@ -130,7 +131,9 @@ export default class TabSearch extends Component {
     }
   }
   updateAutocompleteSuggestions = async (searchStringAtLookup) => {
-    const suggestions = await tabSuggestions(searchStringAtLookup);
+    const suggestions = searchStringAtLookup === ''
+      ? await recentTabSuggestions()
+      : await tabSuggestions(searchStringAtLookup);
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
       this.setState({
