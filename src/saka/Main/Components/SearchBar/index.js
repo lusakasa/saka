@@ -13,6 +13,10 @@ export default ({
   onButtonClick
 }) => (
   <section class='search-bar-container'>
+    <Button
+      icon={icon}
+      onClick={onButtonClick}
+    />
     <Input
       searchString={searchString}
       suggestion={suggestion}
@@ -20,10 +24,6 @@ export default ({
       onInput={onInput}
       onBlur={onBlur}
       autofocus
-    />
-    <Button
-      icon={icon}
-      onClick={onButtonClick}
     />
   </section>
 );

@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
 import SearchBar from '../../Components/SearchBar';
 import SuggestionList from '../../Components/SuggestionList';
+import PaginationBar from '../../Components/PaginationBar';
 import GUIContainer from '../../Components/GUIContainer';
 import BackgroundImage from '../../Components/BackgroundImage';
 import tabSuggestions from 'suggestions/tabs';
@@ -13,11 +14,12 @@ export default class TabSearch extends Component {
     searchString: '',
     suggestions: [],
     selectedIndex: 0,
+    firstVisibleIndex: 0,
     maxSuggestions: 6,
     backgroundImage: undefined
   }
   render () {
-    const { searchString, suggestions, selectedIndex } = this.state;
+    const { searchString, suggestions, selectedIndex, firstVisibleIndex, maxSuggestions } = this.state;
     const suggestion = suggestions[selectedIndex];
     // console.log('render suggestions', suggestions);
     return (
@@ -37,7 +39,15 @@ export default class TabSearch extends Component {
             searchString={searchString}
             suggestions={suggestions}
             selectedIndex={selectedIndex}
+            firstVisibleIndex={firstVisibleIndex}
+            maxSuggestions={maxSuggestions}
             onSuggestionClick={this.handleSuggestionClick}
+          />
+          <PaginationBar
+            selectedIndex={selectedIndex}
+            suggestions={suggestions}
+            firstVisibleIndex={firstVisibleIndex}
+            maxSuggestions={maxSuggestions}
           />
         </GUIContainer>
       </BackgroundImage>
@@ -111,7 +121,6 @@ export default class TabSearch extends Component {
   tryActivateTab = async (index = this.state.selectedIndex) => {
     const { suggestions } = this.state;
     const suggestion = suggestions[index];
-    console.log('attempted activation', index, suggestions, suggestion);
     if (suggestion) {
       await browser.tabs.update(suggestion.tabId, { active: true });
       await browser.windows.update(suggestion.windowId, { focused: true });

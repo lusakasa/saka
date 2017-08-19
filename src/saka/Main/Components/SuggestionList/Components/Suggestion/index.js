@@ -1,9 +1,7 @@
 import { h } from 'preact';
 import { fadedColorMap } from 'lib/colors';
-import { isMac } from 'lib/utils';
+import { ctrlChar } from 'lib/utils';
 import './style.css';
-
-const modifierKey = isMac ? '⌘' : 'ctrl';
 
 export default ({
   type,
@@ -53,7 +51,7 @@ export default ({
       }
     </span>
     <span class='mdc-list-item__end-detail kbd-end-detail'>
-      { selected ? 'enter' : `${modifierKey}-${index + 1}` }
+      { selected ? 'enter' : `${ctrlChar}-${index + 1}` }
     </span>
   </li>
 );
