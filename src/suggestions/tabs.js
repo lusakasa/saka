@@ -1,4 +1,4 @@
-import { MAX_RESULTS } from './';
+// import { MAX_RESULTS } from './';
 import Fuse from 'fuse.js';
 
 export default async function tabSuggestions (searchText) {
@@ -12,7 +12,7 @@ export default async function tabSuggestions (searchText) {
   });
   const results = fuse.search(searchText);
   return results
-    .slice(0, MAX_RESULTS)
+    // .slice(0, MAX_RESULTS)
     .map(({
       item: { id: tabId, windowId, title, url },
       score

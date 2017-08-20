@@ -10,3 +10,10 @@ export function rangedIncrement (value, increment, min, max) {
 
 export const isMac = navigator.appVersion.indexOf('Mac') !== -1;
 export const ctrlChar = isMac ? '⌘' : 'ctrl';
+
+/**
+ * @param {KeyboardEvent} e 
+ */
+export function ctrlKey (e) {
+  return isMac ? e.metaKey : e.ctrlKey;
+}

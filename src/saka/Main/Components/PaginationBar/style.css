@@ -22,6 +22,7 @@
   flex-grow: 3;
   opacity: 0.6;
   text-align: center;
+  cursor: pointer;
 }
 
 .paginator-next-button:hover {
