@@ -1,6 +1,6 @@
 {
   "name": "Saka",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Sufyan Dawoodjee",
   "description": "Saka - elegent tab search, selection, and beyond",
   "manifest_version": 2,
@@ -11,17 +11,18 @@
   "commands": {
     "toggleSaka": {
       "suggested_key": {
-        "default": "Alt+Space"
+        "default": "Ctrl+Space",
+        "mac": "Alt+Space"
       },
       "description": "Toggle Saka"
     },
     "toggleSaka2": {
-      "description": "Toggle Saka"
-    },
-    "toggleSaka3": {
       "suggested_key": {
         "default": "Ctrl+E"
       },
+      "description": "Toggle Saka"
+    },
+    "toggleSaka3": {
       "description": "Toggle Saka"
     },
     "toggleSaka4": {
