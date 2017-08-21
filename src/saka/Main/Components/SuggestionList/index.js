@@ -7,7 +7,9 @@ export default class SuggestionList extends Component {
   render () {
     const { searchString, suggestions, selectedIndex, firstVisibleIndex, maxSuggestions, onSuggestionClick } = this.props;
     return (
-      <ul class='mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container'>
+      <ul
+        class='mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container'
+      >
         { suggestions.slice(firstVisibleIndex, firstVisibleIndex + maxSuggestions).map((suggestion, index) =>
           <Suggestion
             key={index}

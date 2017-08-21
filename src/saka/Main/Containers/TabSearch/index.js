@@ -8,6 +8,7 @@ import tabSuggestions from 'suggestions/tabs';
 import recentTabSuggestions from 'suggestions/recentTabs';
 import { preprocessSuggestion } from 'suggestions/preprocess';
 import { ctrlKey } from 'lib/utils';
+import { slowWheelEvent } from 'lib/dom';
 
 export default class TabSearch extends Component {
   state = {
@@ -24,7 +25,7 @@ export default class TabSearch extends Component {
     // console.log('render suggestions', suggestions);
     return (
       <BackgroundImage suggestion={suggestion}>
-        <GUIContainer>
+        <GUIContainer onWheel={this.handleWheel}>
           <SearchBar
             searchString={searchString}
             suggestion={suggestion}
@@ -58,6 +59,10 @@ export default class TabSearch extends Component {
   componentDidMount () {
     this.updateAutocompleteSuggestions('');
   }
+  handleWheel = slowWheelEvent(50,
+    (e) => { this.incrementSelectedIndex(1); },
+    (e) => { this.incrementSelectedIndex(-1); }
+  );
   handleKeyDown = (e) => {
     switch (e.key) {
       case 'Escape':

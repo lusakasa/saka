@@ -14,11 +14,13 @@ export default class GUIContainer extends Component {
     // opacity: 0.01 is just a trick to hide the component and not prevent it from
     // from rendering/mounting in the DOM, which would preven the search bar from focusing
     return (
-      <main id='GUIContainer' style={
-        zoom === 0
+      <main
+        id='GUIContainer'
+        ref={(self) => { this.self = self; }}
+        style={zoom === 0
           ? { opacity: 0.01 }
           : { transform: `scale(calc(1/${zoom}))` }
-      }>
+        }>
         { children }
       </main>
     );
@@ -31,6 +33,12 @@ export default class GUIContainer extends Component {
     })();
     browser.tabs.onZoomChange.addListener(({ newZoomFactor }) => {
       this.setState({ zoom: newZoomFactor });
+    });
+  }
+  componentDidMount () {
+    this.self.addEventListener('wheel', (e) => {
+      console.log('wheel', e);
+      this.props.onWheel(e);
     });
   }
 }
