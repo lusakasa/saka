@@ -37,7 +37,6 @@ export default class GUIContainer extends Component {
   }
   componentDidMount () {
     this.self.addEventListener('wheel', (e) => {
-      console.log('wheel', e);
       this.props.onWheel(e);
     });
   }
