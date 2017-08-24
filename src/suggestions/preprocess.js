@@ -10,6 +10,14 @@ export function preprocessSuggestion (suggestion, searchText) {
         text: suggestion.title
       };
     }
+    case 'closedTab': {
+      const prettyURL = prettifyURL(suggestion.url, searchText);
+      return {
+        ...suggestion,
+        prettyURL,
+        text: suggestion.title
+      };
+    }
     case 'bookmark': {
       const prettyURL = prettifyURL(suggestion.url, searchText);
       return {

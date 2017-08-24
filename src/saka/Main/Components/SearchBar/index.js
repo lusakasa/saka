@@ -14,7 +14,7 @@ export default ({
 }) => (
   <section class='search-bar-container'>
     <Button
-      icon={icon}
+      suggestion={suggestion}
       onClick={onButtonClick}
     />
     <Input

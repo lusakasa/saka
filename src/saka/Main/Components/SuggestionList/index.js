@@ -12,7 +12,6 @@ export default class SuggestionList extends Component {
       >
         { suggestions.slice(firstVisibleIndex, firstVisibleIndex + maxSuggestions).map((suggestion, index) =>
           <Suggestion
-            key={index}
             suggestion={suggestion}
             searchString={searchString}
             selected={index === selectedIndex}

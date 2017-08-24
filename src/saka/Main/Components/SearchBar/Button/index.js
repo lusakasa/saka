@@ -17,12 +17,24 @@ import './style.css';
 //     : iconForType[isURL(searchValue) ? 'url' : 'search'];
 // }
 
-export default ({ icon, onClick}) => (
+function icon (suggestion) {
+  if (suggestion) {
+    switch (suggestion.type) {
+      case 'tab':
+        return 'tab';
+      case 'closedTab':
+        return 'restore';
+    }
+  }
+  return 'error';
+}
+
+export default ({ suggestion, onClick }) => (
   <div
     role='button'
     id='action-button'
     onClick={onClick}
   >
-    <i class='material-icons' aria-hidden='true'> { icon }</i>
+    <i class='material-icons' aria-hidden='true'> { icon(suggestion) }</i>
   </div>
 );

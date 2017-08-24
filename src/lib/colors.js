@@ -1,6 +1,7 @@
 
 export const colors = {
   red: 'rgba(228,26,28,1)',
+  black: 'rgba(0,0,0,1)',
   blue: 'rgba(55,126,184,1)',
   green: 'rgba(77,175,74,1)',
   purple: 'rgba(152,78,163,1)',
@@ -13,6 +14,7 @@ export const colors = {
 
 export const fadedColors = {
   red: 'rgba(228,26,28,0.44)',
+  black: 'rgba(0,0,0,0.44)',
   blue: 'rgba(55,126,184,0.44)',
   green: 'rgba(77,175,74,0.44)',
   purple: 'rgba(152,78,163,0.44)',
@@ -25,6 +27,7 @@ export const fadedColors = {
 
 export const colorMap = {
   tabs: colors.blue,
+  closedTab: colors.black,
   search: colors.green,
   history: colors.red,
   bookmark: colors.orange,
@@ -36,6 +39,7 @@ export const colorMap = {
 
 export const fadedColorMap = {
   tab: fadedColors.blue,
+  closedTab: fadedColors.black,
   search: fadedColors.green,
   history: fadedColors.red,
   bookmark: fadedColors.orange,

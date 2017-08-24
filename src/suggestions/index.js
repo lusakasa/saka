@@ -42,3 +42,17 @@ export async function fastSuggestions (searchText) {
 export async function slowSuggestions (searchText) {
   return searchEngineSuggestions(searchText).slice(0, MAX_RESULTS);
 }
+
+export async function activate (suggestion) {
+  switch (suggestion.type) {
+    case 'tab':
+      await browser.tabs.update(suggestion.tabId, { active: true });
+      await browser.windows.update(suggestion.windowId, { focused: true });
+      break;
+    case 'closedTab':
+      await browser.sessions.restore(suggestion.sessionId);
+      break;
+    default:
+      console.error(`activation not yet implemented for suggestions of type ${suggestion.type}`)
+  }
+}

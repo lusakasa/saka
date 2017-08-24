@@ -10,18 +10,18 @@ export default async function tabSuggestions (searchText) {
     includeMatches: true,
     keys: ['title', 'url']
   });
-  const results = fuse.search(searchText);
-  return results
-    // .slice(0, MAX_RESULTS)
+  return fuse.search(searchText)
     .map(({
       item: { id: tabId, windowId, title, url },
+      matches,
       score
     }) => ({
+      score,
       type: 'tab',
       tabId,
       windowId,
-      score,
       title,
-      url
+      url,
+      matches
     }));
 }

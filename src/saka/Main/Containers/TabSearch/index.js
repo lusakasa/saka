@@ -6,7 +6,9 @@ import GUIContainer from '../../Components/GUIContainer';
 import BackgroundImage from '../../Components/BackgroundImage';
 import tabSuggestions from 'suggestions/tabs';
 import recentTabSuggestions from 'suggestions/recentTabs';
+import closedTabSuggestions from 'suggestions/closedTabs';
 import { preprocessSuggestion } from 'suggestions/preprocess';
+import { activate } from 'suggestions';
 import { ctrlKey } from 'lib/utils';
 import { slowWheelEvent } from 'lib/dom';
 
@@ -14,14 +16,14 @@ export default class TabSearch extends Component {
   state = {
     searchString: '',
     suggestions: [],
-    selectedIndex: 0,
-    firstVisibleIndex: 0,
+    selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
+    firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
     maxSuggestions: 6,
     backgroundImage: undefined
   }
   render () {
     const { searchString, suggestions, selectedIndex, firstVisibleIndex, maxSuggestions } = this.state;
-    const suggestion = suggestions[selectedIndex];
+    const suggestion = suggestions[firstVisibleIndex + selectedIndex];
     // console.log('render suggestions', suggestions);
     return (
       <BackgroundImage suggestion={suggestion}>
@@ -29,7 +31,6 @@ export default class TabSearch extends Component {
           <SearchBar
             searchString={searchString}
             suggestion={suggestion}
-            icon={'tab'}
             onKeyDown={this.handleKeyDown}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
@@ -97,12 +98,12 @@ export default class TabSearch extends Component {
       case '6':
         if (ctrlKey(e)) {
           e.preventDefault();
-          this.tryActivateTab(Number.parseInt(e.key) - 1);
+          this.tryActivateSuggestion(Number.parseInt(e.key) - 1);
         }
         break;
       case 'Enter':
         e.preventDefault();
-        this.tryActivateTab();
+        this.tryActivateSuggestion();
         break;
       case 'k':
         if (ctrlKey(e)) {
@@ -128,17 +129,6 @@ export default class TabSearch extends Component {
   nextPage = () => {
     const { firstVisibleIndex, maxSuggestions, suggestions: { length: numSuggestions } } = this.state;
     const newFirstVisibleIndex = Math.max(0, Math.min(firstVisibleIndex + maxSuggestions, numSuggestions - maxSuggestions));
-    
-    // firstVisibleIndex + maxSuggestions >= numSuggestions
-    //   ? Math.max(0, numSuggestions - maxSuggestions)
-    //   : firstVisibleIndex + maxSuggestions;
-    // if (firstVisibleIndex + maxSuggestions > numSuggestions) {
-    //   newFirstIndex = Math.max(0, numSuggestions - maxSuggestions);
-    //   selectedIndex = newFirstIndex;
-    // } else {
-    //   newFirstIndex = firstVisibleIndex + maxSuggestions;
-    // }
-    // jump as many slots as possible without overflowing
     this.setState({
       firstVisibleIndex: newFirstVisibleIndex,
       selectedIndex: 0
@@ -172,12 +162,11 @@ export default class TabSearch extends Component {
     const { suggestions, maxSuggestions } = this.state;
     return index >= 0 && index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1);
   }
-  tryActivateTab = async (index = this.state.selectedIndex) => {
+  tryActivateSuggestion = async (index = this.state.selectedIndex) => {
     const { suggestions, firstVisibleIndex } = this.state;
     const suggestion = suggestions[firstVisibleIndex + index];
     if (suggestion) {
-      await browser.tabs.update(suggestion.tabId, { active: true });
-      await browser.windows.update(suggestion.windowId, { focused: true });
+      activate(suggestion);
       await browser.runtime.sendMessage('closeSaka');
     }
   }
@@ -195,7 +184,7 @@ export default class TabSearch extends Component {
   }
   updateAutocompleteSuggestions = async (searchStringAtLookup) => {
     const suggestions = searchStringAtLookup === ''
-      ? await recentTabSuggestions()
+      ? [...await recentTabSuggestions(), ...await closedTabSuggestions()]
       : await tabSuggestions(searchStringAtLookup);
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
@@ -211,9 +200,9 @@ export default class TabSearch extends Component {
     e.target.focus();
   }
   handleButtonClick = (e) => {
-    this.tryActivateTab();
+    this.tryActivateSuggestion();
   }
   handleSuggestionClick = (index) => {
-    this.tryActivateTab(index);
+    this.tryActivateSuggestion(index);
   }
 }

@@ -1,5 +1,3 @@
-import { MAX_RESULTS } from './';
-
 export default async function recentTabSuggestions () {
   const { tabHistory } = await browser.runtime.getBackgroundPage();
   const tabs = await browser.tabs.query({});

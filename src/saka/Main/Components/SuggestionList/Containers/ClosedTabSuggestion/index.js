@@ -1,20 +1,18 @@
 import { h } from 'preact';
 import Suggestion from '../../Components/Suggestion';
-import { highlight } from 'lib/highlight';
 
 export default ({
-  suggestion: { type, title, url, prettyURL, matches },
+  suggestion: { type, title, url, prettyURL },
   searchText,
   selected,
   index,
   onClick
 }) =>
   <Suggestion
-    type={'tab'}
-    title={highlight(title, 'title', matches)}
+    type={'closedTab'}
+    title={title}
     titleColor={'#000000'}
-    secondary={highlight(url, 'url', matches)} // TODO: highlight matches are for normal URL not pretty URL
-    // secondary={prettyURL}
+    secondary={prettyURL}
     secondaryColor={'rgba(63, 81, 245, 1.0)'}
     url={url}
     icon={'star_border'}
