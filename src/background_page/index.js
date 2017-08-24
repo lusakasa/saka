@@ -99,7 +99,7 @@ async function toggleSaka (tabId) {
         lastTabId = currentTab.id;
         await browser.tabs.create({
           url: '/saka.html',
-          index: currentTab.index + 1,
+          index: currentTab.index,
           active: false
         });
 
