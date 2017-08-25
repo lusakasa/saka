@@ -51,7 +51,8 @@
     "history",
     "bookmarks",
     "chrome://favicon/",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "web_accessible_resources": [
     "saka.html",

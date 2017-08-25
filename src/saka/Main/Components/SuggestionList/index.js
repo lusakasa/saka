@@ -6,6 +6,7 @@ import './style.css';
 export default class SuggestionList extends Component {
   render () {
     const { searchString, suggestions, selectedIndex, firstVisibleIndex, maxSuggestions, onSuggestionClick } = this.props;
+    console.log(suggestions.slice(firstVisibleIndex, firstVisibleIndex + maxSuggestions));
     return (
       <ul
         class='mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container'

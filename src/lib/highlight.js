@@ -10,7 +10,8 @@ export function highlight (text, key, matches) {
 function highlighted (text, indices) {
   const out = [];
   let unit = '';
-  let pair = indices.shift();
+  let pairIndex = 0;
+  let pair = indices[pairIndex++];
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
     if (pair && i === pair[0]) {
@@ -21,7 +22,7 @@ function highlighted (text, indices) {
     if (pair && i === pair[1]) {
       out.push(<span style='font-weight: bold'>{unit}</span>);
       unit = '';
-      pair = indices.shift();
+      pair = indices[pairIndex++];
     }
   }
   if (unit !== '') out.push(unit);

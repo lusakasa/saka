@@ -131,3 +131,11 @@ async function closeSaka (tab) {
     }
   }
 }
+
+(function setupContextMenu () {
+  chrome.contextMenus.create({
+    title: 'Saka',
+    contexts: ['all'],
+    onclick: (info, tab) => toggleSaka()
+  });
+})();
