@@ -31,7 +31,6 @@ async function filteredTabSuggestions (searchString) {
 export async function recentTabSuggestions () {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
-  console.log(tabsMap);
   const { tabHistory } = await browser.runtime.getBackgroundPage();
   const recentTabs = tabHistory
     .map((tabId) => {
@@ -39,7 +38,6 @@ export async function recentTabSuggestions () {
       delete tabsMap[tabId];
       return tab;
     });
-  console.log(recentTabs);
   return [...recentTabs, ...Object.values(tabsMap)];
 }
 
