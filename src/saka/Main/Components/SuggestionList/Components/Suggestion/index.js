@@ -1,7 +1,14 @@
 import { h } from 'preact';
 import { fadedColorMap } from 'lib/colors';
 import { ctrlChar } from 'lib/utils';
+import icons from 'modes/icons';
 import './style.css';
+
+const Icon = ({ icon, color }) => (
+  <i class='material-icons' aria-hidden='true' style={{ color }} >
+    { icon }
+  </i>
+);
 
 export default ({
   type,
@@ -24,15 +31,9 @@ export default ({
     onClick={() => onClick(index)}
   >
     <span class='mdc-list-item__start-detail search-icon' role='presentation'>
-      { url ? (
-        <div
-          style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x);`}
-        />
-      ) : (
-        <i class='material-icons' aria-hidden='true'>
-          { icon }
-        </i>
-      )}
+      { url
+        ? <div style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x);`} />
+        : <Icon icon={icon} /> }
     </span>
     <span class='mdc-list-item__text'>
       <span
@@ -51,7 +52,7 @@ export default ({
       }
     </span>
     <span class='mdc-list-item__end-detail kbd-end-detail'>
-      { selected ? 'enter' : `${ctrlChar}-${index + 1}` }
+      { selected ? <Icon icon={icons[type]} color={fadedColorMap[type]} /> : `${ctrlChar}-${index + 1}` }
     </span>
   </li>
 );

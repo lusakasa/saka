@@ -2,6 +2,8 @@ import { prettifyURL } from 'lib/url';
 
 export function preprocessSuggestion (suggestion, searchText) {
   switch (suggestion.type) {
+    case 'mode':
+      return suggestion;
     case 'tab': {
       const prettyURL = prettifyURL(suggestion.url, searchText);
       return {

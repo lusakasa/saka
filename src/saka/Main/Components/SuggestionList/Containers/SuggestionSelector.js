@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import ModeSuggestion from './ModeSuggestion';
 import TabSuggestion from './TabSuggestion';
 import ClosedTabSuggestion from './ClosedTabSuggestion';
 import BookmarkSuggestion from './BookmarkSuggestion';
@@ -10,6 +11,8 @@ import UnknownSuggestion from './UnknownSuggestion';
 export default class Suggestion extends Component {
   render (props) {
     switch (props.suggestion.type) {
+      case 'mode':
+        return <ModeSuggestion {...props} />;
       case 'tab':
         return <TabSuggestion {...props} />;
       case 'closedTab':

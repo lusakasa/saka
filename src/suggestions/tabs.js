@@ -1,8 +1,14 @@
-// import { MAX_RESULTS } from './';
 import Fuse from 'fuse.js';
+import { objectFromArray } from 'lib/utils';
 
-export default async function tabSuggestions (searchText) {
-  const tabs = await browser.tabs.query({});
+export default async function tabSuggestions (searchString) {
+  return searchString === ''
+    ? recentTabSuggestions()
+    : filteredTabSuggestions(searchString);
+}
+
+async function filteredTabSuggestions (searchString) {
+  const tabs = await allTabSuggestions();
   const fuse = new Fuse(tabs, {
     shouldSort: true,
     threshold: 0.5,
@@ -10,18 +16,39 @@ export default async function tabSuggestions (searchText) {
     includeMatches: true,
     keys: ['title', 'url']
   });
-  return fuse.search(searchText)
+  return fuse.search(searchString)
     .map(({
-      item: { id: tabId, windowId, title, url },
+      item,
       matches,
       score
     }) => ({
+      ...item,
       score,
-      type: 'tab',
-      tabId,
-      windowId,
-      title,
-      url,
       matches
     }));
+}
+
+export async function recentTabSuggestions () {
+  const tabs = await allTabSuggestions();
+  const tabsMap = objectFromArray(tabs, 'tabId');
+  console.log(tabsMap);
+  const { tabHistory } = await browser.runtime.getBackgroundPage();
+  const recentTabs = tabHistory
+    .map((tabId) => {
+      const tab = tabsMap[tabId];
+      delete tabsMap[tabId];
+      return tab;
+    });
+  console.log(recentTabs);
+  return [...recentTabs, ...Object.values(tabsMap)];
+}
+
+export async function allTabSuggestions () {
+  const tabs = await browser.tabs.query({});
+  return tabs.map(({ id: tabId, title, url }) => ({
+    type: 'tab',
+    tabId,
+    title,
+    url
+  }));
 }

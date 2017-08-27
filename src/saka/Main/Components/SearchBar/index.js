@@ -4,9 +4,10 @@ import Input from './Input';
 import './style.css';
 
 export default ({
+  placeholder,
   searchString,
   suggestion,
-  icon,
+  mode,
   onKeyDown,
   onInput,
   onBlur,
@@ -14,10 +15,11 @@ export default ({
 }) => (
   <section class='search-bar-container'>
     <Button
-      suggestion={suggestion}
+      mode={mode}
       onClick={onButtonClick}
     />
     <Input
+      placeholder={placeholder}
       searchString={searchString}
       suggestion={suggestion}
       onKeyDown={onKeyDown}

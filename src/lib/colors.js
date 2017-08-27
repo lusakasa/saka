@@ -26,12 +26,13 @@ export const fadedColors = {
 };
 
 export const colorMap = {
-  tabs: colors.blue,
+  tab: colors.blue,
   closedTab: colors.black,
   search: colors.green,
   history: colors.red,
   bookmark: colors.orange,
-  dictionary: colors.purple,
+  mode: colors.purple,
+  // dictionary: colors.purple,
   calculator: colors.brown,
   command: colors.pink,
   unknown: colors.gray
@@ -43,7 +44,8 @@ export const fadedColorMap = {
   search: fadedColors.green,
   history: fadedColors.red,
   bookmark: fadedColors.orange,
-  dictionary: fadedColors.purple,
+  mode: fadedColors.purple,
+  // dictionary: colors.purple,
   calculator: fadedColors.brown,
   command: fadedColors.pink,
   unknown: fadedColors.gray

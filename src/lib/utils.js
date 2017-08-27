@@ -17,3 +17,11 @@ export const ctrlChar = isMac ? '⌘' : 'ctrl';
 export function ctrlKey (e) {
   return isMac ? e.metaKey : e.ctrlKey;
 }
+
+export function objectFromArray (array, key) {
+  const out = {};
+  array.forEach((e) => {
+    out[e[key]] = e;
+  });
+  return out;
+}
