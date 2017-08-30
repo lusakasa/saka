@@ -9,11 +9,7 @@ const log = (listener) => (...args) => {
 };
 
 browser.tabs.onActivated.addListener(log(({ tabId }) => {
-  const i = tabHistory.indexOf(tabId);
-  if (i !== -1) {
-    tabHistory.splice(i, 1);
-  }
-  tabHistory.unshift(tabId);
+  setMostRecentTab(tabId);
 }));
 
 browser.tabs.onRemoved.addListener(log((tabId) => {
@@ -25,3 +21,18 @@ browser.tabs.onReplaced.addListener(log((addedTabId, removedTabId) => {
   const i = tabHistory.indexOf(removedTabId);
   tabHistory[i] = addedTabId;
 }));
+
+browser.windows.onFocusChanged.addListener(async (windowId) => {
+  const [tab] = await browser.tabs.query({ currentWindow: true, active: true });
+  if (tab && tab.windowId === windowId) {
+    setMostRecentTab(tab.id);
+  }
+});
+
+function setMostRecentTab (tabId) {
+  const i = tabHistory.indexOf(tabId);
+  if (i !== -1) {
+    tabHistory.splice(i, 1);
+  }
+  tabHistory.unshift(tabId);
+}
