@@ -34,9 +34,7 @@ if (oldSakaRoot) {
   height: 100%;
   border-width: 0;
   pointer-events: all;
-  }`
-  );
-  iframe.scroling = 'no';
+  }`);
   iframe.frameBorder = 0;
   // mount to DOM
   newSakaRoot.appendChild(iframe);

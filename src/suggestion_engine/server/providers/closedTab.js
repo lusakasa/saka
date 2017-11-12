@@ -12,14 +12,15 @@ async function getAllSuggestions () {
     // only show tabs not windows, TODO: show windows too
     .filter((session) => session.tab && session.tab.url !== 'chrome-extension://nbdfpcokndmapcollfpjdpjlabnibjdi/saka.html')
     .map((session) => {
-      const { id, sessionId, title, url } = session.tab;
+      const { id, sessionId, title, url, favIconUrl } = session.tab;
       return {
         type: 'closedTab',
         tabId: id,
         sessionId,
         score: undefined,
         title,
-        url
+        url,
+        favIconUrl
       };
     });
 }

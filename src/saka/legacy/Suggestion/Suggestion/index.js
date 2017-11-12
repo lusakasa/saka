@@ -11,7 +11,8 @@ export default ({
   url,
   icon,
   selected,
-  index
+  index,
+  favIconUrl
 }) => (
   <li
     class='mdc-list-item search-item'
@@ -23,7 +24,10 @@ export default ({
     <span class='mdc-list-item__start-detail search-icon' role='presentation'>
       { url ? (
         <div
-          style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x);`}
+          style={SAKA_PLATFORM === 'chrome'
+            ? `width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x);`
+            : `width: 25px; height: 25px; content: url(${favIconUrl});`
+          }
         />
       ) : (
         <i class='material-icons' aria-hidden='true'>

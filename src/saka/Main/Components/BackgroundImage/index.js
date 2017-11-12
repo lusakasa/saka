@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import msg from 'msg/client';
 import './style.css';
 
 export default class BackgroundImage extends Component {
@@ -21,8 +22,7 @@ export default class BackgroundImage extends Component {
     (async () => {
       const { screenshot } = await browser.storage.local.get('screenshot');
       this.setState({ screenshot });
-      const { id } = await browser.tabs.getCurrent();
-      await browser.tabs.update(id, { active: true });
+      await msg('focusTab');
       await browser.storage.local.remove('screenshot');
     })();
   }

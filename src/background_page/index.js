@@ -1,4 +1,5 @@
 import 'lib/browser_polyfill';
+import 'msg/server';
 import { tabHistory } from './tabHistory';
 
 window.tabHistory = tabHistory;
@@ -102,7 +103,6 @@ async function toggleSaka (tabId) {
           index: currentTab.index,
           active: false
         });
-
         if (SAKA_DEBUG) console.log(`Failed to execute Saka into tab. Instead, created new Saka tab after ${currentTab.url}`);
       }
     }
@@ -132,10 +132,8 @@ async function closeSaka (tab) {
   }
 }
 
-(function setupContextMenu () {
-  chrome.contextMenus.create({
-    title: 'Saka',
-    contexts: ['all'],
-    onclick: (info, tab) => toggleSaka()
-  });
-})();
+chrome.contextMenus.create({
+  title: 'Saka',
+  contexts: ['all'],
+  onclick: (info, tab) => toggleSaka()
+});

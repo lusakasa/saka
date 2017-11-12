@@ -48,7 +48,7 @@ const fuse = new Fuse(suggestions, {
   keys: ['label']
 });
 
-export async function modeSuggestions (searchString) {
+export default async function modeSuggestions (searchString) {
   return (searchString === '')
     ? suggestions
     : fuse.search(searchString)

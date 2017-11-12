@@ -43,11 +43,12 @@ export async function recentTabSuggestions () {
 
 export async function allTabSuggestions () {
   const tabs = await browser.tabs.query({});
-  return tabs.map(({ id: tabId, windowId, title, url }) => ({
+  return tabs.map(({ id: tabId, windowId, title, url, favIconUrl }) => ({
     type: 'tab',
     tabId,
     windowId,
     title,
-    url
+    url,
+    favIconUrl
   }));
 }

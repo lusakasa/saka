@@ -1,43 +1,43 @@
 import { h, Component } from 'preact';
+import msg from 'msg/client';
 import './style.css';
 
 // Makes GUI constant size
-// TODO: figure out why saka shrinks when zoomed on small viewports
-
 export default class GUIContainer extends Component {
   state = {
     zoom: 0
   }
   render () {
-    const { children } = this.props;
+    const { children, onWheel } = this.props;
     const { zoom } = this.state;
     // opacity: 0.01 is just a trick to hide the component and not prevent it from
     // from rendering/mounting in the DOM, which would preven the search bar from focusing
     return (
       <main
         id='GUIContainer'
-        ref={(self) => { this.self = self; }}
-        style={zoom === 0
-          ? { opacity: 0.01 }
-          : { transform: `scale(calc(1/${zoom}))` }
-        }>
+        onWheel={onWheel}
+        style={zoom === 0 ? {
+          opacity: '0.01'
+        } : {
+          transform: `translateX(-50%) scale(${1 / zoom})`, // firefox can't handle calculated css scale props
+          maxWidth: `${100 * zoom}%`
+        }}
+      >
         { children }
       </main>
     );
   }
   componentWillMount () {
-    (async () => {
-      const { id } = await browser.tabs.getCurrent();
-      const zoom = await browser.tabs.getZoom(id);
-      this.setState({ zoom });
-    })();
-    browser.tabs.onZoomChange.addListener(({ newZoomFactor }) => {
-      this.setState({ zoom: newZoomFactor });
-    });
+    window.addEventListener('zoom', this.onZoomChange);
+    msg('zoom').then(this.setZoom);
   }
-  componentDidMount () {
-    this.self.addEventListener('wheel', (e) => {
-      this.props.onWheel(e);
-    });
+  componentWillUnmount () {
+    window.removeEventListener('zoom', this.onZoomChange);
   }
+  onZoomChange = (event) => {
+    this.setZoom(event.detail.zoom);
+  }
+  setZoom = (zoom) => {
+    this.setState({ zoom });
+  };
 }

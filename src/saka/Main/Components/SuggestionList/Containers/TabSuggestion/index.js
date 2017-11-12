@@ -3,7 +3,7 @@ import Suggestion from '../../Components/Suggestion';
 import { highlight } from 'lib/highlight';
 
 export default ({
-  suggestion: { type, title, url, prettyURL, matches },
+  suggestion: { type, title, url, prettyURL, matches, favIconUrl },
   searchText,
   selected,
   index,
@@ -17,6 +17,7 @@ export default ({
     // secondary={prettyURL}
     secondaryColor={'rgba(63, 81, 245, 1.0)'}
     url={url}
+    favIconUrl={favIconUrl}
     icon={'star_border'}
     selected={selected}
     index={index}

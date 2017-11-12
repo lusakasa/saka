@@ -4,8 +4,8 @@ import SuggestionList from '../../Components/SuggestionList';
 import PaginationBar from '../../Components/PaginationBar';
 import GUIContainer from '../../Components/GUIContainer';
 import BackgroundImage from '../../Components/BackgroundImage';
-import { preprocessSuggestion } from 'suggestions/preprocess';
-import { activate } from 'suggestions';
+import { getSuggestions, activateSuggestion } from 'suggestion_engine/client';
+import { preprocessSuggestion } from 'suggestion_utils';
 import { ctrlKey } from 'lib/utils';
 import { slowWheelEvent } from 'lib/dom';
 
@@ -200,7 +200,7 @@ export default class extends Component {
       if (suggestion.type === 'mode') {
         this.props.setMode(suggestion.mode);
       } else {
-        activate(suggestion);
+        activateSuggestion(suggestion);
         await browser.runtime.sendMessage('closeSaka');
       }
     }
@@ -218,7 +218,7 @@ export default class extends Component {
     }
   }
   updateAutocompleteSuggestions = async (searchStringAtLookup) => {
-    const suggestions = await this.props.getSuggestions(searchStringAtLookup);
+    const suggestions = await getSuggestions(this.props.mode, searchStringAtLookup);
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
       this.setState({
