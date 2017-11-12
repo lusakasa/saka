@@ -1,10 +1,14 @@
 # Saka
 
-Elegant tab management, search, and more for Chrome.
+Elegant tab management, search, and more for [Firefox](https://addons.mozilla.org/firefox/addon/saka/) and [Chrome](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
 
 * Inspired by Spotlight, Alfred, and Quick Tabs
 * Built with React and Material Web Components
 * Designed with users in mind
+
+![Preview](./images/preview.png)
+
+
 
 ## Index
 
@@ -14,6 +18,10 @@ Elegant tab management, search, and more for Chrome.
 * [License](#license)
 
 ## Install
+
+Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/addon/saka/) or [Chrome Webstore](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
+
+To help develop Saka, follow the instructions below to build from source.
 
 ### Install on Chrome
 
@@ -61,6 +69,4 @@ Elegant tab management, search, and more for Chrome.
 
 ## License
 
-Copyright (C) Sufyan Dawoodjee 2017 - All Rights Reserved
-Unauthorized copying of this file, via any medium is strictly prohibited
-Proprietary and confidential
+MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee 
