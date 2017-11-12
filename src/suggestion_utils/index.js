@@ -1,4 +1,4 @@
-import { isURL } from 'lib/url';
+import { prettifyURL, isURL } from 'lib/url';
 
 export const icons = {
   mode: 'apps',
@@ -7,21 +7,6 @@ export const icons = {
   history: 'history',
   bookmark: 'bookmark_border'
 };
-
-/*
- * Given the URL of a suggestion and the search text, makes the URL nicer
- * @param {string} url - the suggestion URL
- * @param {string} searchText - the text in the search bar
- */
-export function prettifyURL (url, searchText) {
-  if (url.endsWith('/')) {
-    url = url.substr(0, url.length - 1);
-  }
-  if (!searchText.startsWith('http://') && url.startsWith('http://')) {
-    url = url.substr(7);
-  }
-  return url;
-}
 
 export function preprocessSuggestion (suggestion, searchText) {
   switch (suggestion.type) {
@@ -89,13 +74,4 @@ export function preprocessSuggestion (suggestion, searchText) {
         text: `Error. Unknown Suggestion type: ${suggestion.type}`
       };
   }
-}
-
-/**
- * Return whether the cursor is at the far right end of the
- * provided HTML input
- * @param {HTMLInputElement} input
- */
-export function cursorAtEnd (input) {
-  return input && input.selectionStart === input.value.length;
 }

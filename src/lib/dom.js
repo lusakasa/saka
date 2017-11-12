@@ -12,3 +12,12 @@ export function slowWheelEvent (threshold, onPositiveThreshold, onNegativeThresh
     }
   };
 };
+
+/**
+ * Return whether the cursor is at the far right end of the
+ * provided HTML input
+ * @param {HTMLInputElement} input
+ */
+export function cursorAtEnd (input) {
+  return input && (input.selectionStart === input.value.length);
+}
