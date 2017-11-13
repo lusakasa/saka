@@ -1,10 +1,10 @@
 # Saka
 
-Elegant tab management, search, and more for [Firefox](https://addons.mozilla.org/firefox/addon/saka/) and [Chrome](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
+A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka/) and [Chrome](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi) designed to be fast, intuitive, and beautiful. Inspired by Spotlight. Keyboard-focused but mouse friendly too.
 
-* Inspired by Spotlight, Alfred, and Quick Tabs
-* Built with React and Material Web Components
-* Designed with users in mind
+* Lists tabs in order of recency by default, then fuzzy search by title or URL.
+* Search recently closed tabs
+* History and bookmarks search coming soon
 
 ![Preview](./images/preview.png)
 
