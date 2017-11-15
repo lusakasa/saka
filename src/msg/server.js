@@ -1,4 +1,4 @@
-import server from 'lib/msg/server';
+import server from 'msgx/server';
 import { getSuggestions, activateSuggestion } from 'suggestion_engine/server';
 
 server(
@@ -8,16 +8,16 @@ server(
     focusTab: (_, sender) => browser.tabs.update(sender.tab.id, { active: true }),
     activateSuggestion
   },
-  function onConnect (port, msg) {
+  function onConnect (sender, msg, data) {
     const onZoomChange = ({ tabId, newZoomFactor }) => {
-      if (port.sender.tab.id === tabId) {
+      if (sender.tab.id === tabId) {
         msg('zoom', newZoomFactor);
       }
     };
     browser.tabs.onZoomChange.addListener(onZoomChange);
-    return onZoomChange;
+    data.onZoomChange = onZoomChange;
   },
-  function onDisconnect (port, onZoomChange) {
-    browser.tabs.onZoomChange.removeListener(onZoomChange);
+  function onDisconnect (sender, data) {
+    browser.tabs.onZoomChange.removeListener(data.onZoomChange);
   }
 );

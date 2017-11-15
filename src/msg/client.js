@@ -1,10 +1,8 @@
-import client from 'lib/msg/client';
+import client from 'msgx/client';
 
-const msg = client(
-  {
-    zoom: (zoom) => {
-      window.dispatchEvent(new CustomEvent('zoom', { detail: { zoom } }));
-    }
+const msg = client({
+  zoom: (zoom) => {
+    window.dispatchEvent(new CustomEvent('zoom', { detail: { zoom } }));
   }
-);
+});
 export default msg;
