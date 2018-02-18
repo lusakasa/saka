@@ -61,9 +61,13 @@ export default class extends Component {
   }
   componentDidMount () {
     this.updateAutocompleteSuggestions('').then((res) => {
-      this.setState({
-        selectedIndex: 1
-      });
+      const {suggestions} = this.state;
+      console.log(suggestions);
+      if (suggestions.length > 1) {
+        this.setState({
+          selectedIndex: 1
+        });
+      }
     });
   }
   componentDidUpdate (prevProps) {
