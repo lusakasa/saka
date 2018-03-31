@@ -155,6 +155,12 @@ export default class extends Component {
           this.props.setMode('mode');
         }
         break;
+      case 'b':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.props.setMode('bookmark');
+        }
+        break;
     }
   }
   nextPage = () => {

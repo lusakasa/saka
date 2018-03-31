@@ -25,7 +25,7 @@ const suggestions = [
     type: 'mode',
     label: 'Bookmarks',
     mode: 'bookmark',
-    shortcut: `${ctrlChar}-shift-B`,
+    shortcut: `${ctrlChar}-B`,
     color: colorMap.bookmark,
     fadedColor: fadedColorMap.bookmark,
     icon: 'bookmark_border'
