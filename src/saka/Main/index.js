@@ -5,7 +5,7 @@ import './style.css';
 export default class Main extends Component {
   state = {
     mode: 'tab',
-    modes: ['mode', 'tab', 'closedTab']
+    modes: ['mode', 'tab', 'closedTab', 'bookmark']
   }
   render () {
     const { mode } = this.state;
@@ -30,6 +30,14 @@ export default class Main extends Component {
         <StandardSearch
           mode={mode}
           placeholder='Recently Closed Tabs'
+          setMode={setMode}
+          shuffleMode={shuffleMode}
+        />
+      );
+      case 'bookmark': return (
+        <StandardSearch
+          mode={mode}
+          placeholder='Bookmarks'
           setMode={setMode}
           shuffleMode={shuffleMode}
         />

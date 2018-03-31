@@ -21,6 +21,16 @@ const suggestions = [
     fadedColor: fadedColorMap.closedTab,
     icon: 'restore_page'
   },
+  {
+    type: 'mode',
+    label: 'Bookmarks',
+    mode: 'bookmark',
+    shortcut: `${ctrlChar}-shift-B`,
+    color: colorMap.bookmark,
+    fadedColor: fadedColorMap.bookmark,
+    icon: 'bookmark_border'
+  }
+
   // {
   //   type: 'mode',
   //   label: 'History',
@@ -30,15 +40,6 @@ const suggestions = [
   //   fadedColor: fadedColorMap.history,
   //   icon: 'history'
   // },
-  // {
-  //   type: 'mode',
-  //   label: 'Bookmarks',
-  //   mode: 'bookmark',
-  //   shortcut: `${ctrlChar}-shift-B`,
-  //   color: colorMap.bookmark,
-  //   fadedColor: fadedColorMap.bookmark,
-  //   icon: 'bookmark_border'
-  // }
 ];
 
 const fuse = new Fuse(suggestions, {
