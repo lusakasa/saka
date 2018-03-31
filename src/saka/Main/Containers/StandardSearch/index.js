@@ -60,7 +60,14 @@ export default class extends Component {
     );
   }
   componentDidMount () {
-    this.updateAutocompleteSuggestions('');
+    this.updateAutocompleteSuggestions('').then((res) => {
+      const {suggestions} = this.state;
+      if (suggestions.length > 1) {
+        this.setState({
+          selectedIndex: 1
+        });
+      }
+    });
   }
   componentDidUpdate (prevProps) {
     if (this.props.mode !== prevProps.mode) {
