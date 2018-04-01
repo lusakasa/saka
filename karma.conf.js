@@ -22,7 +22,7 @@ const preprocessors = {};
 preprocessors[resolveCwd('tests/saka.test.js')] = ['webpack', 'sourcemap'];
 
 module.exports = function (config) {
-  config.set({
+  let configuration = {
     singleRun: true,
     webpack: {
       plugins: [
@@ -104,11 +104,17 @@ module.exports = function (config) {
     autoWatch: false,
     browsers: ['ChromeHeadless'],
     customLaunchers: {
-      Chrome_without_sandbox: {
+      Chrome_travis_ci: {
         base: 'Chrome',
         flags: ['--no-sandbox']
       }
     },
     concurrency: Infinity
-  });
+  };
+
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+
+  config.set(configuration);
 };
