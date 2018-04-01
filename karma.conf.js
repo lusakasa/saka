@@ -76,7 +76,8 @@ module.exports = function (config) {
               return require.resolve('babel-preset-' + p);
             })
           }
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['style-loader', 'css-loader']
         }]

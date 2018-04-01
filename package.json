@@ -16,7 +16,8 @@
     "book:dev": "cd book && npm run dev",
     "book:build": "cd book && npm run build",
     "book:publish": "cd book && npm run publish",
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.0",
+    "@storybook/react": "^3.4.0",
     "@types/chrome": "^0.0.47",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
