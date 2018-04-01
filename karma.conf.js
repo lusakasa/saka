@@ -1,7 +1,39 @@
+const webpack = require('webpack');
+
+const path = require('path');
+const join = path.join;
+
+const env = 'dev:chrome:benchmark';
+const [mode, platform, benchmark] = env.split(':');
+const version = require('./static/manifest.json').version;
+
+function resolveCwd () {
+  let args = [].slice.apply(arguments, []);
+  args.unshift(process.cwd());
+  return join.apply(path, args);
+}
+
+const indexSpec = resolveCwd('tests/saka.test.js');
+const files = [
+  indexSpec
+];
+
+const preprocessors = {};
+preprocessors[resolveCwd('tests/saka.test.js')] = ['webpack', 'sourcemap'];
+
 module.exports = function (config) {
   config.set({
     singleRun: true,
     webpack: {
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('development'),
+          'SAKA_DEBUG': JSON.stringify(true),
+          'SAKA_VERSION': JSON.stringify(version + ' dev'),
+          'SAKA_PLATFORM': JSON.stringify(platform),
+          'SAKA_BENCHMARK': JSON.stringify(benchmark === 'benchmark')
+        })
+      ],
       devtool: 'inline-source-map',
       'resolve': {
         'alias': {
@@ -14,6 +46,11 @@ module.exports = function (config) {
           'react-addons-transition-group': 'preact-transition-group',
           'react': 'preact-compat-enzyme'
         }
+      },
+      externals: {
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
+        'react/addons': true
       },
       module: {
         loaders: [{
@@ -35,18 +72,9 @@ module.exports = function (config) {
                 'transform-object-rest-spread'
               ]
             ],
-            'presets': [
-              [
-                'es2015',
-                {
-                  'es2015': {
-                    'loose': true,
-                    'modules': false
-                  }
-                }
-              ],
-              'react'
-            ]
+            'presets': ['es2015', 'react', 'stage-0'].map((p) => {
+              return require.resolve('babel-preset-' + p);
+            })
           }
         }, {
           test: /\.css$/,
@@ -58,13 +86,9 @@ module.exports = function (config) {
     webpackServer: { noInfo: true },
     basePath: '',
     frameworks: ['jasmine'],
-    files: [
-      { pattern: 'tests/test-context.js', watched: false }
-    ],
-    preprocessors: {
-      'tests/test-context.js': ['webpack']
-    },
-    reporters: ['spec'], // This line is extra important, it enabled the green checkmarks in the specs
+    files,
+    preprocessors,
+    reporters: ['progress', 'coverage', 'spec'], // This line is extra important, it enabled the green checkmarks in the specs
     specReporter: {
       maxLogLines: 5, // limit number of lines logged per test
       suppressErrorSummary: true, // do not print error summary

@@ -1,14 +1,13 @@
 import Suggestion from '../src/saka/Main/Components/SuggestionList/Components/Suggestion/index.js';
-import Enzyme, { mount } from 'enzyme';
+import { render } from 'preact-render-spy';
 import { h } from 'preact';
 // var t = require('../src/saka/Main/t');
 
-describe('background specs', function () {
-  describe('When five is called', function () {
+describe('Suggestion component ', function () {
+  describe('should display suggestion title when provided', function () {
     it('returns 5', function () {
-      // let calc = new Calculator();
-      const wrapper = mount(<Suggestion />);
-      expect(5).toBe(5);
+      const wrapper = render(<Suggestion suggestion={'Suggestion Test'} />);
+      expect(wrapper.find('span').contains('Suggestion Test')).toBeTruthy();
     });
   });
 });
