@@ -69,4 +69,4 @@ To help develop Saka, follow the instructions below to build from source.
 
 ## License
 
-MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee 
+MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee, Uzair Shamim
