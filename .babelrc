@@ -1,22 +1,8 @@
 {
   "sourceMaps": true,
   "plugins": [
-    [
-      "transform-decorators-legacy"
-    ],
-    [
-      "transform-react-jsx",
-      {
-        "pragma": "h"
-      }
-    ],
-    [
-      "transform-object-rest-spread"
-    ]
-  ],
-  "presets": [
-    "es2015",
-    "react",
-    "stage-0"
+    ["transform-react-jsx", { "pragma":"h" }],
+    ["transform-object-rest-spread"],
+    ["transform-class-properties"]
   ]
 }

@@ -22,4 +22,5 @@ export default ({
     selected={selected}
     index={index}
     onClick={onClick}
+    class={'tab-suggestion'}
   />;

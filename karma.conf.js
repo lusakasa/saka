@@ -34,19 +34,19 @@ module.exports = function (config) {
           'SAKA_BENCHMARK': JSON.stringify(benchmark === 'benchmark')
         })
       ],
-      devtool: 'inline-source-map',
-      'resolve': {
-        'alias': {
-          'react-dom/server': 'preact-render-to-string',
-          'react-dom/test-utils': 'preact-test-utils',
-          'react-dom': 'preact-compat-enzyme',
-          'react-test-renderer/shallow': 'preact-test-utils',
-          'react-test-renderer': 'preact-test-utils',
-          'react-addons-test-utils': 'preact-test-utils',
-          'react-addons-transition-group': 'preact-transition-group',
-          'react': 'preact-compat-enzyme'
-        }
-      },
+      // devtool: 'inline-source-map',
+      // 'resolve': {
+      //   'alias': {
+      //     'react-dom/server': 'preact-render-to-string',
+      //     'react-dom/test-utils': 'preact-test-utils',
+      //     'react-dom': 'preact-compat-enzyme',
+      //     'react-test-renderer/shallow': 'preact-test-utils',
+      //     'react-test-renderer': 'preact-test-utils',
+      //     'react-addons-test-utils': 'preact-test-utils',
+      //     'react-addons-transition-group': 'preact-transition-group',
+      //     'react': 'preact-compat-enzyme'
+      //   }
+      // },
       externals: {
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
@@ -89,7 +89,7 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     files,
     preprocessors,
-    reporters: ['progress', 'coverage', 'spec'], // This line is extra important, it enabled the green checkmarks in the specs
+    reporters: ['coverage', 'spec'], // This line is extra important, it enabled the green checkmarks in the specs
     specReporter: {
       maxLogLines: 5, // limit number of lines logged per test
       suppressErrorSummary: true, // do not print error summary
