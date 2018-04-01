@@ -1,8 +1,3 @@
 {
-  "sourceMaps": true,
-  "plugins": [
-    ["transform-react-jsx", { "pragma":"h" }],
-    ["transform-object-rest-spread"],
-    ["transform-class-properties"]
-  ]
+  "sourceMaps": true
 }

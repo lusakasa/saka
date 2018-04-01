@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const BabiliPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 // process.traceDeprecation = true;
-
 // markdown convert to html
 var marked = require('marked');
 var renderer = new marked.Renderer();
@@ -55,6 +54,10 @@ module.exports = function (env) {
       ]
     },
     resolve: {
+      'alias': {
+        'react': 'preact-compat',
+        'react-dom': 'preact-compat'
+      },
       modules: [
         './src',
         './node_modules'

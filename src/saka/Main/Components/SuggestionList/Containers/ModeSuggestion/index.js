@@ -1,11 +1,11 @@
 import { h } from 'preact';
-import { ctrlChar } from 'lib/utils';
-import { highlight } from 'lib/highlight';
-import { fadedColorMap } from 'lib/colors';
+import { ctrlChar } from '../../../../../../lib/utils';
+import { highlight } from '../../../../../../lib/highlight';
+import { fadedColorMap } from '../../../../../../lib/colors';
 
 const Icon = ({ icon, color }) => (
   <i class='material-icons' aria-hidden='true' style={{ color }} >
-    { icon }
+    {icon}
   </i>
 );
 
@@ -31,17 +31,17 @@ export default ({
       <span
         class='suggestion-wrap-text'
       >
-        { highlight(label, 'label', matches) }
+        {highlight(label, 'label', matches)}
       </span>
       <span
         class='mdc-list-item__text__secondary suggestion-wrap-text'
         style={{ color: 'gray' }}
       >
-        { shortcut }
+        {shortcut}
       </span>
     </span>
     <span class='mdc-list-item__end-detail kbd-end-detail'>
-      { selected ? <Icon icon={'forward'} color={fadedColorMap.mode} /> : `${ctrlChar}-${index + 1}` }
+      {selected ? <Icon icon={'forward'} color={fadedColorMap.mode} /> : `${ctrlChar}-${index + 1}`}
     </span>
   </li>
 );

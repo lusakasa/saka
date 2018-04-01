@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import Suggestion from '../../Components/Suggestion';
-import { highlight } from 'lib/highlight';
+import { highlight } from '../../../../../../lib/highlight';
 
 export default ({
   suggestion: { type, title, url, prettyURL, matches, favIconUrl },

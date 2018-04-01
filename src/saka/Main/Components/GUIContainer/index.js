@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import msg from 'msg/client';
+import msg from '../../../../msg/client';
 import './style.css';
 
 // Makes GUI constant size
@@ -23,7 +23,7 @@ export default class GUIContainer extends Component {
           maxWidth: `${100 * zoom}%`
         }}
       >
-        { children }
+        {children}
       </main>
     );
   }
