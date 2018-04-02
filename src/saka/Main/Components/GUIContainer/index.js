@@ -23,7 +23,7 @@ export default class GUIContainer extends Component {
           maxWidth: `${100 * zoom}%`
         }}
       >
-        { children }
+        {children}
       </main>
     );
   }

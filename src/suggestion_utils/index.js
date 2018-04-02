@@ -1,4 +1,4 @@
-import { prettifyURL, isURL } from 'lib/url';
+import { prettifyURL, isURL } from '../lib/url';
 
 export const icons = {
   mode: 'apps',
