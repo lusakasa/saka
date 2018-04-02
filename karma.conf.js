@@ -75,9 +75,12 @@ module.exports = function (config) {
               ],
               [
                 'transform-object-rest-spread'
+              ],
+              [
+                'transform-class-properties'
               ]
             ],
-            'presets': ['es2015', 'react', 'stage-0'].map((p) => {
+            'presets': ['env', 'react'].map((p) => {
               return require.resolve('babel-preset-' + p);
             })
           }

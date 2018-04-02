@@ -54,10 +54,6 @@ module.exports = function (env) {
       ]
     },
     resolve: {
-      'alias': {
-        'react': 'preact-compat',
-        'react-dom': 'preact-compat'
-      },
       modules: [
         './src',
         './node_modules'

@@ -1,6 +1,9 @@
 const defaults = require('@storybook/react/dist/server/config/defaults/webpack.config');
 const webpack = require('webpack');
 
+const path = require('path');
+const join = path.join;
+
 const env = 'dev:chrome:benchmark';
 const [mode, platform, benchmark] = env.split(':');
 const version = require('../static/manifest.json').version;
@@ -11,7 +14,12 @@ module.exports = (base, env) => {
     resolve: Object.assign({}, config.resolve, {
       alias: Object.assign({}, (config.resolve || {}).alias, {
         react: 'preact-compat',
-        'react-dom': 'preact-compat'
+        'react-dom': 'preact-compat',
+        'src': path.join(__dirname, '../src'),
+          'msg': path.join(__dirname, '../src/msg'),
+          'suggestion_engine': path.join(__dirname, '../src/suggestion_engine'),
+          'suggestion_utils': path.join(__dirname, '../src/suggestion_utils'),
+          'lib': path.join(__dirname, '../src/lib')
       })
     }),
     plugins: [
