@@ -97,7 +97,7 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     files,
     preprocessors,
-    reporters: ['coverage', 'spec'], // This line is extra important, it enabled the green checkmarks in the specs
+    reporters: ['spec'], // This line is extra important, it enabled the green checkmarks in the specs
     specReporter: {
       maxLogLines: 5, // limit number of lines logged per test
       suppressErrorSummary: true, // do not print error summary

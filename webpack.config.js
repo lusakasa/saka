@@ -6,6 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 var marked = require('marked');
 var renderer = new marked.Renderer();
 
+const path = require('path');
+const join = path.join;
+
 module.exports = function (env) {
   const config = {
     entry: {
@@ -54,6 +57,13 @@ module.exports = function (env) {
       ]
     },
     resolve: {
+      alias: {
+        'src': path.join(__dirname, 'src'),
+        'msg': path.join(__dirname, 'src/msg'),
+        'suggestion_engine': path.join(__dirname, 'src/suggestion_engine'),
+        'suggestion_utils': path.join(__dirname, 'src/suggestion_utils'),
+        'lib': path.join(__dirname, 'src/lib')
+      },
       modules: [
         './src',
         './node_modules'
