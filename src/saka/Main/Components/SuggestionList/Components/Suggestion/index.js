@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { fadedColorMap } from '../../../../../../lib/colors';
-import { ctrlChar } from '../../../../../../lib/utils';
-import { icons } from '../../../../../../suggestion_utils';
+import { fadedColorMap } from 'lib/colors';
+import { ctrlChar } from 'lib/utils';
+import { icons } from 'src/suggestion_utils';
 import './style.css';
 
 export default ({

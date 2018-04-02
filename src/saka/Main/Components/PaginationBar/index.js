@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { ctrlChar } from '../../../../lib/utils';
+import { ctrlChar } from 'lib/utils';
 import './style.css';
 
 export default ({ firstVisibleIndex, suggestions, maxSuggestions, onClickPrevious, onClickNext }) => {

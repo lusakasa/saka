@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import msg from '../../../../msg/client';
+import msg from 'msg/client';
 import './style.css';
 
 // Makes GUI constant size

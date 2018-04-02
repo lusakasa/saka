@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { ctrlChar } from '../../../../../../lib/utils';
-import { highlight } from '../../../../../../lib/highlight';
-import { fadedColorMap } from '../../../../../../lib/colors';
+import { ctrlChar } from 'lib/utils';
+import { highlight } from 'lib/highlight';
+import { fadedColorMap } from 'lib/colors';
 
 const Icon = ({ icon, color }) => (
   <i class='material-icons' aria-hidden='true' style={{ color }} >

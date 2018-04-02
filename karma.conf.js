@@ -13,13 +13,13 @@ function resolveCwd () {
   return join.apply(path, args);
 }
 
-const indexSpec = resolveCwd('tests/saka.test.js');
+const indexSpec = resolveCwd('src/**/*.test.js');
 const files = [
   indexSpec
 ];
 
 const preprocessors = {};
-preprocessors[resolveCwd('tests/saka.test.js')] = ['webpack', 'sourcemap'];
+preprocessors[resolveCwd('src/**/*.test.js')] = ['webpack', 'sourcemap'];
 
 module.exports = function (config) {
   let configuration = {
@@ -35,18 +35,23 @@ module.exports = function (config) {
         })
       ],
       // devtool: 'inline-source-map',
-      // 'resolve': {
-      //   'alias': {
-      //     'react-dom/server': 'preact-render-to-string',
-      //     'react-dom/test-utils': 'preact-test-utils',
-      //     'react-dom': 'preact-compat-enzyme',
-      //     'react-test-renderer/shallow': 'preact-test-utils',
-      //     'react-test-renderer': 'preact-test-utils',
-      //     'react-addons-test-utils': 'preact-test-utils',
-      //     'react-addons-transition-group': 'preact-transition-group',
-      //     'react': 'preact-compat-enzyme'
-      //   }
-      // },
+      'resolve': {
+        'alias': {
+          'src': path.join(__dirname, 'src'),
+          'msg': path.join(__dirname, 'src/msg'),
+          'suggestion_engine': path.join(__dirname, 'src/suggestion_engine'),
+          'suggestion_utils': path.join(__dirname, 'src/suggestion_utils'),
+          'lib': path.join(__dirname, 'src/lib')
+          //     'react-dom/server': 'preact-render-to-string',
+          //     'react-dom/test-utils': 'preact-test-utils',
+          //     'react-dom': 'preact-compat-enzyme',
+          //     'react-test-renderer/shallow': 'preact-test-utils',
+          //     'react-test-renderer': 'preact-test-utils',
+          //     'react-addons-test-utils': 'preact-test-utils',
+          //     'react-addons-transition-group': 'preact-transition-group',
+          //     'react': 'preact-compat-enzyme'
+        }
+      },
       externals: {
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
