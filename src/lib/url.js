@@ -99,7 +99,8 @@ const knownProtocols = [
   'ftp:',
   'about:',
   'chrome:',
-  'chrome-extension:'
+  'chrome-extension:',
+  'moz-extension:'
 ];
 /** Returns whether the provided text is a known protocol */
 export function isProtocol(text) {
