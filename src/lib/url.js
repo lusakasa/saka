@@ -27,6 +27,14 @@ export function isURL (str) {
   return true;
 }
 
+export function extractProtocol (url) {
+  if (url) {
+    return url.match(/^\w+:/, '') ? url.match(/^\w+:/, '')[0] : '';
+  }
+
+  return '';
+}
+
 export function stripProtocol (url) {
   return url.replace(/(^\w+:|^)\/\//, '');
 }
@@ -82,7 +90,7 @@ export function isTLD (text) {
   return knownTLDs.indexOf(text) !== -1;
 }
 
-const knownProtocols = ['http:', 'https:', 'file:', 'ftp:', 'chrome:', 'chrome-extension:'];
+const knownProtocols = ['http:', 'https:', 'file:', 'ftp:', 'about:', 'chrome:', 'chrome-extension:'];
 /** Returns whether the provided text is a known protocol */
 export function isProtocol (text) {
   return knownProtocols.indexOf(text) !== -1;
