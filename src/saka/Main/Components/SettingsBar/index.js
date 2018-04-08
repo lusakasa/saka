@@ -3,11 +3,18 @@ import { colorMap } from 'lib/colors';
 import './style.css';
 
 const Item = ({ label, color }) => (
-  <span role='button' aria-pressed='false' style={{color}} class='settings-item'>{label}</span>
+  <span
+    role="button"
+    aria-pressed="false"
+    style={{ color }}
+    class="settings-item"
+  >
+    {label}
+  </span>
 );
 
 export default () => (
-  <section id='settings-bar'>
+  <section id="settings-bar">
     <Item label={'Commands'} color={colorMap.command} />
     <Item label={'Tabs'} color={colorMap.tabs} />
     <Item label={'Search'} color={colorMap.search} />
