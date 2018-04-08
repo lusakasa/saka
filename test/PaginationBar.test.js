@@ -1,24 +1,26 @@
-import PaginationBar from '../PaginationBar';
+import PaginationBar from 'src/saka/Main/Components/PaginationBar';
 import { render } from 'preact-render-spy';
 import { h } from 'preact';
 
-describe('PaginationBar component ', function () {
-  it('should be empty when no there are no suggestions', function () {
+describe('PaginationBar component ', function() {
+  it('should be empty when no there are no suggestions', function() {
     const props = {
       firstVisibleIndex: 0,
       suggestions: [],
       maxSuggestions: 6,
-      onClickPrevious: function () {},
-      onClickNext: function () {}
+      onClickPrevious: function() {},
+      onClickNext: function() {}
     };
 
     const paginationBarRender = render(<PaginationBar {...props} />);
-    const paginationList = paginationBarRender.find('.paginator-text-info').text();
+    const paginationList = paginationBarRender
+      .find('.paginator-text-info')
+      .text();
 
     expect(paginationList).toBe('');
   });
 
-  it('should show correct amount of suggestions when there are suggestions found', function () {
+  it('should show correct amount of suggestions when there are suggestions found', function() {
     const props = {
       firstVisibleIndex: 0,
       suggestions: [
@@ -34,12 +36,14 @@ describe('PaginationBar component ', function () {
         }
       ],
       maxSuggestions: 6,
-      onClickPrevious: function () {},
-      onClickNext: function () {}
+      onClickPrevious: function() {},
+      onClickNext: function() {}
     };
 
     const paginationBarRender = render(<PaginationBar {...props} />);
-    const paginationList = paginationBarRender.find('.paginator-text-info').text();
+    const paginationList = paginationBarRender
+      .find('.paginator-text-info')
+      .text();
 
     expect(paginationList).toBe('1 - 2 / 2');
   });
