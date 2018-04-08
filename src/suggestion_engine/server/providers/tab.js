@@ -23,7 +23,7 @@ async function filteredTabSuggestions(searchString) {
   }));
 }
 
-export async function recentTabSuggestions() {
+async function recentTabSuggestions() {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
   const { tabHistory } = await browser.runtime.getBackgroundPage();
@@ -35,7 +35,7 @@ export async function recentTabSuggestions() {
   return [...recentTabs, ...Object.values(tabsMap)];
 }
 
-export async function allTabSuggestions() {
+async function allTabSuggestions() {
   const tabs = await browser.tabs.query({});
   return tabs.map(({ id: tabId, windowId, title, url, favIconUrl }) => ({
     type: 'tab',

@@ -73,9 +73,17 @@ module.exports = function(config) {
                 ['transform-object-rest-spread'],
                 ['transform-class-properties']
               ],
-              presets: ['env', 'react'].map(p => {
-                return require.resolve('babel-preset-' + p);
-              })
+              presets: [
+                [
+                  'env',
+                  {
+                    targets: {
+                      browsers: ['last 2 Chrome versions']
+                    }
+                  }
+                ],
+                'react'
+              ]
             }
           },
           {

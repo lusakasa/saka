@@ -2,15 +2,24 @@
   "name": "saka",
   "description": "A keyboard interface to the web",
   "scripts": {
-    "build": "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:firefox\"",
-    "build:chrome": "npm run clean && webpack --config webpack.config.js --env=dev:chrome:benchmark --progress --colors",
-    "build:firefox": "npm run clean && webpack --config webpack.config.js --env=dev:firefox:benchmark --progress --colors",
-    "build:prod": "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:prod:firefox\"",
-    "build:prod:chrome": "npm run clean && webpack --config webpack.config.js --env=prod:chrome:nobenchmark --progress --colors && npm run zip-dist",
-    "build:prod:firefox": "npm run clean && webpack --config webpack.config.js --env=prod:firefox:nobenchmark --progress --colors && npm run zip-dist",
-    "build:benchmark:chrome": "npm run clean && webpack --config webpack.config.js --env=prod:chrome:benchmark --progress --colors && npm run zip-dist",
-    "build:benchmark:firefox": "npm run clean && webpack --config webpack.config.js --env=prod:firefox:benchmark --progress --colors && npm run zip-dist",
-    "build:profile": "npm run clean && webpack --config webpack.config.js --progress --profile --colors && cp ./static/* ./dist",
+    "build":
+      "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:firefox\"",
+    "build:chrome":
+      "npm run clean && webpack --config webpack.config.js --env=dev:chrome:benchmark --progress --colors",
+    "build:firefox":
+      "npm run clean && webpack --config webpack.config.js --env=dev:firefox:benchmark --progress --colors",
+    "build:prod":
+      "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:prod:firefox\"",
+    "build:prod:chrome":
+      "npm run clean && webpack --config webpack.config.js --env=prod:chrome:nobenchmark --progress --colors && npm run zip-dist",
+    "build:prod:firefox":
+      "npm run clean && webpack --config webpack.config.js --env=prod:firefox:nobenchmark --progress --colors && npm run zip-dist",
+    "build:benchmark:chrome":
+      "npm run clean && webpack --config webpack.config.js --env=prod:chrome:benchmark --progress --colors && npm run zip-dist",
+    "build:benchmark:firefox":
+      "npm run clean && webpack --config webpack.config.js --env=prod:firefox:benchmark --progress --colors && npm run zip-dist",
+    "build:profile":
+      "npm run clean && webpack --config webpack.config.js --progress --profile --colors && cp ./static/* ./dist",
     "clean": "rimraf dist",
     "zip-dist": "bestzip dist.zip dist/*",
     "book:dev": "cd book && npm run dev",
@@ -64,6 +73,7 @@
     "preact-render-spy": "^1.2.2",
     "prettier": "^1.11.1",
     "rimraf": "^2.5.4",
+    "sinon-chrome": "^2.3.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"
   },
@@ -75,6 +85,7 @@
     "preact": "^8.2.7",
     "preact-compat": "^3.18.0",
     "preact-compat-enzyme": "^0.2.5",
-    "webextension-polyfill": "git+https://github.com/lusakasa/webextension-polyfill.git"
+    "webextension-polyfill":
+      "git+https://github.com/lusakasa/webextension-polyfill.git"
   }
 }
