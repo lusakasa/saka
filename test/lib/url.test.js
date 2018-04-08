@@ -1,4 +1,4 @@
-import * as libUrl from '../url';
+import * as libUrl from 'lib/url';
 
 describe('lib/url ', function() {
   describe('isURL ', function() {

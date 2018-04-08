@@ -7,41 +7,39 @@ const env = 'dev:chrome:benchmark';
 const [mode, platform, benchmark] = env.split(':');
 const version = require('./static/manifest.json').version;
 
-function resolveCwd () {
+function resolveCwd() {
   let args = [].slice.apply(arguments, []);
   args.unshift(process.cwd());
   return join.apply(path, args);
 }
 
-const indexSpec = resolveCwd('src/**/*.test.js');
-const files = [
-  indexSpec
-];
+const indexSpec = resolveCwd('test/**/*.test.js');
+const files = [indexSpec];
 
 const preprocessors = {};
-preprocessors[resolveCwd('src/**/*.test.js')] = ['webpack', 'sourcemap'];
+preprocessors[resolveCwd('test/**/*.test.js')] = ['webpack', 'sourcemap'];
 
-module.exports = function (config) {
+module.exports = function(config) {
   let configuration = {
     singleRun: true,
     webpack: {
       plugins: [
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('development'),
-          'SAKA_DEBUG': JSON.stringify(true),
-          'SAKA_VERSION': JSON.stringify(version + ' dev'),
-          'SAKA_PLATFORM': JSON.stringify(platform),
-          'SAKA_BENCHMARK': JSON.stringify(benchmark === 'benchmark')
+          SAKA_DEBUG: JSON.stringify(true),
+          SAKA_VERSION: JSON.stringify(version + ' dev'),
+          SAKA_PLATFORM: JSON.stringify(platform),
+          SAKA_BENCHMARK: JSON.stringify(benchmark === 'benchmark')
         })
       ],
       // devtool: 'inline-source-map',
-      'resolve': {
-        'alias': {
-          'src': path.join(__dirname, 'src'),
-          'msg': path.join(__dirname, 'src/msg'),
-          'suggestion_engine': path.join(__dirname, 'src/suggestion_engine'),
-          'suggestion_utils': path.join(__dirname, 'src/suggestion_utils'),
-          'lib': path.join(__dirname, 'src/lib')
+      resolve: {
+        alias: {
+          src: path.join(__dirname, 'src'),
+          msg: path.join(__dirname, 'src/msg'),
+          suggestion_engine: path.join(__dirname, 'src/suggestion_engine'),
+          suggestion_utils: path.join(__dirname, 'src/suggestion_utils'),
+          lib: path.join(__dirname, 'src/lib')
           //     'react-dom/server': 'preact-render-to-string',
           //     'react-dom/test-utils': 'preact-test-utils',
           //     'react-dom': 'preact-compat-enzyme',
@@ -58,37 +56,33 @@ module.exports = function (config) {
         'react/addons': true
       },
       module: {
-        loaders: [{
-          test: /\.js/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          query: {
-            'plugins': [
-              [
-                'transform-decorators-legacy'
+        loaders: [
+          {
+            test: /\.js/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+              plugins: [
+                ['transform-decorators-legacy'],
+                [
+                  'transform-react-jsx',
+                  {
+                    pragma: 'h'
+                  }
+                ],
+                ['transform-object-rest-spread'],
+                ['transform-class-properties']
               ],
-              [
-                'transform-react-jsx',
-                {
-                  'pragma': 'h'
-                }
-              ],
-              [
-                'transform-object-rest-spread'
-              ],
-              [
-                'transform-class-properties'
-              ]
-            ],
-            'presets': ['env', 'react'].map((p) => {
-              return require.resolve('babel-preset-' + p);
-            })
+              presets: ['env', 'react'].map(p => {
+                return require.resolve('babel-preset-' + p);
+              })
+            }
+          },
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
           }
-        },
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader']
-        }]
+        ]
       },
       watch: true
     },
