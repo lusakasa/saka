@@ -19,10 +19,17 @@ export default class extends Component {
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
     maxSuggestions: 6,
     backgroundImage: undefined
-  }
-  render () {
+  };
+
+  render() {
     const { placeholder, mode } = this.props;
-    const { searchString, suggestions, selectedIndex, firstVisibleIndex, maxSuggestions } = this.state;
+    const {
+      searchString,
+      suggestions,
+      selectedIndex,
+      firstVisibleIndex,
+      maxSuggestions
+    } = this.state;
     const suggestion = suggestions[firstVisibleIndex + selectedIndex];
     // console.log('render suggestions', suggestions);
     return (
@@ -59,9 +66,9 @@ export default class extends Component {
       </BackgroundImage>
     );
   }
-  componentDidMount () {
-    this.updateAutocompleteSuggestions('').then((res) => {
-      const {suggestions} = this.state;
+  componentDidMount() {
+    this.updateAutocompleteSuggestions('').then(res => {
+      const { suggestions } = this.state;
       if (suggestions.length > 1) {
         this.setState({
           selectedIndex: 1
@@ -69,16 +76,21 @@ export default class extends Component {
       }
     });
   }
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.mode !== prevProps.mode) {
       this.updateAutocompleteSuggestions(this.state.searchString);
     }
   }
-  handleWheel = slowWheelEvent(50,
-    (e) => { this.incrementSelectedIndex(1); },
-    (e) => { this.incrementSelectedIndex(-1); }
+  handleWheel = slowWheelEvent(
+    50,
+    e => {
+      this.incrementSelectedIndex(1);
+    },
+    e => {
+      this.incrementSelectedIndex(-1);
+    }
   );
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     switch (e.key) {
       case 'Escape':
         browser.runtime.sendMessage('closeSaka');
@@ -169,43 +181,62 @@ export default class extends Component {
         }
         break;
     }
-  }
+  };
   nextPage = () => {
-    const { firstVisibleIndex, maxSuggestions, suggestions: { length: numSuggestions } } = this.state;
-    const newFirstVisibleIndex = Math.max(0, Math.min(firstVisibleIndex + maxSuggestions, numSuggestions - maxSuggestions));
+    const {
+      firstVisibleIndex,
+      maxSuggestions,
+      suggestions: { length: numSuggestions }
+    } = this.state;
+    const newFirstVisibleIndex = Math.max(
+      0,
+      Math.min(
+        firstVisibleIndex + maxSuggestions,
+        numSuggestions - maxSuggestions
+      )
+    );
     this.setState({
       firstVisibleIndex: newFirstVisibleIndex,
       selectedIndex: 0
     });
-  }
+  };
   previousPage = () => {
     const { firstVisibleIndex, maxSuggestions } = this.state;
-    const newFirstVisibleIndex = Math.max(0, firstVisibleIndex - maxSuggestions);
+    const newFirstVisibleIndex = Math.max(
+      0,
+      firstVisibleIndex - maxSuggestions
+    );
     this.setState({
       firstVisibleIndex: newFirstVisibleIndex,
       selectedIndex: 0
     });
-  }
-  incrementSelectedIndex = (increment) => {
+  };
+  incrementSelectedIndex = increment => {
     const { selectedIndex } = this.state;
     this.trySetIndex(selectedIndex + increment);
-  }
-  trySetIndex = (index) => {
+  };
+  trySetIndex = index => {
     if (this.indexInRange(index)) {
       this.setState({ selectedIndex: index });
     } else {
       const { firstVisibleIndex, maxSuggestions, suggestions } = this.state;
       if (index < 0 && firstVisibleIndex > 0) {
         this.setState({ firstVisibleIndex: firstVisibleIndex - 1 });
-      } else if (index >= maxSuggestions && firstVisibleIndex + maxSuggestions < suggestions.length) {
+      } else if (
+        index >= maxSuggestions &&
+        firstVisibleIndex + maxSuggestions < suggestions.length
+      ) {
         this.setState({ firstVisibleIndex: firstVisibleIndex + 1 });
       }
     }
-  }
-  indexInRange = (index) => {
+  };
+  indexInRange = index => {
     const { suggestions, maxSuggestions } = this.state;
-    return index >= 0 && index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1);
-  }
+    return (
+      index >= 0 &&
+      index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1)
+    );
+  };
   tryActivateSuggestion = async (index = this.state.selectedIndex) => {
     const { suggestions, firstVisibleIndex } = this.state;
     const suggestion = suggestions[firstVisibleIndex + index];
@@ -217,8 +248,8 @@ export default class extends Component {
         await browser.runtime.sendMessage('closeSaka');
       }
     }
-  }
-  handleInput = (e) => {
+  };
+  handleInput = e => {
     const newSearchString = e.target.value;
     const { oldSearchString } = this.state;
     this.setState({ searchString: newSearchString });
@@ -229,26 +260,30 @@ export default class extends Component {
       });
       this.updateAutocompleteSuggestions(newSearchString);
     }
-  }
-  updateAutocompleteSuggestions = async (searchStringAtLookup) => {
-    const suggestions = await getSuggestions(this.props.mode, searchStringAtLookup);
+  };
+  updateAutocompleteSuggestions = async searchStringAtLookup => {
+    const suggestions = await getSuggestions(
+      this.props.mode,
+      searchStringAtLookup
+    );
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
       this.setState({
-        suggestions: suggestions.map((suggestion) =>
-          preprocessSuggestion(suggestion, searchStringAtLookup)),
+        suggestions: suggestions.map(suggestion =>
+          preprocessSuggestion(suggestion, searchStringAtLookup)
+        ),
         firstVisibleIndex: 0,
         selectedIndex: 0
       });
     }
-  }
-  handleBlur = (e) => {
+  };
+  handleBlur = e => {
     e.target.focus();
-  }
-  handleButtonClick = (e) => {
+  };
+  handleButtonClick = e => {
     this.props.setMode('mode');
-  }
-  handleSuggestionClick = (index) => {
+  };
+  handleSuggestionClick = index => {
     this.tryActivateSuggestion(index);
-  }
+  };
 }

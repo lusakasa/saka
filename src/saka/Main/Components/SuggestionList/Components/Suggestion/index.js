@@ -20,48 +20,42 @@ export default ({
   const icon = icons[type];
   return (
     <li
-      class='mdc-list-item search-item'
+      class="mdc-list-item search-item"
       style={{
         backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
         borderLeftColor: color
       }}
       onClick={() => onClick(index)}
     >
-      <span class='mdc-list-item__start-detail search-icon' role='presentation'>
-        {(SAKA_PLATFORM === 'chrome' && url) ? (
+      <span class="mdc-list-item__start-detail search-icon" role="presentation">
+        {SAKA_PLATFORM === 'chrome' && url ? (
           <div
             style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
           />
-        ) : (SAKA_PLATFORM === 'firefox' && favIconUrl) ? (
-          <img
-            style='width: 25px; height: 25px'
-            src={favIconUrl}
-          />
+        ) : SAKA_PLATFORM === 'firefox' && favIconUrl ? (
+          <img style="width: 25px; height: 25px" src={favIconUrl} />
         ) : (
-          <i class='material-icons' aria-hidden='true' style={{ color }} >
+          <i class="material-icons" aria-hidden="true" style={{ color }}>
             {icon}
           </i>
         )}
       </span>
-      <span class='mdc-list-item__text'>
-        <span
-          class='suggestion-wrap-text'
-          style={{ color: titleColor }}
-        >
+      <span class="mdc-list-item__text">
+        <span class="suggestion-wrap-text" style={{ color: titleColor }}>
           {title}
         </span>
-        {secondary &&
+        {secondary && (
           <span
-            class='mdc-list-item__text__secondary suggestion-wrap-text'
+            class="mdc-list-item__text__secondary suggestion-wrap-text"
             style={{ color: secondaryColor || 'inherit' }}
           >
             {secondary}
           </span>
-        }
+        )}
       </span>
-      <span class='mdc-list-item__end-detail kbd-end-detail'>
+      <span class="mdc-list-item__end-detail kbd-end-detail">
         {selected ? (
-          <i class='material-icons' aria-hidden='true' style={{ color }} >
+          <i class="material-icons" aria-hidden="true" style={{ color }}>
             {icon}
           </i>
         ) : (
@@ -71,4 +65,3 @@ export default ({
     </li>
   );
 };
-
