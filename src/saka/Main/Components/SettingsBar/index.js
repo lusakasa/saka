@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { colorMap } from 'lib/colors';
-import './style.css';
+import 'scss/styles.scss';
 
 const Item = ({ label, color }) => (
   <span

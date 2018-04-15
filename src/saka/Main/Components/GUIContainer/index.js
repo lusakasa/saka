@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client';
-import './style.css';
+import 'scss/styles.scss';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {

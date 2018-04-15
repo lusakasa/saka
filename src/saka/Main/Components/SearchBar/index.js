@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import Button from './Button';
 import Input from './Input';
-import './style.css';
+import 'scss/styles.scss';
 
 export default ({
   placeholder,
@@ -13,11 +13,8 @@ export default ({
   onBlur,
   onButtonClick
 }) => (
-  <section class='search-bar-container'>
-    <Button
-      mode={mode}
-      onClick={onButtonClick}
-    />
+  <section class="search-bar-container">
+    <Button mode={mode} onClick={onButtonClick} />
     <Input
       placeholder={placeholder}
       searchString={searchString}

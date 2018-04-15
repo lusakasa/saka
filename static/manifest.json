@@ -4,6 +4,7 @@
   "author": "Sufyan Dawoodjee, Uzair Shamim",
   "description": "Saka - elegent tab search, selection, and beyond",
   "manifest_version": 2,
+  "options_page": "options.html",
   "background": {
     "scripts": ["background_page.js"],
     "persistent": true

@@ -9,15 +9,16 @@ var renderer = new marked.Renderer();
 const path = require('path');
 const join = path.join;
 
-module.exports = function (env) {
+module.exports = function(env) {
   const config = {
     entry: {
-      'background_page': './src/background_page/index.js',
-      'toggle_saka': './src/content_script/toggle_saka.js',
+      background_page: './src/background_page/index.js',
+      toggle_saka: './src/content_script/toggle_saka.js',
       // 'extensions': './src/pages/extensions/index.js',
       // 'info': './src/pages/info/index.js',
       // 'options': './src/pages/options/index.js',
-      'saka': './src/saka/index.js'
+      saka: './src/saka/index.js',
+      'saka-options': './src/options/saka-options.js'
     },
     output: {
       path: __dirname + '/dist',
@@ -37,8 +38,24 @@ module.exports = function (env) {
           }
         },
         {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          test: /\.(sc|c)ss$/,
+          use: [
+            'style-loader',
+            { loader: 'css-loader' },
+            {
+              loader: 'sass-loader',
+              options: {
+                importer: function(url, prev) {
+                  if (url.indexOf('@material') === 0) {
+                    var filePath = url.split('@material')[1];
+                    var nodeModulePath = `./node_modules/@material/${filePath}`;
+                    return { file: require('path').resolve(nodeModulePath) };
+                  }
+                  return { file: url };
+                }
+              }
+            }
+          ]
         },
         {
           test: /\.md$/,
@@ -58,16 +75,14 @@ module.exports = function (env) {
     },
     resolve: {
       alias: {
-        'src': path.join(__dirname, 'src'),
-        'msg': path.join(__dirname, 'src/msg'),
-        'suggestion_engine': path.join(__dirname, 'src/suggestion_engine'),
-        'suggestion_utils': path.join(__dirname, 'src/suggestion_utils'),
-        'lib': path.join(__dirname, 'src/lib')
+        src: path.join(__dirname, 'src'),
+        msg: path.join(__dirname, 'src/msg'),
+        suggestion_engine: path.join(__dirname, 'src/suggestion_engine'),
+        suggestion_utils: path.join(__dirname, 'src/suggestion_utils'),
+        lib: path.join(__dirname, 'src/lib'),
+        scss: path.join(__dirname, 'src/scss')
       },
-      modules: [
-        './src',
-        './node_modules'
-      ]
+      modules: ['./src', './node_modules']
     },
     plugins: [
       new webpack.optimize.ModuleConcatenationPlugin(),
@@ -108,10 +123,10 @@ module.exports = function (env) {
       new BabiliPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
-        'SAKA_DEBUG': JSON.stringify(false),
-        'SAKA_VERSION': JSON.stringify(version),
-        'SAKA_PLATFORM': JSON.stringify(platform),
-        'SAKA_BENCHMARK': JSON.stringify(true)
+        SAKA_DEBUG: JSON.stringify(false),
+        SAKA_VERSION: JSON.stringify(version),
+        SAKA_PLATFORM: JSON.stringify(platform),
+        SAKA_BENCHMARK: JSON.stringify(true)
       })
     ]);
   } else {
@@ -119,10 +134,10 @@ module.exports = function (env) {
     config.plugins = config.plugins.concat([
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),
-        'SAKA_DEBUG': JSON.stringify(true),
-        'SAKA_VERSION': JSON.stringify(version + ' dev'),
-        'SAKA_PLATFORM': JSON.stringify(platform),
-        'SAKA_BENCHMARK': JSON.stringify(benchmark === 'benchmark')
+        SAKA_DEBUG: JSON.stringify(true),
+        SAKA_VERSION: JSON.stringify(version + ' dev'),
+        SAKA_PLATFORM: JSON.stringify(platform),
+        SAKA_BENCHMARK: JSON.stringify(benchmark === 'benchmark')
       })
     ]);
   }

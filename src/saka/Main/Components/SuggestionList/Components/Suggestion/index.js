@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { fadedColorMap } from 'lib/colors';
 import { ctrlChar } from 'lib/utils';
 import { icons } from 'src/suggestion_utils';
-import './style.css';
+import 'scss/styles.scss';
 
 export default ({
   type,

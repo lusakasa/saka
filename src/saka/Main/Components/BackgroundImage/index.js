@@ -1,24 +1,24 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client';
-import './style.css';
+import 'scss/styles.scss';
 
 export default class BackgroundImage extends Component {
   state = {
     screenshot: undefined
-  }
-  render () {
+  };
+  render() {
     const { children } = this.props;
     const { screenshot } = this.state;
     return (
       <div
-        id='background-image'
+        id="background-image"
         style={screenshot && `background-image: url("${screenshot}")`}
       >
-        { children }
+        {children}
       </div>
     );
   }
-  componentDidMount () {
+  componentDidMount() {
     (async () => {
       const { screenshot } = await browser.storage.local.get('screenshot');
       this.setState({ screenshot });
