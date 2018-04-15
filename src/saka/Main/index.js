@@ -32,8 +32,7 @@ export default class Main extends Component {
     const { mode, isLoading } = this.state;
     const { setMode, shuffleMode } = this;
 
-    if(!isLoading){
-      
+    if (!isLoading) {
       switch (mode) {
         case 'mode':
           return (
@@ -72,14 +71,15 @@ export default class Main extends Component {
             />
           );
         default:
-            return <div>Error, invalid mode</div>;
-          }
+          return <div>Error, invalid mode</div>;
       }
     }
   }
+
   setMode = mode => {
     this.setState({ mode });
   };
+
   shuffleMode = () => {
     const { mode, modes } = this.state;
     const nextIndex = modes.indexOf(mode) + 1;

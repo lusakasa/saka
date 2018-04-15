@@ -39,7 +39,8 @@ module.exports = function(config) {
           msg: path.join(__dirname, 'src/msg'),
           suggestion_engine: path.join(__dirname, 'src/suggestion_engine'),
           suggestion_utils: path.join(__dirname, 'src/suggestion_utils'),
-          lib: path.join(__dirname, 'src/lib')
+          lib: path.join(__dirname, 'src/lib'),
+          scss: path.join(__dirname, 'src/scss')
           //     'react-dom/server': 'preact-render-to-string',
           //     'react-dom/test-utils': 'preact-test-utils',
           //     'react-dom': 'preact-compat-enzyme',
@@ -87,8 +88,24 @@ module.exports = function(config) {
             }
           },
           {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            test: /\.(sc|c)ss$/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader' },
+              {
+                loader: 'sass-loader',
+                options: {
+                  importer: function(url, prev) {
+                    if (url.indexOf('@material') === 0) {
+                      var filePath = url.split('@material')[1];
+                      var nodeModulePath = `./node_modules/@material/${filePath}`;
+                      return { file: require('path').resolve(nodeModulePath) };
+                    }
+                    return { file: url };
+                  }
+                }
+              }
+            ]
           }
         ]
       },

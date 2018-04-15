@@ -7,30 +7,30 @@ export default class DefaultModeSelection extends Component {
 
   render() {
     return (
-      <div class="mdc-select">
-        <select
-          value={this.props.mode}
-          class="mdc-select__native-control"
-          onChange={this.props.handleModeChange}
-        >
-          <option value="tab" selected="">
-            Tabs
-          </option>
-          <option value="closedTab" selected="">
-            Recently Closed
-          </option>
-          <option value="bookmark" selected="">
-            Bookmarks
-          </option>
-          <option value="mode" selected="">
-            Modes
-          </option>
-        </select>
-        <div class="mdc-select__label mdc-select__label--float-above">
-          Default mode for Saka
+      <li class="mdc-list-item mdc-form-field">
+        <label class="mdc-list-item__text">Default mode for Saka</label>
+        <div class="mdc-select mdc-list-item__meta">
+          <select
+            value={this.props.mode}
+            id="defaultModeSelect"
+            class=" mdc-select__native-control"
+            onChange={this.props.handleModeChange}
+          >
+            <option value="tab" selected="">
+              Tabs
+            </option>
+            <option value="closedTab" selected="">
+              Recently Closed
+            </option>
+            <option value="bookmark" selected="">
+              Bookmarks
+            </option>
+            <option value="mode" selected="">
+              Modes
+            </option>
+          </select>
         </div>
-        <div class="mdc-select__bottom-line" />
-      </div>
+      </li>
     );
   }
 }

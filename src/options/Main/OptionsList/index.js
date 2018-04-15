@@ -39,20 +39,39 @@ export default class OptionsList extends Component {
 
   render() {
     return (
-      <form>
-        <DefaultModeSelection
-          handleModeChange={this.handleModeChange}
-          mode={this.state.mode}
-        />
-        <input
-          type="submit"
-          value="Submit"
-          class="mdc-button mdc-button--raised mdc-button--dense"
-          onClick={this.handleOptionsSave}
-        >
-          Save
-        </input>
-      </form>
+      <div>
+        <form>
+          <ul class="mdc-list mdc-list--non-interactive mdc-list--dense">
+            <DefaultModeSelection
+              handleModeChange={this.handleModeChange}
+              mode={this.state.mode}
+            />
+            <li role="separator" class="mdc-list-divider" />
+
+            <li class="mdc-list-item">
+              <label class="mdc-list-item__text" for="basic-switch">
+                Only show search bar on load
+              </label>
+              <div class="mdc-list-item__meta mdc-switch">
+                <input
+                  type="checkbox"
+                  id="basic-switch"
+                  class="mdc-switch__native-control"
+                />
+                <div class="mdc-switch__background">
+                  <div class="mdc-switch__knob" />
+                </div>
+              </div>
+            </li>
+          </ul>
+          <input
+            type="submit"
+            value="Save"
+            class="mdc-button mdc-button--raised mdc-button--dense"
+            onClick={this.handleOptionsSave}
+          />
+        </form>
+      </div>
     );
   }
 }
