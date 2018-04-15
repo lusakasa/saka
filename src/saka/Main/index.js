@@ -8,7 +8,8 @@ export default class Main extends Component {
 
     this.state = {
       mode: 'tab',
-      modes: ['mode', 'tab', 'closedTab', 'bookmark']
+      modes: ['mode', 'tab', 'closedTab', 'bookmark'],
+      isLoading: true
     };
   }
 
@@ -21,54 +22,57 @@ export default class Main extends Component {
 
     retrieveSakaSettings.then(sakaSettings => {
       this.setState({
-        mode: sakaSettings.mode
+        mode: sakaSettings.mode,
+        isLoading: false
       });
     });
   }
 
   render() {
-    const { mode } = this.state;
-    console.warn('Mode:', mode);
+    const { mode, isLoading } = this.state;
     const { setMode, shuffleMode } = this;
-    switch (mode) {
-      case 'mode':
-        return (
-          <StandardSearch
-            mode={mode}
-            placeholder="Modes"
-            setMode={setMode}
-            shuffleMode={shuffleMode}
-          />
-        );
-      case 'tab':
-        return (
-          <StandardSearch
-            mode={mode}
-            placeholder="Tabs"
-            setMode={setMode}
-            shuffleMode={shuffleMode}
-          />
-        );
-      case 'closedTab':
-        return (
-          <StandardSearch
-            mode={mode}
-            placeholder="Recently Closed Tabs"
-            setMode={setMode}
-            shuffleMode={shuffleMode}
-          />
-        );
-      case 'bookmark':
-        return (
-          <StandardSearch
-            mode={mode}
-            placeholder="Bookmarks"
-            setMode={setMode}
-            shuffleMode={shuffleMode}
-          />
-        );
-      default:
-        return <div>Error, invalid mode</div>;
+
+    if (!isLoading) {
+      switch (mode) {
+        case 'mode':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="Modes"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+            />
+          );
+        case 'tab':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="Tabs"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+            />
+          );
+        case 'closedTab':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="Recently Closed Tabs"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+            />
+          );
+        case 'bookmark':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="Bookmarks"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+            />
+          );
+        default:
+          return <div>Error, invalid mode</div>;
+      }
     }
   }
   setMode = mode => {
