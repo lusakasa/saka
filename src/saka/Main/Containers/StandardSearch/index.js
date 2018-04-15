@@ -32,6 +32,7 @@ export default class extends Component {
     } = this.state;
     const suggestion = suggestions[firstVisibleIndex + selectedIndex];
     // console.log('render suggestions', suggestions);
+
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer onWheel={this.handleWheel}>

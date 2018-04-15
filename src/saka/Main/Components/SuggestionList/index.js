@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import Suggestion from './Containers/SuggestionSelector';
-import '@material/list/dist/mdc.list.min.css';
 import 'scss/styles.scss';
 
 export default class SuggestionList extends Component {

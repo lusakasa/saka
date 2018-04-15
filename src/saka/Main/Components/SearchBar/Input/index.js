@@ -1,5 +1,5 @@
 import { Component, h } from 'preact';
-import '@material/textfield/dist/mdc.textfield.min.css';
+// import '@material/textfield/dist/mdc.textfield.min.css';
 import 'scss/styles.scss';
 
 export default class Input extends Component {
@@ -12,10 +12,10 @@ export default class Input extends Component {
       onBlur
     } = this.props;
     return (
-      <section class="mdc-textfield mdc-textfield--fullwidth search-field-wrapper">
+      <section class="mdc-text-field mdc-text-field--fullwidth search-field-wrapper">
         <input
           id="search-bar"
-          class="mdc-textfield__input search-field-input"
+          class="mdc-text-field__input search-field-input"
           type="text"
           placeholder={placeholder}
           aria-label={placeholder}

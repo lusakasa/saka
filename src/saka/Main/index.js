@@ -1,6 +1,5 @@
 import { Component, h } from 'preact';
 import StandardSearch from './Containers/StandardSearch';
-import PlaceholderSearch from './Containers/PlaceholderSearch';
 import 'scss/styles.scss';
 
 export default class Main extends Component {
@@ -33,7 +32,8 @@ export default class Main extends Component {
     const { mode, isLoading } = this.state;
     const { setMode, shuffleMode } = this;
 
-    if (!isLoading) {
+    if(!isLoading){
+      
       switch (mode) {
         case 'mode':
           return (
@@ -72,17 +72,9 @@ export default class Main extends Component {
             />
           );
         default:
-          return <div>Error, invalid mode</div>;
+            return <div>Error, invalid mode</div>;
+          }
       }
-    } else {
-      return (
-        <PlaceholderSearch
-          mode={mode}
-          placeholder=""
-          setMode={setMode}
-          shuffleMode={shuffleMode}
-        />
-      );
     }
   }
   setMode = mode => {
