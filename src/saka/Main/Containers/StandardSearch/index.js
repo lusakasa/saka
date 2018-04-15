@@ -249,6 +249,7 @@ export default class extends Component {
       }
     }
   };
+
   handleInput = e => {
     const newSearchString = e.target.value;
     const { oldSearchString } = this.state;
