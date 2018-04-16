@@ -21,11 +21,19 @@ export default class Main extends Component {
     });
 
     retrieveSakaSettings.then(sakaSettings => {
-      this.setState({
-        isLoading: false,
-        mode: sakaSettings.mode,
-        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
-      });
+      if (sakaSettings !== undefined) {
+        this.setState({
+          isLoading: false,
+          mode: sakaSettings.mode,
+          showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
+        });
+      } else {
+        this.setState({
+          isLoading: false,
+          mode: 'tab',
+          showEmptySearchSuggestions: true
+        });
+      }
     });
   }
 

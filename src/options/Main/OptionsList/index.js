@@ -21,11 +21,21 @@ export default class OptionsList extends Component {
     });
 
     retrieveSakaSettings.then(sakaSettings => {
-      this.setState({
-        isLoading: false,
-        mode: sakaSettings.mode,
-        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
-      });
+      console.log('Saka Settings fetched ', sakaSettings);
+
+      if (sakaSettings !== undefined) {
+        this.setState({
+          isLoading: false,
+          mode: sakaSettings.mode,
+          showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
+        });
+      } else {
+        this.setState({
+          isLoading: false,
+          mode: 'tab',
+          showEmptySearchSuggestions: true
+        });
+      }
     });
   }
 
@@ -53,6 +63,7 @@ export default class OptionsList extends Component {
   };
 
   render() {
+    console.log('State: ', this.state);
     if (!this.state.isLoading) {
       return (
         <div class="options-form">
