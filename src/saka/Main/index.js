@@ -22,14 +22,15 @@ export default class Main extends Component {
 
     retrieveSakaSettings.then(sakaSettings => {
       this.setState({
+        isLoading: false,
         mode: sakaSettings.mode,
-        isLoading: false
+        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
       });
     });
   }
 
   render() {
-    const { mode, isLoading } = this.state;
+    const { mode, isLoading, showEmptySearchSuggestions } = this.state;
     const { setMode, shuffleMode } = this;
 
     if (!isLoading) {
@@ -41,6 +42,7 @@ export default class Main extends Component {
               placeholder="Modes"
               setMode={setMode}
               shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
             />
           );
         case 'tab':
@@ -50,6 +52,7 @@ export default class Main extends Component {
               placeholder="Tabs"
               setMode={setMode}
               shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
             />
           );
         case 'closedTab':
@@ -59,6 +62,7 @@ export default class Main extends Component {
               placeholder="Recently Closed Tabs"
               setMode={setMode}
               shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
             />
           );
         case 'bookmark':
@@ -68,6 +72,7 @@ export default class Main extends Component {
               placeholder="Bookmarks"
               setMode={setMode}
               shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
             />
           );
         default:

@@ -6,17 +6,18 @@ import 'scss/options.scss';
 export default class Main extends Component {
   render() {
     return (
-      <div
-        id="background-image"
-        style="background-color: #ffffff;
-        margin: auto;
-        position: relative;
-        text-align: center;
-        top: 50%;
-        width: 40%;"
-      >
-        <OptionsList />
-      </div>
+      <body>
+        <header class="mdc-top-app-bar mdc-top-app-bar--short">
+          <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+              <span class="mdc-top-app-bar__title">Saka Options</span>
+            </section>
+          </div>
+        </header>
+        <div id="background-image" class="mdc-elevation--z1 options-container">
+          <OptionsList />
+        </div>
+      </body>
     );
   }
 }

@@ -7,8 +7,13 @@ export default class DefaultModeSelection extends Component {
 
   render() {
     return (
-      <li class="mdc-list-item mdc-form-field">
-        <label class="mdc-list-item__text">Default mode for Saka</label>
+      <li class="mdc-list-item option">
+        <span class="mdc-list-item__text">
+          Default Mode
+          <span class="mdc-list-item__secondary-text">
+            Select the default mode Saka opens with
+          </span>
+        </span>
         <div class="mdc-select mdc-list-item__meta">
           <select
             value={this.props.mode}
