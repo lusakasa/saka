@@ -7,14 +7,17 @@ export default class Main extends Component {
   render() {
     return (
       <body>
-        <header class="mdc-top-app-bar mdc-top-app-bar--short">
-          <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <span class="mdc-top-app-bar__title">Saka Options</span>
+        <header className="mdc-top-app-bar mdc-top-app-bar--short">
+          <div className="mdc-top-app-bar__row">
+            <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+              <span className="mdc-top-app-bar__title">Saka Options</span>
             </section>
           </div>
         </header>
-        <div id="background-image" class="mdc-elevation--z1 options-container">
+        <div
+          id="background-image"
+          className="mdc-elevation--z1 options-container"
+        >
           <OptionsList />
         </div>
       </body>

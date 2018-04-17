@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import Suggestion from './Containers/SuggestionSelector';
 import 'scss/styles.scss';
+import 'material-components-web/dist/material-components-web.css';
 
 export default class SuggestionList extends Component {
   render() {

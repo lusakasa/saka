@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
 import StandardSearch from './Containers/StandardSearch';
 import 'scss/styles.scss';
+import 'material-components-web/dist/material-components-web.css';
 
 export default class Main extends Component {
   constructor(props) {

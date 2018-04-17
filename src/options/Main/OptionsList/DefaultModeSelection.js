@@ -1,4 +1,5 @@
 import { Component, h } from 'preact';
+import 'material-components-web/dist/material-components-web.css';
 
 export default class DefaultModeSelection extends Component {
   constructor(props) {
@@ -6,20 +7,21 @@ export default class DefaultModeSelection extends Component {
   }
 
   render() {
+    const { mode, handleModeChange } = this.props;
     return (
-      <li class="mdc-list-item option">
-        <span class="mdc-list-item__text">
+      <li className="mdc-list-item option">
+        <span className="mdc-list-item__text">
           Default Mode
-          <span class="mdc-list-item__secondary-text">
+          <span className="mdc-list-item__secondary-text">
             Select the default mode Saka opens with
           </span>
         </span>
-        <div class="mdc-select mdc-list-item__meta">
+        <div className="mdc-select mdc-list-item__meta">
           <select
-            value={this.props.mode}
+            value={mode}
             id="defaultModeSelect"
-            class=" mdc-select__native-control"
-            onChange={this.props.handleModeChange}
+            className=" mdc-select__native-control"
+            onChange={handleModeChange}
           >
             <option value="tab" selected="">
               Tabs

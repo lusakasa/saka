@@ -21,8 +21,6 @@ export default class OptionsList extends Component {
     });
 
     retrieveSakaSettings.then(sakaSettings => {
-      console.log('Saka Settings fetched ', sakaSettings);
-
       if (sakaSettings !== undefined) {
         this.setState({
           isLoading: false,
@@ -63,21 +61,20 @@ export default class OptionsList extends Component {
   };
 
   render() {
-    console.log('State: ', this.state);
     if (!this.state.isLoading) {
       return (
-        <div class="options-form">
+        <div className="options-form">
           <form>
-            <div class="mdc-list-group">
-              <h3 class="mdc-list-group__subheader">General Settings</h3>
-              <ul class="mdc-list mdc-list--non-interactive mdc-list--dense">
+            <div className="mdc-list-group">
+              <h3 className="mdc-list-group__subheader">General Settings</h3>
+              <ul className="mdc-list mdc-list--non-interactive mdc-list--dense">
                 <DefaultModeSelection
                   handleModeChange={this.handleModeChange}
                   mode={this.state.mode}
                 />
                 <li
                   role="separator"
-                  class="mdc-list-divider mdc-list-divider--padded options-separator"
+                  className="mdc-list-divider mdc-list-divider--padded options-separator"
                 />
                 <OnlyShowSearchBarSelector
                   checked={this.state.showEmptySearchSuggestions}
@@ -85,13 +82,17 @@ export default class OptionsList extends Component {
                     this.handleShowSearchSuggestionsChange
                   }
                 />
+                <li
+                  role="separator"
+                  className="mdc-list-divider mdc-list-divider--padded options-separator"
+                />
               </ul>
             </div>
-            <div dir="rtl" class="options-save">
+            <div dir="rtl" className="options-save">
               <input
                 type="submit"
                 value="Save"
-                class="mdc-button mdc-button--raised mdc-button--dense options-save-button"
+                className="mdc-button mdc-button--raised mdc-button--dense options-save-button"
                 onClick={this.handleOptionsSave}
               />
             </div>
