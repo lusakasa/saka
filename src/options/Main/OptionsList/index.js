@@ -13,28 +13,22 @@ export default class OptionsList extends Component {
     };
   }
 
-  componentDidMount() {
-    var retrieveSakaSettings = new Promise(function(resolve, reject) {
-      chrome.storage.sync.get(['sakaSettings'], result => {
-        resolve(result.sakaSettings);
-      });
-    });
+  async componentDidMount() {
+    let { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
-    retrieveSakaSettings.then(sakaSettings => {
-      if (sakaSettings !== undefined) {
-        this.setState({
-          isLoading: false,
-          mode: sakaSettings.mode,
-          showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
-        });
-      } else {
-        this.setState({
-          isLoading: false,
-          mode: 'tab',
-          showEmptySearchSuggestions: true
-        });
-      }
-    });
+    if (sakaSettings !== undefined) {
+      this.setState({
+        isLoading: false,
+        mode: sakaSettings.mode,
+        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
+      });
+    } else {
+      this.setState({
+        isLoading: false,
+        mode: 'tab',
+        showEmptySearchSuggestions: true
+      });
+    }
   }
 
   handleOptionsSave = e => {
@@ -43,9 +37,7 @@ export default class OptionsList extends Component {
       showEmptySearchSuggestions: this.state.showEmptySearchSuggestions
     };
 
-    chrome.storage.sync.set({ sakaSettings: settingsStore }, function() {
-      console.log('Saka Settings set to ', settingsStore);
-    });
+    browser.storage.sync.set({ sakaSettings: settingsStore });
   };
 
   handleModeChange = e => {

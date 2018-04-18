@@ -34,6 +34,7 @@ export default class extends Component {
   state = {
     hovered: false
   };
+
   render() {
     const { mode, onClick } = this.props;
     const { hovered } = this.state;
@@ -58,9 +59,11 @@ export default class extends Component {
       </div>
     );
   }
+
   handleMouseEnter = () => {
     this.setState({ hovered: true });
   };
+
   handleMouseLeave = () => {
     this.setState({ hovered: false });
   };

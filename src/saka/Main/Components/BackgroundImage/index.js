@@ -6,6 +6,7 @@ export default class BackgroundImage extends Component {
   state = {
     screenshot: undefined
   };
+
   render() {
     const { children } = this.props;
     const { screenshot } = this.state;
@@ -18,6 +19,7 @@ export default class BackgroundImage extends Component {
       </div>
     );
   }
+
   componentDidMount() {
     (async () => {
       const { screenshot } = await browser.storage.local.get('screenshot');
@@ -26,6 +28,7 @@ export default class BackgroundImage extends Component {
       await browser.storage.local.remove('screenshot');
     })();
   }
+
   // componentWillReceiveProps (nextProps) {
   //   if (nextProps.suggestion.tabId !== this.props.suggestion.tabId) {
   //     this.fetchImage(nextProps.suggestion.tabId);

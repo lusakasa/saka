@@ -87,6 +87,7 @@ export default class extends Component {
       );
     }
   }
+
   componentDidMount() {
     this.updateAutocompleteSuggestions('').then(res => {
       const { suggestions } = this.state;
@@ -97,11 +98,13 @@ export default class extends Component {
       }
     });
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.mode !== prevProps.mode) {
       this.updateAutocompleteSuggestions(this.state.searchString);
     }
   }
+
   handleWheel = slowWheelEvent(
     50,
     e => {
@@ -111,6 +114,7 @@ export default class extends Component {
       this.incrementSelectedIndex(-1);
     }
   );
+
   handleKeyDown = e => {
     switch (e.key) {
       case 'Escape':
@@ -203,6 +207,7 @@ export default class extends Component {
         break;
     }
   };
+
   nextPage = () => {
     const {
       firstVisibleIndex,
@@ -221,6 +226,7 @@ export default class extends Component {
       selectedIndex: 0
     });
   };
+
   previousPage = () => {
     const { firstVisibleIndex, maxSuggestions } = this.state;
     const newFirstVisibleIndex = Math.max(
@@ -232,10 +238,12 @@ export default class extends Component {
       selectedIndex: 0
     });
   };
+
   incrementSelectedIndex = increment => {
     const { selectedIndex } = this.state;
     this.trySetIndex(selectedIndex + increment);
   };
+
   trySetIndex = index => {
     if (this.indexInRange(index)) {
       this.setState({ selectedIndex: index });
@@ -251,6 +259,7 @@ export default class extends Component {
       }
     }
   };
+
   indexInRange = index => {
     const { suggestions, maxSuggestions } = this.state;
     return (
@@ -258,6 +267,7 @@ export default class extends Component {
       index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1)
     );
   };
+
   tryActivateSuggestion = async (index = this.state.selectedIndex) => {
     const { suggestions, firstVisibleIndex } = this.state;
     const suggestion = suggestions[firstVisibleIndex + index];
@@ -283,6 +293,7 @@ export default class extends Component {
       this.updateAutocompleteSuggestions(newSearchString);
     }
   };
+
   updateAutocompleteSuggestions = async searchStringAtLookup => {
     const suggestions = await getSuggestions(
       this.props.mode,
@@ -299,12 +310,15 @@ export default class extends Component {
       });
     }
   };
+
   handleBlur = e => {
     e.target.focus();
   };
+
   handleButtonClick = e => {
     this.props.setMode('mode');
   };
+
   handleSuggestionClick = index => {
     this.tryActivateSuggestion(index);
   };

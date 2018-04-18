@@ -11,68 +11,6 @@ const join = path.join;
 
 module.exports = function(env) {
   const config = {
-    entry: {
-      background_page: './src/background_page/index.js',
-      toggle_saka: './src/content_script/toggle_saka.js',
-      // 'extensions': './src/pages/extensions/index.js',
-      // 'info': './src/pages/info/index.js',
-      // 'options': './src/pages/options/index.js',
-      saka: './src/saka/index.js',
-      'saka-options': './src/options/saka-options.js'
-    },
-    output: {
-      path: __dirname + '/dist',
-      filename: '[name].js',
-      sourceMapFilename: '[name].js.map'
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          query: {
-            // require.resolve needed to work with linked modules
-            // (e.g. saka-action in development) or build will fail
-            // presets: [require.resolve('babel-preset-stage-3')]
-          }
-        },
-        {
-          test: /\.(sc|c)ss$/,
-          use: [
-            'style-loader',
-            { loader: 'css-loader' },
-            {
-              loader: 'sass-loader',
-              options: {
-                importer: function(url, prev) {
-                  if (url.indexOf('@material') === 0) {
-                    var filePath = url.split('@material')[1];
-                    var nodeModulePath = `./node_modules/@material/${filePath}`;
-                    return { file: require('path').resolve(nodeModulePath) };
-                  }
-                  return { file: url };
-                }
-              }
-            }
-          ]
-        },
-        {
-          test: /\.md$/,
-          use: [
-            {
-              loader: 'html-loader'
-            },
-            {
-              loader: 'markdown-loader',
-              options: {
-                renderer
-              }
-            }
-          ]
-        }
-      ]
-    },
     resolve: {
       alias: {
         src: path.join(__dirname, 'src'),
@@ -83,6 +21,61 @@ module.exports = function(env) {
         scss: path.join(__dirname, 'src/scss')
       },
       modules: ['./src', './node_modules']
+    },
+    entry: {
+      background_page: 'src/background_page/index.js',
+      toggle_saka: 'src/content_script/toggle_saka.js',
+      // 'extensions': './src/pages/extensions/index.js',
+      // 'info': './src/pages/info/index.js',
+      // 'options': './src/pages/options/index.js',
+      saka: 'src/saka/index.js',
+      'saka-options': 'src/options/saka-options.js'
+    },
+    output: {
+      path: __dirname + '/dist',
+      filename: '[name].js',
+      sourceMapFilename: '[name].js.map'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loaders: ['babel-loader']
+        },
+        {
+          test: /\.(sc|c)ss$/,
+          loaders: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                importer: function(url, prev) {
+                  if (url.indexOf('@material') === 0) {
+                    var filePath = url.split('@material')[1];
+                    var nodeModulePath = `./node_modules/@material/${filePath}`;
+                    return { file: path.resolve(nodeModulePath) };
+                  }
+                  return { file: url };
+                }
+              }
+            }
+          ]
+        },
+        {
+          test: /\.md$/,
+          loaders: [
+            'html-loader',
+            {
+              loader: 'markdown-loader',
+              options: {
+                renderer
+              }
+            }
+          ]
+        }
+      ]
     },
     plugins: [
       new webpack.optimize.ModuleConcatenationPlugin(),
