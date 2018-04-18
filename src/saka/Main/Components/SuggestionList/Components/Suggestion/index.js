@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { fadedColorMap } from 'lib/colors';
 import { ctrlChar } from 'lib/utils';
 import { icons } from 'src/suggestion_utils';
-import './style.css';
+import 'scss/styles.scss';
 
 export default ({
   type,
@@ -27,7 +27,7 @@ export default ({
       }}
       onClick={() => onClick(index)}
     >
-      <span class="mdc-list-item__start-detail search-icon" role="presentation">
+      <span class="mdc-list-item__graphic search-icon" role="presentation">
         {SAKA_PLATFORM === 'chrome' && url ? (
           <div
             style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
@@ -46,16 +46,20 @@ export default ({
         </span>
         {secondary && (
           <span
-            class="mdc-list-item__text__secondary suggestion-wrap-text"
+            class="mdc-list-item__secondary-text suggestion-wrap-text"
             style={{ color: secondaryColor || 'inherit' }}
           >
             {secondary}
           </span>
         )}
       </span>
-      <span class="mdc-list-item__end-detail kbd-end-detail">
+      <span class="mdc-list-item__meta kbd-end-detail">
         {selected ? (
-          <i class="material-icons" aria-hidden="true" style={{ color }}>
+          <i
+            class="mdc-list-item__graphic material-icons"
+            aria-hidden="true"
+            style={{ color }}
+          >
             {icon}
           </i>
         ) : (

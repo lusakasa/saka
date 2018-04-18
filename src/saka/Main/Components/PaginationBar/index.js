@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { ctrlChar } from 'lib/utils';
-import './style.css';
+import 'scss/styles.scss';
 
 export default ({
   firstVisibleIndex,

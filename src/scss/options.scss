@@ -1,0 +1,34 @@
+$mdc-theme-primary: #00796b; // Purple 500
+$mdc-theme-secondary: #4db6ac; // Orange A200
+
+@import "@material/theme/mdc-theme";
+
+html {
+  background-color: #eeeeee;
+}
+
+.options-container {
+  background-color: #ffffff;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  width: 60%;
+  margin-top: 80px;
+}
+
+.options-form {
+  padding: 10px;
+}
+
+.option {
+  padding-bottom: 10px;
+}
+
+.options-separator {
+  margin-bottom: 5px;
+}
+
+.options-save {
+  margin-top: 5px;
+  margin-right: 10px;
+}

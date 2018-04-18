@@ -1,12 +1,13 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client';
-import './style.css';
+import 'scss/styles.scss';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {
   state = {
     zoom: 0
   };
+
   render() {
     const { children, onWheel } = this.props;
     const { zoom } = this.state;
@@ -31,16 +32,20 @@ export default class GUIContainer extends Component {
       </main>
     );
   }
+
   componentWillMount() {
     window.addEventListener('zoom', this.onZoomChange);
     msg('zoom').then(this.setZoom);
   }
+
   componentWillUnmount() {
     window.removeEventListener('zoom', this.onZoomChange);
   }
+
   onZoomChange = event => {
     this.setZoom(event.detail.zoom);
   };
+
   setZoom = zoom => {
     this.setState({ zoom });
   };

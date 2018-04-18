@@ -4,7 +4,7 @@ import { highlight } from 'lib/highlight';
 import { fadedColorMap } from 'lib/colors';
 
 const Icon = ({ icon, color }) => (
-  <i class='material-icons' aria-hidden='true' style={{ color }} >
+  <i class="material-icons" aria-hidden="true" style={{ color }}>
     {icon}
   </i>
 );
@@ -17,31 +17,33 @@ export default ({
   onClick
 }) => (
   <li
-    class='mdc-list-item search-item'
+    class="mdc-list-item search-item"
     style={{
       backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
       borderLeftColor: fadedColor
     }}
     onClick={() => onClick(index)}
   >
-    <span class='mdc-list-item__start-detail search-icon' role='presentation'>
+    <span class="mdc-list-item__graphic search-icon" role="presentation">
       <Icon icon={icon} color={fadedColor} />
     </span>
-    <span class='mdc-list-item__text'>
-      <span
-        class='suggestion-wrap-text'
-      >
+    <span class="mdc-list-item__text">
+      <span class="suggestion-wrap-text">
         {highlight(label, 'label', matches)}
       </span>
       <span
-        class='mdc-list-item__text__secondary suggestion-wrap-text'
+        class="mdc-list-item__secondary-text suggestion-wrap-text"
         style={{ color: 'gray' }}
       >
         {shortcut}
       </span>
     </span>
-    <span class='mdc-list-item__end-detail kbd-end-detail'>
-      {selected ? <Icon icon={'forward'} color={fadedColorMap.mode} /> : `${ctrlChar}-${index + 1}`}
+    <span class="mdc-list-item__meta kbd-end-detail">
+      {selected ? (
+        <Icon icon={'forward'} color={fadedColorMap.mode} />
+      ) : (
+        `${ctrlChar}-${index + 1}`
+      )}
     </span>
   </li>
 );
