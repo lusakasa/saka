@@ -1,4 +1,4 @@
-import { isURL, extractProtocol, isProtocol } from 'lib/url';
+import { isURL, extractProtocol, isProtocol } from 'lib/url.js';
 
 // https://github.com/nwjs/chromium.src/blob/45886148c94c59f45f14a9dc7b9a60624cfa626a/components/omnibox/browser/bookmark_provider.cc
 export default async function bookmarkSuggestions(searchText) {
@@ -6,7 +6,7 @@ export default async function bookmarkSuggestions(searchText) {
   const searchResults = await browser.bookmarks.search(searchCriteria);
 
   const filteredResults = [];
-  searchResults.forEach(({ url, title, dateAdded }) => {
+  searchResults.forEach(({ url, title }) => {
     const protocol = extractProtocol(url);
     if (isURL(url) && isProtocol(protocol)) {
       filteredResults.push({

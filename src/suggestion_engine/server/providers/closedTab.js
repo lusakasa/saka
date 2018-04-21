@@ -1,11 +1,5 @@
 import Fuse from 'fuse.js';
 
-export default async function closedTabSuggestions(searchString) {
-  return searchString === ''
-    ? getAllSuggestions()
-    : getFilteredSuggestions(searchString);
-}
-
 async function getAllSuggestions() {
   const sessions = await browser.sessions.getRecentlyClosed();
   return (
@@ -45,4 +39,10 @@ async function getFilteredSuggestions(searchString) {
     score,
     matches
   }));
+}
+
+export default async function closedTabSuggestions(searchString) {
+  return searchString === ''
+    ? getAllSuggestions()
+    : getFilteredSuggestions(searchString);
 }

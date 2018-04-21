@@ -1,18 +1,12 @@
 import { MAX_RESULTS } from './';
 
-const commands = [
-  'search',
-  'help',
-  'history',
-  'tabs',
-  'define'
-];
+const commands = ['search', 'help', 'history', 'tabs', 'define'];
 
-export default function commandSuggestions (searchText) {
+export default function commandSuggestions(searchText) {
   return commands
-    .filter((command) => command.startsWith(searchText))
+    .filter(command => command.startsWith(searchText))
     .slice(0, MAX_RESULTS)
-    .map((command) => ({
+    .map(command => ({
       type: 'command',
       score: -1,
       title: command

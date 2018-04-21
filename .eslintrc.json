@@ -23,7 +23,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"],
+        "paths": ["src", "lib", "msg"],
         "extensions": ["js", "jsx"]
       }
     }

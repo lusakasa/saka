@@ -31,6 +31,9 @@ const DefaultModeSelection = function DefaultModeSelection({
           <option value="bookmark" selected="">
             Bookmarks
           </option>
+          <option value="history" selected="">
+            History
+          </option>
           <option value="mode" selected="">
             Modes
           </option>

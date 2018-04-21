@@ -1,9 +1,9 @@
-import msg from 'msg/client';
+import msg from 'msg/client.js';
 
-export async function getSuggestions (mode, searchString) {
+export async function getSuggestions(mode, searchString) {
   return msg('sg', [mode, searchString]);
 }
 
-export async function activateSuggestion (suggestion) {
+export async function activateSuggestion(suggestion) {
   return msg('activateSuggestion', suggestion);
 }

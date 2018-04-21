@@ -1,10 +1,10 @@
-import * as providers from './providers';
+import * as providers from './providers/index.js';
 
-export async function getSuggestions ([mode, searchString]) {
+export async function getSuggestions([mode, searchString]) {
   return providers[mode](searchString);
 }
 
-export async function activateSuggestion (suggestion) {
+export async function activateSuggestion(suggestion) {
   switch (suggestion.type) {
     case 'tab':
       await browser.tabs.update(suggestion.tabId, { active: true });
@@ -16,7 +16,14 @@ export async function activateSuggestion (suggestion) {
     case 'bookmark':
       await browser.tabs.create({ url: suggestion.url });
       break;
+    case 'history':
+      await browser.tabs.create({ url: suggestion.url });
+      break;
     default:
-      console.error(`activation not yet implemented for suggestions of type ${suggestion.type}`);
+      console.error(
+        `activation not yet implemented for suggestions of type ${
+          suggestion.type
+        }`
+      );
   }
 }

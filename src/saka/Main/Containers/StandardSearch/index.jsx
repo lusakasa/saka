@@ -1,5 +1,5 @@
 import { Component, h } from 'preact';
-import SearchBar from '../../Components/SearchBar';
+import SearchBar from '../../Components/SearchBar/index.js';
 import SuggestionList from '../../Components/SuggestionList';
 import PaginationBar from '../../Components/PaginationBar';
 import GUIContainer from '../../Components/GUIContainer';
@@ -17,79 +17,11 @@ export default class extends Component {
     suggestions: [],
     selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
-    maxSuggestions: 6,
-    backgroundImage: undefined
+    maxSuggestions: 6
   };
 
-  render() {
-    const { placeholder, mode, showEmptySearchSuggestions } = this.props;
-    const {
-      searchString,
-      suggestions,
-      selectedIndex,
-      firstVisibleIndex,
-      maxSuggestions
-    } = this.state;
-    const suggestion = suggestions[firstVisibleIndex + selectedIndex];
-    // console.log('render suggestions', suggestions);
-
-    if (!showEmptySearchSuggestions && !searchString) {
-      return (
-        <BackgroundImage suggestion={suggestion}>
-          <GUIContainer onWheel={this.handleWheel}>
-            <SearchBar
-              placeholder={placeholder}
-              searchString={searchString}
-              suggestion={suggestion}
-              onKeyDown={this.handleKeyDown}
-              onInput={this.handleInput}
-              onBlur={this.handleBlur}
-              onButtonClick={this.handleButtonClick}
-              onSuggestionClick={this.handleSuggestionClick}
-              mode={mode}
-            />
-          </GUIContainer>
-        </BackgroundImage>
-      );
-    } else {
-      return (
-        <BackgroundImage suggestion={suggestion}>
-          <GUIContainer onWheel={this.handleWheel}>
-            <SearchBar
-              placeholder={placeholder}
-              searchString={searchString}
-              suggestion={suggestion}
-              onKeyDown={this.handleKeyDown}
-              onInput={this.handleInput}
-              onBlur={this.handleBlur}
-              onButtonClick={this.handleButtonClick}
-              onSuggestionClick={this.handleSuggestionClick}
-              mode={mode}
-            />
-            <SuggestionList
-              searchString={searchString}
-              suggestions={suggestions}
-              selectedIndex={selectedIndex}
-              firstVisibleIndex={firstVisibleIndex}
-              maxSuggestions={maxSuggestions}
-              onSuggestionClick={this.handleSuggestionClick}
-            />
-            <PaginationBar
-              selectedIndex={selectedIndex}
-              suggestions={suggestions}
-              firstVisibleIndex={firstVisibleIndex}
-              maxSuggestions={maxSuggestions}
-              onClickPrevious={this.previousPage}
-              onClickNext={this.nextPage}
-            />
-          </GUIContainer>
-        </BackgroundImage>
-      );
-    }
-  }
-
   componentDidMount() {
-    this.updateAutocompleteSuggestions('').then(res => {
+    this.updateAutocompleteSuggestions('').then(() => {
       const { suggestions } = this.state;
       if (suggestions.length > 1) {
         this.setState({
@@ -107,10 +39,10 @@ export default class extends Component {
 
   handleWheel = slowWheelEvent(
     50,
-    e => {
+    () => {
       this.incrementSelectedIndex(1);
     },
-    e => {
+    () => {
       this.incrementSelectedIndex(-1);
     }
   );
@@ -129,11 +61,12 @@ export default class extends Component {
       case 'ArrowRight':
         break;
       case 'ArrowDown':
+        e.preventDefault();
+        this.incrementSelectedIndex(1);
+        break;
       case 'ArrowUp':
         e.preventDefault();
-        e.key === 'ArrowUp'
-          ? this.incrementSelectedIndex(-1)
-          : this.incrementSelectedIndex(1);
+        this.incrementSelectedIndex(-1);
         break;
       case 'Tab':
         e.preventDefault();
@@ -149,7 +82,7 @@ export default class extends Component {
       case '6':
         if (ctrlKey(e)) {
           e.preventDefault();
-          this.tryActivateSuggestion(Number.parseInt(e.key) - 1);
+          this.tryActivateSuggestion(Number.parseInt(10, e.key) - 1);
         }
         break;
       case 'Enter':
@@ -204,6 +137,8 @@ export default class extends Component {
           e.preventDefault();
           this.props.setMode('bookmark');
         }
+        break;
+      default:
         break;
     }
   };
@@ -315,11 +250,77 @@ export default class extends Component {
     e.target.focus();
   };
 
-  handleButtonClick = e => {
+  handleButtonClick = () => {
     this.props.setMode('mode');
   };
 
   handleSuggestionClick = index => {
     this.tryActivateSuggestion(index);
   };
+
+  render() {
+    const { placeholder, mode, showEmptySearchSuggestions } = this.props;
+    const {
+      searchString,
+      suggestions,
+      selectedIndex,
+      firstVisibleIndex,
+      maxSuggestions
+    } = this.state;
+    const suggestion = suggestions[firstVisibleIndex + selectedIndex];
+    // console.log('render suggestions', suggestions);
+
+    if (!showEmptySearchSuggestions && !searchString) {
+      return (
+        <BackgroundImage suggestion={suggestion}>
+          <GUIContainer onWheel={this.handleWheel}>
+            <SearchBar
+              placeholder={placeholder}
+              searchString={searchString}
+              suggestion={suggestion}
+              onKeyDown={this.handleKeyDown}
+              onInput={this.handleInput}
+              onBlur={this.handleBlur}
+              onButtonClick={this.handleButtonClick}
+              onSuggestionClick={this.handleSuggestionClick}
+              mode={mode}
+            />
+          </GUIContainer>
+        </BackgroundImage>
+      );
+    }
+    return (
+      <BackgroundImage suggestion={suggestion}>
+        <GUIContainer onWheel={this.handleWheel}>
+          <SearchBar
+            placeholder={placeholder}
+            searchString={searchString}
+            suggestion={suggestion}
+            onKeyDown={this.handleKeyDown}
+            onInput={this.handleInput}
+            onBlur={this.handleBlur}
+            onButtonClick={this.handleButtonClick}
+            onSuggestionClick={this.handleSuggestionClick}
+            mode={mode}
+          />
+          <SuggestionList
+            searchString={searchString}
+            suggestions={suggestions}
+            selectedIndex={selectedIndex}
+            firstVisibleIndex={firstVisibleIndex}
+            maxSuggestions={maxSuggestions}
+            onSuggestionClick={this.handleSuggestionClick}
+          />
+          <PaginationBar
+            selectedIndex={selectedIndex}
+            suggestions={suggestions}
+            firstVisibleIndex={firstVisibleIndex}
+            maxSuggestions={maxSuggestions}
+            onClickPrevious={this.previousPage}
+            onClickNext={this.nextPage}
+          />
+        </GUIContainer>
+      </BackgroundImage>
+    );
+  }
 }
