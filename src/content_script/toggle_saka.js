@@ -3,6 +3,8 @@
 //   * if found, remove it
 //   * if not found, create and show it
 
+console.log('TEST');
+
 const oldSakaRoot = document.querySelector('#saka-root');
 if (oldSakaRoot) {
   if (SAKA_DEBUG) console.log('REMOVING SAKA');
@@ -12,21 +14,19 @@ if (oldSakaRoot) {
   // create container div
   const newSakaRoot = document.createElement('div');
   newSakaRoot.id = 'saka-root';
-  newSakaRoot.style = (
-  `position: absolute;
+  newSakaRoot.style = `position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 2147483647;
   opacity: 1;
-  pointer-events: none;`);
+  pointer-events: none;`;
   // create Saka iframe
   const iframe = document.createElement('iframe');
   iframe.id = 'saka';
   iframe.src = chrome.runtime.getURL('saka.html');
-  iframe.style = (
-  `z-index: 2147483647;
+  iframe.style = `z-index: 2147483647;
   position: fixed;
   left: 0;
   top: 0;
@@ -34,7 +34,7 @@ if (oldSakaRoot) {
   height: 100%;
   border-width: 0;
   pointer-events: all;
-  }`);
+  }`;
   iframe.frameBorder = 0;
   // mount to DOM
   newSakaRoot.appendChild(iframe);

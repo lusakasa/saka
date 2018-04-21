@@ -1,7 +1,7 @@
 import { Component, h } from 'preact';
-import StandardSearch from './Containers/StandardSearch';
-import 'scss/styles.scss';
 import 'material-components-web/dist/material-components-web.css';
+import 'scss/styles.scss';
+import StandardSearch from './Containers/StandardSearch';
 
 export default class Main extends Component {
   constructor(props) {
@@ -15,22 +15,36 @@ export default class Main extends Component {
   }
 
   async componentDidMount() {
-    let { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    const sakaSettings = await this.fetchSakaSettings();
+    this.setState(sakaSettings);
+  }
+
+  setMode = mode => {
+    this.setState({ mode });
+  };
+
+  shuffleMode = () => {
+    const { mode, modes } = this.state;
+    const nextIndex = modes.indexOf(mode) + 1;
+    const nextModeIndex = nextIndex >= modes.length ? 0 : nextIndex;
+    this.setMode(modes[nextModeIndex]);
+  };
+
+  fetchSakaSettings = async function fetchSakaSettings() {
+    const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
     if (sakaSettings !== undefined) {
-      this.setState({
+      return {
         isLoading: false,
         mode: sakaSettings.mode,
         showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
-      });
-    } else {
-      this.setState({
-        isLoading: false,
-        mode: 'tab',
-        showEmptySearchSuggestions: true
-      });
+      };
     }
-  }
+
+    return {
+      isLoading: false
+    };
+  };
 
   render() {
     const { mode, isLoading, showEmptySearchSuggestions } = this.state;
@@ -81,17 +95,8 @@ export default class Main extends Component {
         default:
           return <div>Error, invalid mode</div>;
       }
+    } else {
+      return <div />;
     }
   }
-
-  setMode = mode => {
-    this.setState({ mode });
-  };
-
-  shuffleMode = () => {
-    const { mode, modes } = this.state;
-    const nextIndex = modes.indexOf(mode) + 1;
-    const nextModeIndex = nextIndex >= modes.length ? 0 : nextIndex;
-    this.setMode(modes[nextModeIndex]);
-  };
 }

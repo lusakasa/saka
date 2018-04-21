@@ -9,7 +9,7 @@
     "open_in_tab": true
   },
   "background": {
-    "scripts": ["background_page.js"],
+    "page": "background_page.html",
     "persistent": true
   },
   "commands": {

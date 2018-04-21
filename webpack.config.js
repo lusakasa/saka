@@ -1,18 +1,21 @@
 const webpack = require('webpack');
 const BabiliPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // process.traceDeprecation = true;
 // markdown convert to html
-var marked = require('marked');
-var renderer = new marked.Renderer();
+const marked = require('marked');
+
+const renderer = new marked.Renderer();
 
 const path = require('path');
-const join = path.join;
 
-module.exports = function(env) {
+module.exports = function webpackConfig(env) {
   const config = {
     resolve: {
       alias: {
+        react: 'preact-compat',
+        'react-dom': 'preact-compat',
         src: path.join(__dirname, 'src'),
         msg: path.join(__dirname, 'src/msg'),
         suggestion_engine: path.join(__dirname, 'src/suggestion_engine'),
@@ -28,18 +31,29 @@ module.exports = function(env) {
       // 'extensions': './src/pages/extensions/index.js',
       // 'info': './src/pages/info/index.js',
       // 'options': './src/pages/options/index.js',
-      saka: 'src/saka/index.js',
-      'saka-options': 'src/options/saka-options.js'
+      saka: 'src/saka/index.jsx',
+      'saka-options': 'src/options/saka-options.jsx'
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'all'
+          }
+        }
+      }
     },
     output: {
-      path: __dirname + '/dist',
-      filename: '[name].js',
-      sourceMapFilename: '[name].js.map'
+      path: `${__dirname}/dist`,
+      filename: '[name].js'
+      // sourceMapFilename: '[name].js.map'
     },
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(jsx|js)$/,
           exclude: /node_modules/,
           loaders: ['babel-loader']
         },
@@ -51,10 +65,10 @@ module.exports = function(env) {
             {
               loader: 'sass-loader',
               options: {
-                importer: function(url, prev) {
+                importer(url, prev) {
                   if (url.indexOf('@material') === 0) {
-                    var filePath = url.split('@material')[1];
-                    var nodeModulePath = `./node_modules/@material/${filePath}`;
+                    const filePath = url.split('@material')[1];
+                    const nodeModulePath = `./node_modules/@material/${filePath}`;
                     return { file: path.resolve(nodeModulePath) };
                   }
                   return { file: url };
@@ -128,7 +142,7 @@ module.exports = function(env) {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),
         SAKA_DEBUG: JSON.stringify(true),
-        SAKA_VERSION: JSON.stringify(version + ' dev'),
+        SAKA_VERSION: JSON.stringify(`${version} dev`),
         SAKA_PLATFORM: JSON.stringify(platform),
         SAKA_BENCHMARK: JSON.stringify(benchmark === 'benchmark')
       })
