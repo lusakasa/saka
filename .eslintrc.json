@@ -1,10 +1,13 @@
 {
   "parser": "babel-eslint",
   "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier"],
   "rules": {
-    "prettier/prettier": ["error", { "singleQuote": true }]
+    "react/react-in-jsx-scope": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/prop-types": "off",
+    "react/no-did-mount-set-state": "off"
   },
-  "extends": ["plugin:prettier/recommended"],
   "env": {
     "webextensions": true
   },
@@ -16,5 +19,13 @@
     "SAKA_PLATFORM": true,
     "SAKA_VERSION": true,
     "SAKA_BENCHMARK": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": ["js", "jsx"]
+      }
+    }
   }
 }

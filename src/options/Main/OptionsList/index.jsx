@@ -1,6 +1,6 @@
 import { Component, h } from 'preact';
-import DefaultModeSelection from './DefaultModeSelection';
-import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector';
+import DefaultModeSelection from './DefaultModeSelection.jsx';
+import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector.jsx';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -14,22 +14,25 @@ export default class OptionsList extends Component {
   }
 
   async componentDidMount() {
-    let { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    const sakaSettings = await this.fetchSakaSettings();
+    this.setState(sakaSettings);
+  }
+
+  fetchSakaSettings = async function fetchSakaSettings() {
+    const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
     if (sakaSettings !== undefined) {
-      this.setState({
+      return {
         isLoading: false,
         mode: sakaSettings.mode,
         showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
-      });
-    } else {
-      this.setState({
-        isLoading: false,
-        mode: 'tab',
-        showEmptySearchSuggestions: true
-      });
+      };
     }
-  }
+
+    return {
+      isLoading: false
+    };
+  };
 
   handleOptionsSave = e => {
     const settingsStore = {
