@@ -24,7 +24,7 @@ export default class Input extends Component {
           onInput={onInput}
           value={searchString}
           onBlur={onBlur}
-          autoFocus
+          ref={input => input && input.focus()}
         />
       </section>
     );
