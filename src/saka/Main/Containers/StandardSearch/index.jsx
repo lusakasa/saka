@@ -1,5 +1,5 @@
 import { Component, h } from 'preact';
-import SearchBar from '../../Components/SearchBar/index.js';
+import SearchBar from '../../Components/SearchBar/index.jsx';
 import SuggestionList from '../../Components/SuggestionList';
 import PaginationBar from '../../Components/PaginationBar';
 import GUIContainer from '../../Components/GUIContainer';
