@@ -1,18 +1,15 @@
 import Fuse from 'fuse.js';
 import { isSakaUrl } from 'lib/url.js';
+import { filter } from 'rxjs/operator/filter';
 
 async function getAllSuggestions() {
-  // only show tabs not windows, TODO: show windows too
-  // .filter(
-  //   session =>
-  //     session.tab &&
-  //     session.tab.url !==
-  //       'chrome-extension://nbdfpcokndmapcollfpjdpjlabnibjdi/saka.html'
-  // )
-
   const sessions = await browser.sessions.getRecentlyClosed();
   const filteredSessions = [];
 
+  // TODO: This for loop is currently flagged by the airbnb eslint rules.
+  // See: https://github.com/airbnb/javascript/issues/1271
+  // Not disabling the rule as this might be fixable in the future using filter.
+  // This for loop is needed at the moment as a workaround since filter does not support async.
   for (const session of sessions) {
     const sakaUrl = await isSakaUrl(session.tab.url);
     if (session.tab && !sakaUrl) {
