@@ -1,29 +1,37 @@
 import Fuse from 'fuse.js';
+import { isSakaUrl } from 'lib/url.js';
 
 async function getAllSuggestions() {
+  // only show tabs not windows, TODO: show windows too
+  // .filter(
+  //   session =>
+  //     session.tab &&
+  //     session.tab.url !==
+  //       'chrome-extension://nbdfpcokndmapcollfpjdpjlabnibjdi/saka.html'
+  // )
+
   const sessions = await browser.sessions.getRecentlyClosed();
-  return (
-    sessions
-      // only show tabs not windows, TODO: show windows too
-      .filter(
-        session =>
-          session.tab &&
-          session.tab.url !==
-            'chrome-extension://nbdfpcokndmapcollfpjdpjlabnibjdi/saka.html'
-      )
-      .map(session => {
-        const { id, sessionId, title, url, favIconUrl } = session.tab;
-        return {
-          type: 'closedTab',
-          tabId: id,
-          sessionId,
-          score: undefined,
-          title,
-          url,
-          favIconUrl
-        };
-      })
-  );
+  const filteredSessions = [];
+
+  for (const session of sessions) {
+    const sakaUrl = await isSakaUrl(session.tab.url);
+    if (session.tab && !sakaUrl) {
+      filteredSessions.push(session);
+    }
+  }
+
+  return filteredSessions.map(session => {
+    const { id, sessionId, title, url, favIconUrl } = session.tab;
+    return {
+      type: 'closedTab',
+      tabId: id,
+      sessionId,
+      score: undefined,
+      title,
+      url,
+      favIconUrl
+    };
+  });
 }
 
 async function getFilteredSuggestions(searchString) {

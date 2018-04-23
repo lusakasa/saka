@@ -1,3 +1,4 @@
+import { isSakaUrl } from 'lib/url.js';
 import { MAX_RESULTS } from './';
 
 export default async function historySuggestions(searchText) {
@@ -5,13 +6,14 @@ export default async function historySuggestions(searchText) {
     text: searchText,
     maxResults: MAX_RESULTS
   });
-  return results.map(
-    ({ url, title, lastVisitTime, visitCount, typedCount }) => ({
+
+  return results
+    .filter(result => !isSakaUrl(result.url))
+    .map(({ url, title, lastVisitTime, visitCount, typedCount }) => ({
       type: 'history',
       score: visitCount + typedCount,
       lastVisitTime,
       title,
       url
-    })
-  );
+    }));
 }

@@ -2,15 +2,15 @@ import modeSuggestions from 'suggestion_engine/server/providers/mode.js';
 import { ctrlChar } from 'lib/utils';
 import { colorMap, fadedColorMap } from 'lib/colors';
 
-describe('server/providers/mode ', function() {
-  describe('modeSuggestions ', function() {
-    it('should return all modes when no search string provided', async function() {
+describe('server/providers/mode ', () => {
+  describe('modeSuggestions ', () => {
+    it('should return all modes when no search string provided', async () => {
       const expectedResult = [
         {
           type: 'mode',
           mode: 'tab',
           label: 'Tabs',
-          shortcut: `${ctrlChar}-shift-A`,
+          shortcut: `${ctrlChar}-shift-a`,
           color: colorMap.tab,
           fadedColor: fadedColorMap.tab,
           icon: 'tab'
@@ -19,7 +19,7 @@ describe('server/providers/mode ', function() {
           type: 'mode',
           mode: 'closedTab',
           label: 'Recently Closed Tabs',
-          shortcut: `${ctrlChar}-shift-C`,
+          shortcut: `${ctrlChar}-shift-c`,
           color: colorMap.closedTab,
           fadedColor: fadedColorMap.closedTab,
           icon: 'restore_page'
@@ -28,10 +28,19 @@ describe('server/providers/mode ', function() {
           type: 'mode',
           label: 'Bookmarks',
           mode: 'bookmark',
-          shortcut: `${ctrlChar}-B`,
+          shortcut: `${ctrlChar}-b`,
           color: colorMap.bookmark,
           fadedColor: fadedColorMap.bookmark,
           icon: 'bookmark_border'
+        },
+        {
+          type: 'mode',
+          label: 'History',
+          mode: 'history',
+          shortcut: `${ctrlChar}-shift-e`,
+          color: colorMap.history,
+          fadedColor: fadedColorMap.history,
+          icon: 'history'
         }
       ];
 
@@ -39,13 +48,13 @@ describe('server/providers/mode ', function() {
       expect(await modeSuggestions(searchString)).toEqual(expectedResult);
     });
 
-    it('should return closedTab search mode when search string `cl` provided', async function() {
+    it('should return closedTab search mode when search string `cl` provided', async () => {
       const expectedResult = [
         {
           type: 'mode',
           mode: 'closedTab',
           label: 'Recently Closed Tabs',
-          shortcut: 'ctrl-shift-C',
+          shortcut: 'ctrl-shift-c',
           color: 'rgba(0,0,0,1)',
           fadedColor: 'rgba(0,0,0,0.44)',
           icon: 'restore_page',

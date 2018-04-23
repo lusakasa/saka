@@ -1,13 +1,13 @@
 import { Component, h } from 'preact';
-import SearchBar from '../../Components/SearchBar/index.jsx';
-import SuggestionList from '../../Components/SuggestionList';
-import PaginationBar from '../../Components/PaginationBar';
-import GUIContainer from '../../Components/GUIContainer';
-import BackgroundImage from '../../Components/BackgroundImage';
 import { getSuggestions, activateSuggestion } from 'suggestion_engine/client';
 import { preprocessSuggestion } from 'suggestion_utils';
 import { ctrlKey } from 'lib/utils';
 import { slowWheelEvent } from 'lib/dom';
+import SearchBar from '../../Components/SearchBar/index.jsx';
+import SuggestionList from '../../Components/SuggestionList/index.js';
+import PaginationBar from '../../Components/PaginationBar/index.js';
+import GUIContainer from '../../Components/GUIContainer/index.js';
+import BackgroundImage from '../../Components/BackgroundImage/index.js';
 
 // provides suggestions but doesn't autocomplete input
 
@@ -136,6 +136,12 @@ export default class extends Component {
         if (ctrlKey(e)) {
           e.preventDefault();
           this.props.setMode('bookmark');
+        }
+        break;
+      case 'E':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.props.setMode('history');
         }
         break;
       default:
