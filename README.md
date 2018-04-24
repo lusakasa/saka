@@ -1,3 +1,5 @@
+NOTE: This is a fork of Saka used for development purposes only. Please refer to the upstream project for issues and contributing: [lusakasa/saka](https://github.com/lusakasa/saka)
+
 # Saka
 
 A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka/) and [Chrome](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi) designed to be fast, intuitive, and beautiful. Inspired by Spotlight. Keyboard-focused but mouse friendly too.
