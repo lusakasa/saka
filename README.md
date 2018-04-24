@@ -1,4 +1,4 @@
-NOTE: This is a fork of Saka used for development purposes only. Please refer to the upstream project for issues and contributing: [lusakasa/saka](https://github.com/lusakasa/saka)
+> NOTE: This is a fork of Saka used for development purposes only. Please refer to the upstream project for issues and contributing: [lusakasa/saka](https://github.com/lusakasa/saka)
 
 # Saka
 
