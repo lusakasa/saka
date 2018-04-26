@@ -1,26 +1,17 @@
-const webpack = require('webpack');
 const mainWebpackConfig = require('./webpack.config.js');
 const path = require('path');
 
-const join = path.join;
+const env = 'development:chrome:benchmark';
+const [mode] = env.split(':');
 
-const env = 'dev:chrome:benchmark';
-const [mode, platform, benchmark] = env.split(':');
-const version = require('./static/manifest.json').version;
+const files = ['test/index.test.js'];
 
-function resolveCwd() {
-  const args = [].slice.apply(arguments, []);
-  args.unshift(process.cwd());
-  return join.apply(path, args);
-}
-
-const indexSpec = resolveCwd('test/**/*.test.js');
-const files = [indexSpec];
-
-const preprocessors = {};
-preprocessors[resolveCwd('test/**/*.test.js')] = ['webpack', 'sourcemap'];
+const preprocessors = {
+  'test/index.test.js': ['webpack']
+};
 
 const karmaWebpackConfig = Object.assign({}, mainWebpackConfig(env), {
+  mode,
   module: {
     rules: [
       {
@@ -50,7 +41,8 @@ const karmaWebpackConfig = Object.assign({}, mainWebpackConfig(env), {
       }
     ]
   },
-  optimization: {}
+  optimization: {},
+  devtool: false
 });
 
 module.exports = function karmaConfig(config) {
@@ -66,15 +58,15 @@ module.exports = function karmaConfig(config) {
     specReporter: {
       maxLogLines: 5, // limit number of lines logged per test
       suppressErrorSummary: true, // do not print error summary
-      suppressFailed: false, // do not print information about failed tests
-      suppressPassed: false, // do not print information about passed tests
-      suppressSkipped: true, // do not print information about skipped tests
-      showSpecTiming: false // print the time elapsed for each spec
+      suppressFailed: false, // print information about failed tests
+      suppressPassed: false, //  print information about passed tests
+      suppressSkipped: false, // print information about skipped tests
+      showSpecTiming: true // print the time elapsed for each spec
     },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: false,
+    autoWatch: true,
     browsers: ['ChromeHeadless'],
     customLaunchers: {
       Chrome_travis_ci: {
