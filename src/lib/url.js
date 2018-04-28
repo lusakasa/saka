@@ -71,6 +71,7 @@ export function isLikeURL(url) {
   if (protocolMatch && /^[a-zA-Z0-9@!]+$/.test(url)) {
     return true;
   }
+
   if (protocol && !protocolMatch && protocol !== 'localhost:') {
     return false;
   }
@@ -105,4 +106,14 @@ const knownProtocols = [
 /** Returns whether the provided text is a known protocol */
 export function isProtocol(text) {
   return knownProtocols.indexOf(text) !== -1;
+}
+
+export async function isSakaUrl(url) {
+  if (url !== undefined) {
+    const sakaUrl = browser.runtime.getURL('saka.html');
+    const sakaId = sakaUrl.substring(0, sakaUrl.indexOf('/'));
+    return url.includes(sakaId);
+  }
+
+  return false;
 }

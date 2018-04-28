@@ -1,4 +1,5 @@
 import { Component, h } from 'preact';
+import React from 'react';
 // import '@material/textfield/dist/mdc.textfield.min.css';
 import 'scss/styles.scss';
 
@@ -12,26 +13,20 @@ export default class Input extends Component {
       onBlur
     } = this.props;
     return (
-      <section class="mdc-text-field mdc-text-field--fullwidth search-field-wrapper">
+      <section className="mdc-text-field mdc-text-field--fullwidth search-field-wrapper">
         <input
           id="search-bar"
-          class="mdc-text-field__input search-field-input"
+          className="mdc-text-field__input search-field-input"
           type="text"
           placeholder={placeholder}
           aria-label={placeholder}
           onKeyDown={onKeyDown}
           onInput={onInput}
           value={searchString}
-          autoFocus
           onBlur={onBlur}
-          ref={input => {
-            this.input = input;
-          }}
+          ref={input => input && input.focus()}
         />
       </section>
     );
-  }
-  componentDidMount() {
-    this.input.focus();
   }
 }

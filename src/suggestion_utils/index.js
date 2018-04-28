@@ -1,4 +1,4 @@
-import { prettifyURL, isURL } from '../lib/url';
+import { prettifyURL, isURL } from 'lib/url.js';
 
 export const icons = {
   mode: 'apps',
@@ -8,7 +8,7 @@ export const icons = {
   bookmark: 'bookmark_border'
 };
 
-export function preprocessSuggestion (suggestion, searchText) {
+export function preprocessSuggestion(suggestion, searchText) {
   switch (suggestion.type) {
     case 'tab': {
       const prettyURL = prettifyURL(suggestion.url, searchText);
@@ -59,13 +59,12 @@ export function preprocessSuggestion (suggestion, searchText) {
           prettyURL,
           text: prettyURL
         };
-      } else {
-        return {
-          ...suggestion,
-          isURL: false,
-          text: suggestion.title
-        };
       }
+      return {
+        ...suggestion,
+        isURL: false,
+        text: suggestion.title
+      };
     }
     default:
       return {
