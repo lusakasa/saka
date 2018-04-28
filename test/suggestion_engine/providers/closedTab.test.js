@@ -1,17 +1,18 @@
 const browser = require('sinon-chrome/webextensions');
+
 import closedTabSuggestions from 'suggestion_engine/server/providers/closedTab.js';
 
-describe('server/providers/bookmark ', function() {
-  beforeAll(function() {
+describe('server/providers/bookmark ', () => {
+  beforeAll(() => {
     global.browser = browser;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     browser.flush();
   });
 
-  describe('closedTabSuggestions ', function() {
-    it('should return all closed tabs when no search string provided', async function() {
+  describe('closedTabSuggestions ', () => {
+    it('should return all closed tabs when no search string provided', async () => {
       const queryResults = [
         {
           tab: {
@@ -36,11 +37,13 @@ describe('server/providers/bookmark ', function() {
       ];
 
       const searchString = '';
+      const sakaId = 'abcdefg/saka.html';
+      browser.runtime.getURL.returns(sakaId);
       browser.sessions.getRecentlyClosed.returns(queryResults);
       expect(await closedTabSuggestions(searchString)).toEqual(expectedResult);
     });
 
-    it('should filter out entries for saka in recently closed tabs', async function() {
+    it('should filter out entries for saka in recently closed tabs', async () => {
       const queryResults = [
         {
           tab: {
@@ -56,8 +59,7 @@ describe('server/providers/bookmark ', function() {
             id: 2,
             windowId: 0,
             title: 'Saka Extension',
-            url:
-              'chrome-extension://nbdfpcokndmapcollfpjdpjlabnibjdi/saka.html',
+            url: 'chrome-extension://abcdefg/saka.html',
             favIconUrl: ''
           }
         }
@@ -75,11 +77,13 @@ describe('server/providers/bookmark ', function() {
       ];
 
       const searchString = '';
+      const sakaId = 'abcdefg/saka.html';
+      browser.runtime.getURL.returns(sakaId);
       browser.sessions.getRecentlyClosed.returns(queryResults);
       expect(await closedTabSuggestions(searchString)).toEqual(expectedResult);
     });
 
-    it('should return all closed tabs matching searchString', async function() {
+    it('should return all closed tabs matching searchString', async () => {
       const queryResults = [
         {
           tab: {
@@ -127,12 +131,14 @@ describe('server/providers/bookmark ', function() {
       ];
 
       const searchString = 'Goog';
+      const sakaId = 'abcdefg/saka.html';
+      browser.runtime.getURL.returns(sakaId);
       browser.sessions.getRecentlyClosed.returns(queryResults);
       expect(await closedTabSuggestions(searchString)).toEqual(expectedResult);
     });
   });
 
-  afterAll(function() {
+  afterAll(() => {
     browser.flush();
     delete global.browser;
   });

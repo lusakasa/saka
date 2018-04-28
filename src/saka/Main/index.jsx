@@ -1,7 +1,7 @@
 import { Component, h } from 'preact';
 import 'material-components-web/dist/material-components-web.css';
 import 'scss/styles.scss';
-import StandardSearch from './Containers/StandardSearch';
+import StandardSearch from './Containers/StandardSearch/index.jsx';
 
 export default class Main extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export default class Main extends Component {
 
     this.state = {
       mode: 'tab',
-      modes: ['mode', 'tab', 'closedTab', 'bookmark'],
+      modes: ['mode', 'tab', 'closedTab', 'bookmark', 'history'],
       isLoading: true
     };
   }
@@ -87,6 +87,16 @@ export default class Main extends Component {
             <StandardSearch
               mode={mode}
               placeholder="Bookmarks"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
+            />
+          );
+        case 'history':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="History"
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}

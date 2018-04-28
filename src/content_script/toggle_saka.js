@@ -3,8 +3,6 @@
 //   * if found, remove it
 //   * if not found, create and show it
 
-console.log('TEST');
-
 const oldSakaRoot = document.querySelector('#saka-root');
 if (oldSakaRoot) {
   if (SAKA_DEBUG) console.log('REMOVING SAKA');

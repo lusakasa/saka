@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import '@material/button/dist/mdc.button.min.css';
-import { icons } from 'src/suggestion_utils';
-import { colorMap, fadedColorMap } from 'lib/colors';
+import { icons } from 'src/suggestion_utils/index.js';
+import { colorMap, fadedColorMap } from 'lib/colors.js';
 import 'scss/styles.scss';
 
 // 1. Reload
@@ -35,6 +35,14 @@ export default class extends Component {
     hovered: false
   };
 
+  handleMouseEnter = () => {
+    this.setState({ hovered: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ hovered: false });
+  };
+
   render() {
     const { mode, onClick } = this.props;
     const { hovered } = this.state;
@@ -44,11 +52,13 @@ export default class extends Component {
         role="button"
         id="action-button"
         onClick={onClick}
+        onKeyPress={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        tabIndex={0}
       >
         <i
-          class="material-icons"
+          className="material-icons"
           aria-hidden="true"
           style={{
             color: hovered ? colorMap.mode : fadedColorMap[mode]
@@ -59,12 +69,4 @@ export default class extends Component {
       </div>
     );
   }
-
-  handleMouseEnter = () => {
-    this.setState({ hovered: true });
-  };
-
-  handleMouseLeave = () => {
-    this.setState({ hovered: false });
-  };
 }
