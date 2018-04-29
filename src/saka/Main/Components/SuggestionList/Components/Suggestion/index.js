@@ -20,14 +20,14 @@ export default ({
   const icon = icons[type];
   return (
     <li
-      class="mdc-list-item search-item"
+      className="mdc-list-item search-item"
       style={{
         backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
         borderLeftColor: color
       }}
       onClick={() => onClick(index)}
     >
-      <span class="mdc-list-item__graphic search-icon" role="presentation">
+      <span className="mdc-list-item__graphic search-icon" role="presentation">
         {SAKA_PLATFORM === 'chrome' && url ? (
           <div
             style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
@@ -35,28 +35,28 @@ export default ({
         ) : SAKA_PLATFORM === 'firefox' && favIconUrl ? (
           <img style="width: 25px; height: 25px" src={favIconUrl} />
         ) : (
-          <i class="material-icons" aria-hidden="true" style={{ color }}>
+          <i className="material-icons" aria-hidden="true" style={{ color }}>
             {icon}
           </i>
         )}
       </span>
-      <span class="mdc-list-item__text">
-        <span class="suggestion-wrap-text" style={{ color: titleColor }}>
+      <span className="mdc-list-item__text">
+        <span className="suggestion-wrap-text" style={{ color: titleColor }}>
           {title}
         </span>
         {secondary && (
           <span
-            class="mdc-list-item__secondary-text suggestion-wrap-text"
+            className="mdc-list-item__secondary-text suggestion-wrap-text"
             style={{ color: secondaryColor || 'inherit' }}
           >
             {secondary}
           </span>
         )}
       </span>
-      <span class="mdc-list-item__meta kbd-end-detail">
+      <span className="mdc-list-item__meta kbd-end-detail">
         {selected ? (
           <i
-            class="mdc-list-item__graphic material-icons"
+            className="mdc-list-item__graphic material-icons"
             aria-hidden="true"
             style={{ color }}
           >
