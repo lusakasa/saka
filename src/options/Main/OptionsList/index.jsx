@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
-import OptionsForm from './OptionsForm.jsx';
-import SakaHotkeysList from './SakaHotkeysList.jsx';
+import DefaultModeSelection from './DefaultModeSelection.jsx';
+import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector.jsx';
+import ShowSakaHotkeys from './ShowSakaHotkeys.jsx';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -9,8 +10,7 @@ export default class OptionsList extends Component {
     this.state = {
       isLoading: true,
       mode: 'tab',
-      showEmptySearchSuggestions: true,
-      showSakaKeybindings: true
+      showEmptySearchSuggestions: true
     };
   }
 
@@ -56,29 +56,55 @@ export default class OptionsList extends Component {
     });
   };
 
-  handleOpenSakaKeybindings = () => {
-    this.setState({
-      showSakaKeybindings: !this.state.showSakaKeybindings
-    });
-  };
-
   render() {
+    const { handleOpenSakaKeybindings } = this.props;
+
     if (!this.state.isLoading) {
-      if (!this.state.showSakaKeybindings) {
-        return (
-          <OptionsForm
-            handleModeChange={this.handleModeChange}
-            mode={this.state.mode}
-            showEmptySearchSuggestions={this.state.showEmptySearchSuggestions}
-            handleShowSearchSuggestionsChange={
-              this.handleShowSearchSuggestionsChange
-            }
-            handleOpenSakaKeybindings={this.handleOpenSakaKeybindings}
-            handleOptionsSave={this.handleOptionsSave}
-          />
-        );
-      }
-      return <SakaHotkeysList />;
+      return (
+        <div className="options-form">
+          <form>
+            <div className="mdc-list-group">
+              <h3 className="mdc-list-group__subheader">General Settings</h3>
+              <ul className="mdc-list mdc-list--non-interactive mdc-list--dense">
+                <DefaultModeSelection
+                  handleModeChange={this.handleModeChange}
+                  mode={this.state.mode}
+                />
+                <li
+                  role="separator"
+                  className="mdc-list-divider mdc-list-divider--padded options-separator"
+                />
+                <OnlyShowSearchBarSelector
+                  checked={this.state.showEmptySearchSuggestions}
+                  handleShowSearchSuggestionsChange={
+                    this.handleShowSearchSuggestionsChange
+                  }
+                />
+                <li
+                  role="separator"
+                  className="mdc-list-divider mdc-list-divider--padded options-separator"
+                />
+                <ShowSakaHotkeys
+                  handleOpenSakaKeybindings={handleOpenSakaKeybindings}
+                />
+                <li
+                  role="separator"
+                  className="mdc-list-divider mdc-list-divider--padded options-separator"
+                />
+              </ul>
+            </div>
+            <div dir="rtl" className="options-save">
+              <input
+                type="submit"
+                value="Save"
+                className="mdc-button mdc-button--raised mdc-button--dense options-save-button"
+                onClick={this.handleOptionsSave}
+              />
+            </div>
+          </form>
+        </div>
+      );
     }
+    return <div />;
   }
 }

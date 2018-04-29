@@ -8,8 +8,8 @@ const ShowSakaHotkeys = function ShowSakaHotkeys({
   return (
     <li className="mdc-list-item option">
       <span className="mdc-list-item__text">Saka Hotkeys</span>
-      <div
-        className="mdc-list-item__meta mdc-switch"
+      <button
+        className="mdc-list-item__meta mdc-button mdc-button__icon"
         onClick={handleOpenSakaKeybindings}
       >
         <i
@@ -18,7 +18,7 @@ const ShowSakaHotkeys = function ShowSakaHotkeys({
         >
           {'keyboard'}
         </i>
-      </div>
+      </button>
     </li>
   );
 };
