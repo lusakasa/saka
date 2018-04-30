@@ -6,20 +6,20 @@ const SakaHotkeysList = function SakaHotkeysList({
   handleOpenSakaKeybindings
 }) {
   return (
-    <div className="options-form">
-      <div className="mdc-list-group">
-        <button
-          className="mdc-button mdc-button__icon"
+    <div className="saka-hotkey-list">
+      <div id="top-bar">
+        <i
+          className="mdc-icon-toggle material-icons"
+          role="button"
+          aria-pressed="false"
+          aria-label="Back to Saka settings"
           onClick={handleOpenSakaKeybindings}
         >
-          <i
-            className="mdc-list-item__graphic material-icons options-icon"
-            aria-hidden="true"
-          >
-            {'arrow_back'}
-          </i>
-        </button>
+          arrow_back
+        </i>
         <h3 className="mdc-list-group__subheader">Keyboard Shortcuts</h3>
+      </div>
+      <div className="mdc-list-group">
         <ul className="mdc-list mdc-list--non-interactive mdc-list--dense">
           <HotkeyListRow title="Open Saka" keys={['Ctrl', 'Space']} />
           <li role="separator" className="mdc-list-divider options-separator" />

@@ -8,17 +8,15 @@ const ShowSakaHotkeys = function ShowSakaHotkeys({
   return (
     <li className="mdc-list-item option">
       <span className="mdc-list-item__text">Saka Hotkeys</span>
-      <button
-        className="mdc-list-item__meta mdc-button mdc-button__icon"
+      <i
+        className="mdc-list-item__meta mdc-icon-toggle material-icons"
+        role="button"
+        aria-pressed="false"
+        aria-label="View Saka hotkeys"
         onClick={handleOpenSakaKeybindings}
       >
-        <i
-          className="mdc-list-item__graphic material-icons options-icon"
-          aria-hidden="true"
-        >
-          {'keyboard'}
-        </i>
-      </button>
+        keyboard
+      </i>
     </li>
   );
 };

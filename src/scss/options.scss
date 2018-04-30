@@ -1,6 +1,7 @@
 $mdc-theme-primary: #00796b; // Purple 500
 $mdc-theme-secondary: #4db6ac; // Orange A200
 
+@import '@material/animation/functions';
 @import '@material/theme/mdc-theme';
 
 html {
@@ -26,6 +27,7 @@ html {
 
 .options-separator {
   margin-bottom: 5px;
+  color: #f1f1f1;
 }
 
 .options-save {
