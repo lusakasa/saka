@@ -28,14 +28,14 @@ To help develop Saka, follow the instructions below to build from source.
     An extension you can run will be generated in the 'dist' directory.
 
 
-```sh
-git clone https://github.com/lusakasa/saka-key.git
-cd saka-key
-npm install
-npm run build:chrome
-# or if you want to generate an optimized production build
-npm run build:prod:chrome
-```
+    ```sh
+    git clone https://github.com/lusakasa/saka-key.git
+    cd saka-key
+    npm install
+    npm run build:chrome
+    # or if you want to generate an optimized production build
+    npm run build:prod:chrome
+    ```
 
 2.  Navigate to `chrome://extensions`
 
@@ -49,7 +49,6 @@ npm run build:prod:chrome
 
 1.  Run the following commands in your terminal to clone and build Saka Key.
     An extension you can run will be generated in the 'dist' directory.
-
 
 ```sh
 git clone https://github.com/lusakasa/saka-key.git
