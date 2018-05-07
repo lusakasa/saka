@@ -9,8 +9,6 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 
 ![Preview](./images/preview.png)
 
-
-
 ## Index
 
 * [Intro](#intro)
@@ -26,47 +24,48 @@ To help develop Saka, follow the instructions below to build from source.
 
 ### Install on Chrome
 
-1. Run the following commands in your terminal to clone and build Saka Key. 
-  An extension you can run will be generated in the 'dist' directory.
+1.  Run the following commands in your terminal to clone and build Saka Key.
+    An extension you can run will be generated in the 'dist' directory.
 
-  ```sh
-  git clone https://github.com/lusakasa/saka-key.git
-  cd saka-key
-  npm install
-  npm run build:chrome
-  # or if you want to generate an optimized production build
-  npm run build:prod:chrome
-  ```
 
-2. Navigate to `chrome://extensions`
+    ```sh
+    git clone https://github.com/lusakasa/saka-key.git
+    cd saka-key
+    npm install
+    npm run build:chrome
+    # or if you want to generate an optimized production build
+    npm run build:prod:chrome
+    ```
 
-3. Enable developer mode and click 'Load Unpacked Extension'
+2.  Navigate to `chrome://extensions`
 
-4. Select the dist directory, and &#128640;.
+3.  Enable developer mode and click 'Load Unpacked Extension'
 
-5. Refresh existing tabs to load Saka Key into them
+4.  Select the dist directory, and 🚀.
+
+5.  Refresh existing tabs to load Saka Key into them
 
 ### Install on Firefox
 
-1. Run the following commands in your terminal to clone and build Saka Key. 
-  An extension you can run will be generated in the 'dist' directory.
+1.  Run the following commands in your terminal to clone and build Saka Key.
+    An extension you can run will be generated in the 'dist' directory.
 
-  ```sh
-  git clone https://github.com/lusakasa/saka-key.git
-  cd saka-key
-  npm install
-  npm run build:firefox
-  # or if you want to generate an optimized production build
-  npm run build:prod:firefox
-  ```
+    ```sh
+    git clone https://github.com/lusakasa/saka-key.git
+    cd saka-key
+    npm install
+    npm run build:firefox
+    # or if you want to generate an optimized production build
+    npm run build:prod:firefox
+    ```
 
-2. Navigate to `about:debugging`
+2.  Navigate to `about:debugging`
 
-3. Enable add-on debugging and click 'Load Temporary Add-on'
+3.  Enable add-on debugging and click 'Load Temporary Add-on'
 
-4. Select any file within the dist directory, and &#128640;.
+4.  Select any file within the dist directory, and 🚀.
 
-5. Firefox will load Saka Key automatically into all valid existing tabs
+5.  Firefox will load Saka Key automatically into all valid existing tabs
 
 ## License
 
