@@ -6,7 +6,7 @@ import { slowWheelEvent } from 'lib/dom';
 import SearchBar from '../../Components/SearchBar/index.jsx';
 import SuggestionList from '../../Components/SuggestionList/index.js';
 import PaginationBar from '../../Components/PaginationBar/index.js';
-import GUIContainer from '../../Components/GUIContainer/index.js';
+import GUIContainer from '../../Components/GUIContainer/index.jsx';
 import BackgroundImage from '../../Components/BackgroundImage/index.js';
 
 // provides suggestions but doesn't autocomplete input
