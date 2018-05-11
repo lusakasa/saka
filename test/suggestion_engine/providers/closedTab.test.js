@@ -20,7 +20,8 @@ describe('server/providers/bookmark ', () => {
             windowId: 0,
             title: 'Saka',
             url: 'https://github.com/lusakasa/saka',
-            favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+            favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+            incognito: false
           }
         }
       ];
@@ -32,7 +33,8 @@ describe('server/providers/bookmark ', () => {
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
           sessionId: undefined,
-          score: undefined
+          score: undefined,
+          incognito: false
         }
       ];
 
@@ -51,7 +53,8 @@ describe('server/providers/bookmark ', () => {
             windowId: 0,
             title: 'Saka',
             url: 'https://github.com/lusakasa/saka',
-            favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+            favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+            incognito: true
           }
         },
         {
@@ -60,7 +63,8 @@ describe('server/providers/bookmark ', () => {
             windowId: 0,
             title: 'Saka Extension',
             url: 'chrome-extension://abcdefg/saka.html',
-            favIconUrl: ''
+            favIconUrl: '',
+            incognito: false
           }
         }
       ];
@@ -70,9 +74,10 @@ describe('server/providers/bookmark ', () => {
           tabId: 1,
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
-          favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+          favIconUrl: null,
           sessionId: undefined,
-          score: undefined
+          score: undefined,
+          incognito: true
         }
       ];
 
@@ -91,7 +96,8 @@ describe('server/providers/bookmark ', () => {
             windowId: 0,
             title: 'Saka',
             url: 'https://github.com/lusakasa/saka',
-            favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+            favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+            incognito: false
           }
         },
         {
@@ -100,7 +106,8 @@ describe('server/providers/bookmark ', () => {
             windowId: 0,
             title: 'Google',
             url: 'https://google.com',
-            favIconUrl: 'https://google.com/icon.png'
+            favIconUrl: 'https://google.com/icon.png',
+            incognito: true
           }
         }
       ];
@@ -110,9 +117,10 @@ describe('server/providers/bookmark ', () => {
           tabId: 2,
           title: 'Google',
           url: 'https://google.com',
-          favIconUrl: 'https://google.com/icon.png',
+          favIconUrl: null,
           sessionId: undefined,
           score: undefined,
+          incognito: true,
           matches: [
             {
               indices: [[0, 3]],

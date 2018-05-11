@@ -37,12 +37,15 @@ async function recentTabSuggestions() {
 
 async function allTabSuggestions() {
   const tabs = await browser.tabs.query({});
-  return tabs.map(({ id: tabId, windowId, title, url, favIconUrl }) => ({
-    type: 'tab',
-    tabId,
-    windowId,
-    title,
-    url,
-    favIconUrl
-  }));
+  return tabs.map(
+    ({ id: tabId, windowId, title, url, favIconUrl, incognito }) => ({
+      type: 'tab',
+      tabId,
+      windowId,
+      title,
+      url,
+      favIconUrl: incognito ? null : favIconUrl,
+      incognito
+    })
+  );
 }
