@@ -5,7 +5,8 @@ export const icons = {
   tab: 'tab',
   closedTab: 'restore_page',
   history: 'history',
-  bookmark: 'bookmark_border'
+  bookmark: 'bookmark_border',
+  incognito: 'visibility_off'
 };
 
 export function preprocessSuggestion(suggestion, searchText) {

@@ -11,14 +11,13 @@ async function getAllSuggestions() {
   // Not disabling the rule as this might be fixable in the future using filter.
   // This for loop is needed at the moment as a workaround since filter does not support async.
   for (const session of sessions) {
-    const sakaUrl = await isSakaUrl(session.tab.url);
-    if (session.tab && !sakaUrl) {
+    if (session.tab && !await isSakaUrl(session.tab.url)) {
       filteredSessions.push(session);
     }
   }
 
   return filteredSessions.map(session => {
-    const { id, sessionId, title, url, favIconUrl } = session.tab;
+    const { id, sessionId, title, url, favIconUrl, incognito } = session.tab;
     return {
       type: 'closedTab',
       tabId: id,
@@ -26,7 +25,8 @@ async function getAllSuggestions() {
       score: undefined,
       title,
       url,
-      favIconUrl
+      favIconUrl: incognito ? null : favIconUrl,
+      incognito
     };
   });
 }

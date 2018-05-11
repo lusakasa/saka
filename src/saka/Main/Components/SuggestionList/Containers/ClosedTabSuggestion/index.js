@@ -3,21 +3,23 @@ import { highlight } from 'lib/highlight';
 import Suggestion from '../../Components/Suggestion';
 
 export default ({
-  suggestion: { type, title, url, matches, favIconUrl },
+  suggestion: { type, title, url, matches, favIconUrl, incognito },
   selected,
   index,
   onClick
-}) =>
+}) => (
   <Suggestion
-    type={'closedTab'}
+    type="closedTab"
     title={highlight(title, 'title', matches)}
-    titleColor={'#000000'}
+    titleColor="#000000"
     secondary={highlight(url, 'url', matches)}
-    secondaryColor={'rgba(63, 81, 245, 1.0)'}
+    secondaryColor="rgba(63, 81, 245, 1.0)"
     url={url}
     favIconUrl={favIconUrl}
-    icon={'star_border'}
+    incognito={incognito}
+    icon="star_border"
     selected={selected}
     index={index}
     onClick={onClick}
-  />;
+  />
+);

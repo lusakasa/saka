@@ -12,12 +12,38 @@ export default ({
   secondaryColor,
   url,
   favIconUrl,
+  incognito,
   selected,
   index,
   onClick
 }) => {
   const color = fadedColorMap[type];
   const icon = icons[type];
+  const incognitoIcon = icons.incognito;
+  let suggestionIcon;
+
+  if (incognito) {
+    suggestionIcon = (
+      <i className="material-icons" aria-hidden="true" style={{ color }}>
+        {incognitoIcon}
+      </i>
+    );
+  } else if (SAKA_PLATFORM === 'chrome' && url) {
+    suggestionIcon = (
+      <div
+        style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
+      />
+    );
+  } else if (SAKA_PLATFORM === 'firefox' && favIconUrl) {
+    suggestionIcon = <img style="width: 25px; height: 25px" src={favIconUrl} />;
+  } else {
+    suggestionIcon = (
+      <i className="material-icons" aria-hidden="true" style={{ color }}>
+        {icon}
+      </i>
+    );
+  }
+
   return (
     <li
       className="mdc-list-item search-item"
@@ -28,17 +54,7 @@ export default ({
       onClick={() => onClick(index)}
     >
       <span className="mdc-list-item__graphic search-icon" role="presentation">
-        {SAKA_PLATFORM === 'chrome' && url ? (
-          <div
-            style={`width: 25px; height: 25px; content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
-          />
-        ) : SAKA_PLATFORM === 'firefox' && favIconUrl ? (
-          <img style="width: 25px; height: 25px" src={favIconUrl} />
-        ) : (
-          <i className="material-icons" aria-hidden="true" style={{ color }}>
-            {icon}
-          </i>
-        )}
+        {suggestionIcon}
       </span>
       <span className="mdc-list-item__text">
         <span className="suggestion-wrap-text" style={{ color: titleColor }}>

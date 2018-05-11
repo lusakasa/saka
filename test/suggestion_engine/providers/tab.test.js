@@ -1,31 +1,34 @@
 const browser = require('sinon-chrome/webextensions');
+
 import tabSuggestions from 'suggestion_engine/server/providers/tab.js';
 
-describe('server/providers/tab ', function() {
-  beforeAll(function() {
+describe('server/providers/tab ', () => {
+  beforeAll(() => {
     global.browser = browser;
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     browser.flush();
   });
 
-  describe('tabSuggestions ', function() {
-    it('should return all recent tabs when search string is empty', async function() {
+  describe('tabSuggestions ', () => {
+    it('should return all recent tabs when search string is empty', async () => {
       const queryResults = [
         {
           id: 1,
           windowId: 0,
           title: 'Google',
           url: 'https://google.com',
-          favIconUrl: 'https://google.com/icon.png'
+          favIconUrl: 'https://google.com/icon.png',
+          incognito: false
         },
         {
           id: 0,
           windowId: 0,
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
-          favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+          favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+          incognito: true
         }
       ];
 
@@ -37,7 +40,8 @@ describe('server/providers/tab ', function() {
             windowId: 0,
             title: 'Google',
             url: 'https://google.com',
-            favIconUrl: 'https://google.com/icon.png'
+            favIconUrl: 'https://google.com/icon.png',
+            incognito: false
           }
         ]
       };
@@ -50,7 +54,8 @@ describe('server/providers/tab ', function() {
           windowId: 0,
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
-          favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+          favIconUrl: null,
+          incognito: true
         },
         {
           type: 'tab',
@@ -58,7 +63,8 @@ describe('server/providers/tab ', function() {
           windowId: 0,
           title: 'Google',
           url: 'https://google.com',
-          favIconUrl: 'https://google.com/icon.png'
+          favIconUrl: 'https://google.com/icon.png',
+          incognito: false
         }
       ];
 
@@ -68,21 +74,23 @@ describe('server/providers/tab ', function() {
       expect(await tabSuggestions(searchString)).toEqual(expectedResult);
     });
 
-    it('should return all tabs matching searchString', async function() {
+    it('should return all tabs matching searchString', async () => {
       const queryResults = [
         {
           id: 0,
           windowId: 0,
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
-          favIconUrl: 'https://github.com/lusakasa/saka/icon.png'
+          favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+          incognito: false
         },
         {
           id: 0,
           windowId: 0,
           title: 'Google',
           url: 'https://google.com',
-          favIconUrl: 'https://google.com/icon.png'
+          favIconUrl: 'https://google.com/icon.png',
+          incognito: false
         }
       ];
 
@@ -94,6 +102,7 @@ describe('server/providers/tab ', function() {
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+          incognito: false,
           matches: [
             {
               indices: [[0, 3]],
@@ -118,7 +127,7 @@ describe('server/providers/tab ', function() {
     });
   });
 
-  afterAll(function() {
+  afterAll(() => {
     browser.flush();
     delete global.browser;
   });
