@@ -54,7 +54,7 @@ describe('server/providers/mode ', () => {
           type: 'mode',
           mode: 'closedTab',
           label: 'Recently Closed Tabs',
-          shortcut: 'ctrl-shift-c',
+          shortcut: `${ctrlChar}-shift-c`,
           color: 'rgba(0,0,0,1)',
           fadedColor: 'rgba(0,0,0,0.44)',
           icon: 'restore_page',
