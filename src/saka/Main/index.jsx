@@ -10,7 +10,8 @@ export default class Main extends Component {
     this.state = {
       mode: 'tab',
       modes: ['mode', 'tab', 'closedTab', 'bookmark', 'history'],
-      isLoading: true
+      isLoading: true,
+      showEmptySearchSuggestions: true
     };
   }
 
@@ -34,10 +35,11 @@ export default class Main extends Component {
     const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
     if (sakaSettings !== undefined) {
+      const { mode, showEmptySearchSuggestions } = sakaSettings;
       return {
         isLoading: false,
-        mode: sakaSettings.mode,
-        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
+        mode,
+        showEmptySearchSuggestions
       };
     }
 
