@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import '@material/button/dist/mdc.button.min.css';
-import { icons } from 'src/suggestion_utils/index.js';
+import { icons } from 'suggestion_utils/index.js';
 import { colorMap, fadedColorMap } from 'lib/colors.js';
 import 'scss/styles.scss';
 

@@ -1,11 +1,28 @@
 import { h, Component } from 'preact';
-import msg from 'msg/client';
+import msg from 'msg/client.js';
 import 'scss/styles.scss';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {
   state = {
     zoom: 0
+  };
+
+  componentWillMount() {
+    window.addEventListener('zoom', this.onZoomChange);
+    msg('zoom').then(this.setZoom);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('zoom', this.onZoomChange);
+  }
+
+  onZoomChange = event => {
+    this.setZoom(event.detail.zoom);
+  };
+
+  setZoom = zoom => {
+    this.setState({ zoom });
   };
 
   render() {
@@ -32,21 +49,4 @@ export default class GUIContainer extends Component {
       </main>
     );
   }
-
-  componentWillMount() {
-    window.addEventListener('zoom', this.onZoomChange);
-    msg('zoom').then(this.setZoom);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('zoom', this.onZoomChange);
-  }
-
-  onZoomChange = event => {
-    this.setZoom(event.detail.zoom);
-  };
-
-  setZoom = zoom => {
-    this.setState({ zoom });
-  };
 }

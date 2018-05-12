@@ -1,10 +1,9 @@
 import { h } from 'preact';
-import Suggestion from '../../Components/Suggestion';
-import { highlight } from 'lib/highlight';
+import { highlight } from 'lib/highlight.js';
+import Suggestion from '../../Components/Suggestion/index.jsx';
 
 export default ({
-  suggestion: { type, title, url, prettyURL, matches, favIconUrl, incognito },
-  searchText,
+  suggestion: { title, url, matches, favIconUrl, incognito },
   selected,
   index,
   onClick
