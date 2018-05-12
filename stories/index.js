@@ -16,9 +16,9 @@ global.chrome = chrome;
 
 storiesOf('SuggestionList', module)
   .add('with no entries', () => {
-    let suggestions = [];
+    const suggestions = [];
 
-    let searchString = {};
+    const searchString = {};
     return (
       <SuggestionList
         searchString={searchString}
@@ -31,7 +31,7 @@ storiesOf('SuggestionList', module)
     );
   })
   .add('with tab entries', () => {
-    let suggestions = [
+    const suggestions = [
       {
         type: 'tab',
         title: 'lusakasa/saka: Elegant tab search',
@@ -46,7 +46,7 @@ storiesOf('SuggestionList', module)
       }
     ];
 
-    let searchString = {};
+    const searchString = {};
     return (
       <SuggestionList
         searchString={searchString}
@@ -59,7 +59,7 @@ storiesOf('SuggestionList', module)
     );
   })
   .add('with bookmark entries', () => {
-    let suggestions = [
+    const suggestions = [
       {
         type: 'bookmark',
         title: 'lusakasa/saka: Elegant tab search',
@@ -74,7 +74,7 @@ storiesOf('SuggestionList', module)
       }
     ];
 
-    let searchString = {};
+    const searchString = {};
     return (
       <SuggestionList
         searchString={searchString}
@@ -87,7 +87,7 @@ storiesOf('SuggestionList', module)
     );
   })
   .add('with mode entries', () => {
-    let suggestions = [
+    const suggestions = [
       {
         type: 'mode',
         mode: 'tab',
@@ -108,7 +108,7 @@ storiesOf('SuggestionList', module)
       }
     ];
 
-    let searchString = {};
+    const searchString = {};
     return (
       <SuggestionList
         searchString={searchString}
@@ -146,7 +146,7 @@ storiesOf('OptionsPage', module)
 storiesOf('DefaultModeSelection', module).add('Default render', () => {
   const props = {
     mode: 'bookmark',
-    handleModeChange: function() {}
+    handleModeChange() {}
   };
   return <DefaultModeSelection {...props} />;
 });
@@ -155,14 +155,14 @@ storiesOf('OnlyShowSearchBarSelector', module)
   .add('Suggestions on load enabled', () => {
     const props = {
       checked: true,
-      handleShowSearchSuggestionsChange: function() {}
+      handleShowSearchSuggestionsChange() {}
     };
     return <OnlyShowSearchBarSelector {...props} />;
   })
   .add('Suggestions on load disabled', () => {
     const props = {
       checked: false,
-      handleShowSearchSuggestionsChange: function() {}
+      handleShowSearchSuggestionsChange() {}
     };
     return <OnlyShowSearchBarSelector {...props} />;
   });

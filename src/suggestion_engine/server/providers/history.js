@@ -1,5 +1,5 @@
 import { isSakaUrl } from 'lib/url.js';
-import { MAX_RESULTS } from './';
+import { MAX_RESULTS } from './index.js';
 
 export default async function getHistorySuggestions(searchText) {
   const results = await browser.history.search({

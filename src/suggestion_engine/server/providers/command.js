@@ -1,4 +1,4 @@
-import { MAX_RESULTS } from './';
+import { MAX_RESULTS } from './index.js';
 
 const commands = ['search', 'help', 'history', 'tabs', 'define'];
 
