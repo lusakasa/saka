@@ -72,7 +72,7 @@ export default ({
       <span className="mdc-list-item__meta kbd-end-detail">
         {selected ? (
           <i
-            className="mdc-list-item__graphic material-icons"
+            className="material-icons"
             aria-hidden="true"
             style={{ color }}
           >
