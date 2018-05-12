@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { ctrlChar } from 'lib/utils.js';
-import { highlight } from 'lib/highlight.js';
+import highlight from 'lib/highlight.jsx';
 import { fadedColorMap } from 'lib/colors.js';
 
 const Icon = ({ icon, color }) => (

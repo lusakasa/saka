@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { highlight } from 'lib/highlight.js';
+import highlight from 'lib/highlight.jsx';
 import Suggestion from '../../Components/Suggestion/index.jsx';
 
 export default ({

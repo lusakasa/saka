@@ -75,11 +75,7 @@ export default ({
       </span>
       <span className="mdc-list-item__meta kbd-end-detail">
         {selected ? (
-          <i
-            className="material-icons"
-            aria-hidden="true"
-            style={{ color }}
-          >
+          <i className="material-icons" aria-hidden="true" style={{ color }}>
             {icon}
           </i>
         ) : (

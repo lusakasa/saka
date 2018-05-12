@@ -12,9 +12,9 @@ export function prettifyURL(url, searchString) {
 
   // TODO add support for any protocol
   if (!searchString.startsWith('http://') && targetUrl.startsWith('http://')) {
-    targetUrl = url.substr(7);
+    targetUrl = targetUrl.substr(7);
   }
-  return url;
+  return targetUrl;
 }
 
 /**
