@@ -5,16 +5,19 @@ import knownTLDs from './tld.js';
  * @param {string} searchString - the text in the search bar
  */
 export function prettifyURL(url, searchString) {
-  let targetUrl = url;
+  let prettifiedUrl = url;
   if (url.endsWith('/')) {
-    targetUrl = url.substr(0, url.length - 1);
+    prettifiedUrl = url.substr(0, url.length - 1);
   }
 
   // TODO add support for any protocol
-  if (!searchString.startsWith('http://') && targetUrl.startsWith('http://')) {
-    targetUrl = targetUrl.substr(7);
+  if (
+    !searchString.startsWith('http://') &&
+    prettifiedUrl.startsWith('http://')
+  ) {
+    prettifiedUrl = prettifiedUrl.substr(7);
   }
-  return targetUrl;
+  return prettifiedUrl;
 }
 
 /**
