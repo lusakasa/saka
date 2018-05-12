@@ -41,7 +41,12 @@ export default class GUIContainer extends Component {
               }
             : {
                 transform: `translateX(-50%) scale(${1 / zoom})`, // firefox can't handle calculated css scale props
-                maxWidth: `${100 * zoom}%`
+                maxWidth: `${100 * zoom}%`,
+                top: `${Math.max(0, (window.innerHeight - 504 / zoom) / 2)}px`
+                // WARNING: 504 is the height of the GUI container with all 6 suggestions in pixels at the default zoom
+                // This may change in future updates, so the constant will have to be updated accordingly
+                // TODO: on each extension update, calculate the height of the Saka GUI with all 6 suggestions
+                // and use that instead of the constant 504
               }
         }
       >
