@@ -1,3 +1,5 @@
+import Fuse from 'fuse.js';
+
 export function rangedIncrement(value, increment, min, max) {
   const result = value + increment;
   return result < min ? min : result > max ? max : result;
@@ -19,4 +21,20 @@ export function objectFromArray(array, key) {
     out[e[key]] = e;
   });
   return out;
+}
+
+export async function getFilteredSuggestions(searchString, getSuggestions) {
+  const suggestions = await getSuggestions(searchString);
+  const fuse = new Fuse(suggestions, {
+    shouldSort: true,
+    threshold: 0.5,
+    minMatchCharLength: 1,
+    includeMatches: true,
+    keys: ['title', 'url']
+  });
+  return fuse.search(searchString).map(({ item, matches, score }) => ({
+    ...item,
+    score,
+    matches
+  }));
 }

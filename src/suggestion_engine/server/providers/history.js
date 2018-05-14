@@ -1,5 +1,5 @@
-import Fuse from 'fuse.js';
 import { isSakaUrl } from 'lib/url.js';
+import { getFilteredSuggestions } from 'lib/utils.js';
 import { MAX_RESULTS } from './';
 
 async function allHistorySuggestions(searchText) {
@@ -26,24 +26,8 @@ async function allHistorySuggestions(searchText) {
   );
 }
 
-async function filteredHistorySuggestions(searchString) {
-  const history = await allHistorySuggestions(searchString);
-  const fuse = new Fuse(history, {
-    shouldSort: true,
-    threshold: 0.5,
-    minMatchCharLength: 1,
-    includeMatches: true,
-    keys: ['title', 'url']
-  });
-  return fuse.search(searchString).map(({ item, matches, score }) => ({
-    ...item,
-    score,
-    matches
-  }));
-}
-
 export default async function historySuggestions(searchString) {
   return searchString === ''
     ? allHistorySuggestions(searchString)
-    : filteredHistorySuggestions(searchString);
+    : getFilteredSuggestions(searchString, allHistorySuggestions);
 }
