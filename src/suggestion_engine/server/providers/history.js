@@ -29,5 +29,5 @@ async function allHistorySuggestions(searchText) {
 export default async function historySuggestions(searchString) {
   return searchString === ''
     ? allHistorySuggestions(searchString)
-    : getFilteredSuggestions(searchString, allHistorySuggestions);
+    : getFilteredSuggestions(searchString, allHistorySuggestions, 1);
 }

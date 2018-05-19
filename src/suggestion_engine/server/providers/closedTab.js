@@ -34,5 +34,5 @@ async function getAllSuggestions() {
 export default async function closedTabSuggestions(searchString) {
   return searchString === ''
     ? getAllSuggestions()
-    : getFilteredSuggestions(searchString, getAllSuggestions);
+    : getFilteredSuggestions(searchString, getAllSuggestions, 0.5);
 }

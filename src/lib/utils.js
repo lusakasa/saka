@@ -23,11 +23,11 @@ export function objectFromArray(array, key) {
   return out;
 }
 
-export async function getFilteredSuggestions(searchString, getSuggestions) {
+export async function getFilteredSuggestions(searchString, getSuggestions, threshold) {
   const suggestions = await getSuggestions(searchString);
   const fuse = new Fuse(suggestions, {
     shouldSort: true,
-    threshold: 0.5,
+    threshold,
     minMatchCharLength: 1,
     includeMatches: true,
     keys: ['title', 'url']

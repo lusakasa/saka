@@ -30,5 +30,5 @@ async function recentTabSuggestions() {
 export default async function tabSuggestions(searchString) {
   return searchString === ''
     ? recentTabSuggestions()
-    : getFilteredSuggestions(searchString, allTabSuggestions);
+    : getFilteredSuggestions(searchString, allTabSuggestions, 0.5);
 }

@@ -25,5 +25,5 @@ async function allBookmarkSuggestions(searchText) {
 export default async function bookmarkSuggestions(searchString) {
   return searchString === ''
     ? allBookmarkSuggestions(searchString)
-    : getFilteredSuggestions(searchString, allBookmarkSuggestions);
+    : getFilteredSuggestions(searchString, allBookmarkSuggestions, 1);
 }
