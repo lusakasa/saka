@@ -1,11 +1,13 @@
 import { isSakaUrl } from 'lib/url.js';
+import { getFilteredSuggestions } from 'lib/utils.js';
 import { MAX_RESULTS } from './index.js';
 
-export default async function getHistorySuggestions(searchText) {
+async function allHistorySuggestions(searchText) {
   const results = await browser.history.search({
     text: searchText,
     maxResults: MAX_RESULTS
   });
+
   const filteredResults = [];
 
   for (const result of results) {
@@ -22,4 +24,14 @@ export default async function getHistorySuggestions(searchText) {
       url
     })
   );
+}
+
+export default async function historySuggestions(searchString) {
+  const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+
+  if (searchString && sakaSettings.enableFuzzySearch) {
+    return getFilteredSuggestions(searchString, allHistorySuggestions, 1);
+  }
+
+  return allHistorySuggestions(searchString);
 }

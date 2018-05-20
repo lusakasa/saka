@@ -5,7 +5,7 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 * Lists tabs in order of recency by default, then fuzzy search by title or URL.
 * Search recently closed tabs
 * Search all bookmarks
-* History search coming soon
+* Search all browsing history
 
 ![Preview](./images/preview.png)
 

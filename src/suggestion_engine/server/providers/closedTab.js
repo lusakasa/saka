@@ -1,6 +1,6 @@
-import Fuse from 'fuse.js';
 import { isSakaUrl } from 'lib/url.js';
 import { filter } from 'rxjs/operator/filter';
+import { getFilteredSuggestions } from 'lib/utils.js';
 
 async function getAllSuggestions() {
   const sessions = await browser.sessions.getRecentlyClosed();
@@ -31,23 +31,8 @@ async function getAllSuggestions() {
   });
 }
 
-async function getFilteredSuggestions(searchString) {
-  const fuse = new Fuse(await getAllSuggestions(), {
-    shouldSort: true,
-    threshold: 0.5,
-    minMatchCharLength: 1,
-    includeMatches: true,
-    keys: ['title', 'url']
-  });
-  return fuse.search(searchString).map(({ item, matches, score }) => ({
-    ...item,
-    score,
-    matches
-  }));
-}
-
 export default async function closedTabSuggestions(searchString) {
   return searchString === ''
     ? getAllSuggestions()
-    : getFilteredSuggestions(searchString);
+    : getFilteredSuggestions(searchString, getAllSuggestions, 0.5);
 }

@@ -1,5 +1,4 @@
-import Fuse from 'fuse.js';
-import { objectFromArray } from 'lib/utils.js';
+import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
 
 async function allTabSuggestions() {
   const tabs = await browser.tabs.query({});
@@ -28,24 +27,8 @@ async function recentTabSuggestions() {
   return [...recentTabs, ...Object.values(tabsMap)];
 }
 
-async function filteredTabSuggestions(searchString) {
-  const tabs = await allTabSuggestions();
-  const fuse = new Fuse(tabs, {
-    shouldSort: true,
-    threshold: 0.5,
-    minMatchCharLength: 1,
-    includeMatches: true,
-    keys: ['title', 'url']
-  });
-  return fuse.search(searchString).map(({ item, matches, score }) => ({
-    ...item,
-    score,
-    matches
-  }));
-}
-
 export default async function tabSuggestions(searchString) {
   return searchString === ''
     ? recentTabSuggestions()
-    : filteredTabSuggestions(searchString);
+    : getFilteredSuggestions(searchString, allTabSuggestions, 0.5);
 }
