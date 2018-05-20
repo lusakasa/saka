@@ -1,19 +1,17 @@
 import { h } from 'preact';
-import { highlight } from 'lib/highlight.js';
-import Suggestion from '../../Components/Suggestion/index.js';
+import Suggestion from '../../Components/Suggestion/index.jsx';
 
 export default ({
-  suggestion: { type, title, url, prettyURL, matches },
-  searchText,
+  suggestion: { title, url, prettyURL },
   selected,
   index,
   onClick
 }) => (
   <Suggestion
     type="bookmark"
-    title={highlight(title, 'title', matches)}
+    title={title}
     titleColor="#000000"
-    secondary={highlight(url, 'url', matches)}
+    secondary={prettyURL}
     secondaryColor="rgba(63, 81, 245, 1.0)"
     url={url}
     icon="star_border"

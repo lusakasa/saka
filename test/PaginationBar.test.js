@@ -1,15 +1,15 @@
-import PaginationBar from 'src/saka/Main/Components/PaginationBar';
+import PaginationBar from 'src/saka/Main/Components/PaginationBar/index.jsx';
 import { render } from 'preact-render-spy';
 import { h } from 'preact';
 
-describe('PaginationBar component ', function() {
-  it('should be empty when no there are no suggestions', function() {
+describe('PaginationBar component ', () => {
+  it('should be empty when no there are no suggestions', () => {
     const props = {
       firstVisibleIndex: 0,
       suggestions: [],
       maxSuggestions: 6,
-      onClickPrevious: function() {},
-      onClickNext: function() {}
+      onClickPrevious() {},
+      onClickNext() {}
     };
 
     const paginationBarRender = render(<PaginationBar {...props} />);
@@ -20,7 +20,7 @@ describe('PaginationBar component ', function() {
     expect(paginationList).toBe('');
   });
 
-  it('should show correct amount of suggestions when there are suggestions found', function() {
+  it('should show correct amount of suggestions when there are suggestions found', () => {
     const props = {
       firstVisibleIndex: 0,
       suggestions: [
@@ -36,8 +36,8 @@ describe('PaginationBar component ', function() {
         }
       ],
       maxSuggestions: 6,
-      onClickPrevious: function() {},
-      onClickNext: function() {}
+      onClickPrevious() {},
+      onClickNext() {}
     };
 
     const paginationBarRender = render(<PaginationBar {...props} />);

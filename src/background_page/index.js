@@ -1,6 +1,6 @@
 import 'lib/browser_polyfill.js';
 import 'msg/server.js';
-import { tabHistory } from './tabHistory.js';
+import tabHistory from './tabHistory.js';
 
 window.tabHistory = tabHistory;
 

@@ -1,14 +1,14 @@
-import SuggestionList from 'src/saka/Main/Components/SuggestionList';
+import SuggestionList from 'src/saka/Main/Components/SuggestionList/index.jsx';
 import { render } from 'preact-render-spy';
 import { h } from 'preact';
 
 const MAX_SUGGESTIONS = 6;
 
-describe('SuggestionList component ', function() {
-  it('should be empty when no values provided', function() {
-    let suggestions = [];
+describe('SuggestionList component ', () => {
+  it('should be empty when no values provided', () => {
+    const suggestions = [];
 
-    let searchString = {};
+    const searchString = {};
 
     const wrapper = render(
       <SuggestionList
@@ -20,12 +20,12 @@ describe('SuggestionList component ', function() {
       />
     );
 
-    let suggestionList = wrapper.find('.tab-suggestion');
+    const suggestionList = wrapper.find('.tab-suggestion');
     expect(suggestionList.length).toBe(0);
   });
 
-  it('should display suggestions when provided', function() {
-    let suggestions = [
+  it('should display suggestions when provided', () => {
+    const suggestions = [
       {
         type: 'tab',
         title: 'lusakasa/saka: Elegant tab search',
@@ -38,7 +38,7 @@ describe('SuggestionList component ', function() {
       }
     ];
 
-    let searchString = {};
+    const searchString = '';
 
     const SuggestionListRender = render(
       <SuggestionList
@@ -47,10 +47,11 @@ describe('SuggestionList component ', function() {
         selectedIndex={0}
         firstVisibleIndex={0}
         maxSuggestions={MAX_SUGGESTIONS}
+        onSuggestionClick={() => {}}
       />
     );
 
-    let suggestionList = SuggestionListRender.find('.tab-suggestion');
+    const suggestionList = SuggestionListRender.find('.tab-suggestion');
     expect(suggestionList.length).toBe(2);
 
     suggestions.map((suggestion, index) => {

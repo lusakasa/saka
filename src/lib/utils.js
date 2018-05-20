@@ -2,7 +2,14 @@ import Fuse from 'fuse.js';
 
 export function rangedIncrement(value, increment, min, max) {
   const result = value + increment;
-  return result < min ? min : result > max ? max : result;
+
+  if (result < min) {
+    return min;
+  } else if (result > max) {
+    return max;
+  }
+
+  return result;
 }
 
 export const isMac = navigator.appVersion.indexOf('Mac') !== -1;

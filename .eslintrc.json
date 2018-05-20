@@ -6,10 +6,13 @@
     "react/react-in-jsx-scope": "off",
     "import/no-extraneous-dependencies": "off",
     "react/prop-types": "off",
-    "react/no-did-mount-set-state": "off"
+    "react/no-did-mount-set-state": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   },
   "env": {
-    "webextensions": true
+    "webextensions": true,
+    "browser": true
   },
   "globals": {
     "document": true,
