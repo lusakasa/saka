@@ -1,11 +1,9 @@
 import { isSakaUrl } from 'lib/url.js';
 import { getFilteredSuggestions } from 'lib/utils.js';
-import { MAX_RESULTS } from './index.js';
 
 async function allHistorySuggestions(searchText) {
   const results = await browser.history.search({
-    text: searchText,
-    maxResults: MAX_RESULTS
+    text: searchText
   });
 
   const filteredResults = [];
