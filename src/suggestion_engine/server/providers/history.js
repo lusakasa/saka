@@ -27,7 +27,11 @@ async function allHistorySuggestions(searchText) {
 }
 
 export default async function historySuggestions(searchString) {
-  return searchString === ''
-    ? allHistorySuggestions(searchString)
-    : getFilteredSuggestions(searchString, allHistorySuggestions, 1);
+  const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+
+  if (searchString && sakaSettings.enableFuzzySearch) {
+    return getFilteredSuggestions(searchString, allHistorySuggestions, 1);
+  }
+
+  return allHistorySuggestions(searchString);
 }

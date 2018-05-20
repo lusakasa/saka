@@ -23,7 +23,11 @@ async function allBookmarkSuggestions(searchText) {
 }
 
 export default async function bookmarkSuggestions(searchString) {
-  return searchString === ''
-    ? allBookmarkSuggestions(searchString)
-    : getFilteredSuggestions(searchString, allBookmarkSuggestions, 1);
+  const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+
+  if (searchString && sakaSettings.enableFuzzySearch) {
+    return getFilteredSuggestions(searchString, allBookmarkSuggestions, 1);
+  }
+
+  return allBookmarkSuggestions(searchString);
 }

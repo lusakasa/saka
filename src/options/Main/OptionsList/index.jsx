@@ -2,6 +2,7 @@ import { Component, h } from 'preact';
 import DefaultModeSelection from './DefaultModeSelection.jsx';
 import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector.jsx';
 import ShowSakaHotkeys from './ShowSakaHotkeys.jsx';
+import EnableFuzzySearch from './EnableFuzzySearch.jsx';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export default class OptionsList extends Component {
     this.state = {
       isLoading: true,
       mode: 'tab',
-      showEmptySearchSuggestions: true
+      showEmptySearchSuggestions: true,
+      enableFuzzySearch: true
     };
   }
 
@@ -26,7 +28,8 @@ export default class OptionsList extends Component {
       return {
         isLoading: false,
         mode: sakaSettings.mode,
-        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions
+        showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions,
+        enableFuzzySearch: sakaSettings.enableFuzzySearch
       };
     }
 
@@ -35,10 +38,11 @@ export default class OptionsList extends Component {
     };
   };
 
-  handleOptionsSave = e => {
+  handleOptionsSave = () => {
     const settingsStore = {
       mode: this.state.mode,
-      showEmptySearchSuggestions: this.state.showEmptySearchSuggestions
+      showEmptySearchSuggestions: this.state.showEmptySearchSuggestions,
+      enableFuzzySearch: this.state.enableFuzzySearch
     };
 
     browser.storage.sync.set({ sakaSettings: settingsStore });
@@ -53,6 +57,12 @@ export default class OptionsList extends Component {
   handleShowSearchSuggestionsChange = () => {
     this.setState({
       showEmptySearchSuggestions: !this.state.showEmptySearchSuggestions
+    });
+  };
+
+  handleEnableFuzzySearch = () => {
+    this.setState({
+      enableFuzzySearch: !this.state.enableFuzzySearch
     });
   };
 
@@ -78,6 +88,14 @@ export default class OptionsList extends Component {
                 handleShowSearchSuggestionsChange={
                   this.handleShowSearchSuggestionsChange
                 }
+              />
+              <li
+                role="separator"
+                className="mdc-list-divider mdc-list-divider--padded options-separator"
+              />
+              <EnableFuzzySearch
+                checked={this.state.enableFuzzySearch}
+                handleEnableFuzzySearch={this.handleEnableFuzzySearch}
               />
               <li
                 role="separator"
