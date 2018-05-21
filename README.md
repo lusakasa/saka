@@ -20,6 +20,7 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 
 Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/addon/saka/) or [Chrome Webstore](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
 
+## Development
 To help develop Saka, follow the instructions below to build from source.
 
 ### Install on Chrome
