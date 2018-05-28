@@ -9,7 +9,14 @@ export default class Main extends Component {
 
     this.state = {
       mode: 'tab',
-      modes: ['mode', 'tab', 'closedTab', 'bookmark', 'history'],
+      modes: [
+        'mode',
+        'tab',
+        'closedTab',
+        'bookmark',
+        'history',
+        'recentlyViewed'
+      ],
       isLoading: true,
       showEmptySearchSuggestions: true
     };
@@ -99,6 +106,16 @@ export default class Main extends Component {
             <StandardSearch
               mode={mode}
               placeholder="History"
+              setMode={setMode}
+              shuffleMode={shuffleMode}
+              showEmptySearchSuggestions={showEmptySearchSuggestions}
+            />
+          );
+        case 'recentlyViewed':
+          return (
+            <StandardSearch
+              mode={mode}
+              placeholder="Recently Viewed"
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}

@@ -20,6 +20,8 @@ export default props => {
       return <BookmarkSuggestion {...props} />;
     case 'history':
       return <HistorySuggestion {...props} />;
+    case 'recentlyViewed':
+      return <HistorySuggestion {...props} />;
     case 'command':
       return <CommandSuggestion {...props} />;
     case 'searchEngine':
