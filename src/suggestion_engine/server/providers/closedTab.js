@@ -2,7 +2,7 @@ import { isSakaUrl } from 'lib/url.js';
 import { filter } from 'rxjs/operator/filter';
 import { getFilteredSuggestions } from 'lib/utils.js';
 
-async function getAllSuggestions() {
+export async function getAllSuggestions() {
   const sessions = await browser.sessions.getRecentlyClosed();
   const filteredSessions = [];
 
@@ -16,7 +16,10 @@ async function getAllSuggestions() {
     }
   }
 
+  console.log('Session: ', filteredSessions);
+
   return filteredSessions.map(session => {
+    const lastModified = session.lastAccessed;
     const { id, sessionId, title, url, favIconUrl, incognito } = session.tab;
     return {
       type: 'closedTab',
@@ -26,7 +29,8 @@ async function getAllSuggestions() {
       title,
       url,
       favIconUrl: incognito ? null : favIconUrl,
-      incognito
+      incognito,
+      lastAccessed: lastModified
     };
   });
 }
@@ -34,5 +38,9 @@ async function getAllSuggestions() {
 export default async function closedTabSuggestions(searchString) {
   return searchString === ''
     ? getAllSuggestions()
-    : getFilteredSuggestions(searchString, getAllSuggestions, 0.5);
+    : getFilteredSuggestions(searchString, {
+        getSuggestions: getAllSuggestions,
+        threshold: 0.5,
+        keys: ['title', 'url']
+      });
 }

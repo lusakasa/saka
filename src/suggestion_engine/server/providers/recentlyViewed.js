@@ -1,33 +1,41 @@
 import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
-import tabSuggestions from './tab.js';
-import closedTabSuggestions from './closedTab.js';
+import { allTabSuggestions as getAllOpenTabs } from './tab.js';
+import { getAllSuggestions as getAllClosedTabs } from './closedTab.js';
 
 async function allRecentlyViewedSuggestions(searchString) {
-  const tabs = await tabSuggestions(searchString);
-  const closedTabs = await closedTabSuggestions(searchString);
-  console.warn('Tabs: ', tabs);
-  console.warn('Closed Tabs: ', closedTabs);
+  const openTabs = await getAllOpenTabs(searchString);
+  const closedTabs = await getAllClosedTabs(searchString);
 
-  const recentlyViewed = new Set(tabs);
-  closedTabs.forEach(tab => {
-    recentlyViewed.add(tab);
+  const closedTabsMap = objectFromArray(closedTabs, 'url');
+  const recentOpenTabs = openTabs.map(openTab => {
+    if (closedTabsMap[openTab.url]) {
+      delete closedTabsMap[openTab.url];
+    }
+    return openTab;
   });
 
-  console.warn('Recent: ', recentlyViewed);
+  console.warn('ASD: ', [...recentOpenTabs, ...Object.values(closedTabsMap)]);
+  return [...recentOpenTabs, ...Object.values(closedTabsMap)];
+}
 
-  return recentlyViewed;
+function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
+  return suggestion1.lastAccessed - suggestion2.lastAccessed;
 }
 
 export default async function recentlyViewedSuggestions(searchString) {
-  //   const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+  const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
-  //   if (searchString && sakaSettings.enableFuzzySearch) {
-  //     return getFilteredSuggestions(
-  //       searchString,
-  //       allRecentlyViewedSuggestions,
-  //       1
-  //     );
-  //   }
+  // if (sakaSettings.enableFuzzySearch) {
+  //   return getFilteredSuggestions(searchString, {
+  //     getSuggestions: allRecentlyViewedSuggestions,
+  //     threshold: 1,
+  //     keys: ['lastAccessed']
+  //   });
+  // }
 
-  return allRecentlyViewedSuggestions(searchString);
+  const suggestions = await allRecentlyViewedSuggestions(searchString);
+  const sorted = suggestions.sort(compareRecentlyViewedSuggestions);
+  console.error('Sorted: ', sorted);
+
+  return sorted;
 }

@@ -243,6 +243,7 @@ export default class extends Component {
       this.props.mode,
       searchStringAtLookup
     );
+    console.log('Suggestions: ', suggestions)
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
       this.setState({

@@ -30,15 +30,21 @@ export function objectFromArray(array, key) {
   return out;
 }
 
-export async function getFilteredSuggestions(searchString, getSuggestions, threshold) {
+export async function getFilteredSuggestions(
+  searchString,
+  { getSuggestions, threshold, keys }
+) {
   const suggestions = await getSuggestions(searchString);
+  console.error('Fuse Suggestions: ', suggestions);
   const fuse = new Fuse(suggestions, {
     shouldSort: true,
     threshold,
     minMatchCharLength: 1,
     includeMatches: true,
-    keys: ['title', 'url']
+    keys
   });
+
+  console.error('Fuse: ', fuse.search(searchString));
   return fuse.search(searchString).map(({ item, matches, score }) => ({
     ...item,
     score,
