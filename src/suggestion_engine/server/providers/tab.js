@@ -28,20 +28,18 @@ export async function allTabSuggestions() {
 async function recentTabSuggestions() {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
-  console.warn('TypeOf tabsMap: ', typeof Object.values(tabsMap));
-  console.warn('tabsMap: ', Object.values(tabsMap));
-  console.warn('tabsMap spread: ', ...Object.values(tabsMap));
   const { tabHistory } = await browser.runtime.getBackgroundPage();
   const recentTabs = tabHistory.map(tabId => {
     const tab = tabsMap[tabId];
     delete tabsMap[tabId];
     return tab;
   });
-  console.warn('final: ', [...recentTabs, ...Object.values(tabsMap)]);
   return [...recentTabs, ...Object.values(tabsMap)];
 }
 
 export default async function tabSuggestions(searchString) {
+  console.log('Tab Search: ', searchString);
+
   return searchString === ''
     ? recentTabSuggestions()
     : getFilteredSuggestions(searchString, {
