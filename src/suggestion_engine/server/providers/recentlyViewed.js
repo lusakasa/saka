@@ -19,7 +19,7 @@ async function allRecentlyViewedSuggestions(searchString) {
 }
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
-  return suggestion1.lastAccessed - suggestion2.lastAccessed;
+  return suggestion2.lastAccessed - suggestion1.lastAccessed;
 }
 
 export default async function recentlyViewedSuggestions(searchString) {

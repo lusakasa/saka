@@ -19,7 +19,7 @@ export async function getAllSuggestions() {
   console.log('Session: ', filteredSessions);
 
   return filteredSessions.map(session => {
-    const lastModified = session.lastAccessed;
+    const { lastModified } = session;
     const { id, sessionId, title, url, favIconUrl, incognito } = session.tab;
     return {
       type: 'closedTab',
