@@ -24,17 +24,25 @@ async function allRecentlyViewedSuggestions(searchString) {
   console.error('Closed: ', closedTabs);
   console.error('History: ', historyTabs);
 
+  const openTabsMap = objectFromArray(openTabs, 'url');
   const filteredClosedTabs = closedTabs.filter(
-    tab => openTabs.indexOf(tab.url) === -1
+    tab => !openTabsMap.hasOwnProperty(tab.url)
   );
 
-  const openAndClosedTabs = [...openTabs, ...filteredClosedTabs];
+  const openAndClosedTabsMap = objectFromArray(
+    [...openTabs, ...filteredClosedTabs],
+    'url'
+  );
   const filteredHistoryTabs = historyTabs.filter(
-    tab => openAndClosedTabs.indexOf(tab.url) === -1
+    tab => !openAndClosedTabsMap.hasOwnProperty(tab.url)
   );
 
-  console.warn('Recent: ', [...openAndClosedTabs, ...filteredHistoryTabs]);
-  return [...openAndClosedTabs, ...filteredHistoryTabs];
+  console.warn('Recent: ', [
+    ...openTabs,
+    ...filteredClosedTabs,
+    ...filteredHistoryTabs
+  ]);
+  return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs];
 }
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
@@ -52,6 +60,10 @@ export default async function recentlyViewedSuggestions(searchString) {
   const suggestions = await allRecentlyViewedSuggestions(searchString);
 
   if (searchString !== undefined) {
+    console.warn(
+      'Sorted: ',
+      suggestions.sort(compareRecentlyViewedSuggestions)
+    );
     return suggestions.sort(compareRecentlyViewedSuggestions);
   }
 

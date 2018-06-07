@@ -8,7 +8,8 @@
     "react/prop-types": "off",
     "react/no-did-mount-set-state": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-prototype-builtins": "off"
   },
   "env": {
     "webextensions": true,
