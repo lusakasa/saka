@@ -1,22 +1,40 @@
 import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
 import tabSuggestions, { allTabSuggestions } from './tab.js';
 import { getAllSuggestions as getAllClosedTabs } from './closedTab.js';
+import { allHistorySuggestions as getAllHistoryTabs } from './history.js';
 
 async function allRecentlyViewedSuggestions(searchString) {
-  console.warn('allRecentlyViewedSuggestions starting...');
   const openTabs = await tabSuggestions(searchString);
   const closedTabs = await getAllClosedTabs(searchString);
+  const historyTabs = await getAllHistoryTabs(searchString);
 
-  const closedTabsMap = objectFromArray(closedTabs, 'url');
-  const recentOpenTabs = openTabs.map(openTab => {
-    if (closedTabsMap[openTab.url]) {
-      delete closedTabsMap[openTab.url];
-    }
-    return openTab;
-  });
+  // const closedTabsMap = objectFromArray(closedTabs, 'url');
+  // const historyTabsMap = objectFromArray(historyTabs, 'url');
 
-  console.warn('ASD: ', [...recentOpenTabs, ...Object.values(closedTabsMap)]);
-  return [...recentOpenTabs, ...Object.values(closedTabsMap)];
+  // const recentOpenTabs = openTabs.map(openTab => {
+  //   if (closedTabsMap[openTab.url]) {
+  //     delete closedTabsMap[openTab.url];
+  //   }
+  //   return openTab;
+  // });
+
+  // return [...recentOpenTabs, ...Object.values(closedTabsMap)];
+
+  console.error('Tabs: ', openTabs);
+  console.error('Closed: ', closedTabs);
+  console.error('History: ', historyTabs);
+
+  const filteredClosedTabs = closedTabs.filter(
+    tab => openTabs.indexOf(tab.url) === -1
+  );
+
+  const openAndClosedTabs = [...openTabs, ...filteredClosedTabs];
+  const filteredHistoryTabs = historyTabs.filter(
+    tab => openAndClosedTabs.indexOf(tab.url) === -1
+  );
+
+  console.warn('Recent: ', [...openAndClosedTabs, ...filteredHistoryTabs]);
+  return [...openAndClosedTabs, ...filteredHistoryTabs];
 }
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
