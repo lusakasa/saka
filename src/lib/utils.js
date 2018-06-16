@@ -35,7 +35,6 @@ export async function getFilteredSuggestions(
   { getSuggestions, threshold, keys }
 ) {
   const suggestions = await getSuggestions(searchString);
-  console.error('Fuse Suggestions: ', suggestions);
   const fuse = new Fuse(suggestions, {
     shouldSort: true,
     threshold,
@@ -44,7 +43,6 @@ export async function getFilteredSuggestions(
     keys
   });
 
-  console.error('Fuse: ', fuse.search(searchString));
   return fuse.search(searchString).map(({ item, matches, score }) => ({
     ...item,
     score,

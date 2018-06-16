@@ -8,22 +8,6 @@ async function allRecentlyViewedSuggestions(searchString) {
   const closedTabs = await getAllClosedTabs(searchString);
   const historyTabs = await getAllHistoryTabs(searchString);
 
-  // const closedTabsMap = objectFromArray(closedTabs, 'url');
-  // const historyTabsMap = objectFromArray(historyTabs, 'url');
-
-  // const recentOpenTabs = openTabs.map(openTab => {
-  //   if (closedTabsMap[openTab.url]) {
-  //     delete closedTabsMap[openTab.url];
-  //   }
-  //   return openTab;
-  // });
-
-  // return [...recentOpenTabs, ...Object.values(closedTabsMap)];
-
-  console.error('Tabs: ', openTabs);
-  console.error('Closed: ', closedTabs);
-  console.error('History: ', historyTabs);
-
   const openTabsMap = objectFromArray(openTabs, 'url');
   const filteredClosedTabs = closedTabs.filter(
     tab => !openTabsMap.hasOwnProperty(tab.url)
@@ -37,11 +21,6 @@ async function allRecentlyViewedSuggestions(searchString) {
     tab => !openAndClosedTabsMap.hasOwnProperty(tab.url)
   );
 
-  console.warn('Recent: ', [
-    ...openTabs,
-    ...filteredClosedTabs,
-    ...filteredHistoryTabs
-  ]);
   return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs];
 }
 
@@ -59,11 +38,7 @@ async function filteredRecentlyViewedSuggestions(searchString) {
 export default async function recentlyViewedSuggestions(searchString) {
   const suggestions = await allRecentlyViewedSuggestions(searchString);
 
-  if (searchString !== undefined) {
-    console.warn(
-      'Sorted: ',
-      suggestions.sort(compareRecentlyViewedSuggestions)
-    );
+  if (searchString === '') {
     return suggestions.sort(compareRecentlyViewedSuggestions);
   }
 
