@@ -33,14 +33,24 @@ function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
 async function filteredRecentlyViewedSuggestions(searchString) {
   const tabs = await allTabSuggestions();
   const closedTabs = await getAllClosedTabs(searchString);
+  const historyTabs = await getAllHistoryTabs(searchString);
 
-  return [...tabs, ...Object.values(closedTabs)];
+  console.warn('Filtered: ', [
+    ...tabs,
+    ...Object.values(closedTabs),
+    ...Object.values(historyTabs)
+  ]);
+  return [
+    ...tabs,
+    ...Object.values(closedTabs),
+    ...Object.values(historyTabs)
+  ].map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }));
 }
 
 export default async function recentlyViewedSuggestions(searchString) {
-  const suggestions = await allRecentlyViewedSuggestions(searchString);
-
   if (searchString === '') {
+    const suggestions = await allRecentlyViewedSuggestions(searchString);
+    console.warn('Suggestions: ', suggestions);
     return suggestions.sort(compareRecentlyViewedSuggestions);
   }
 

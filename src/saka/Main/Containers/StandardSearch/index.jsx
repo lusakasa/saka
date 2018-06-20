@@ -297,6 +297,8 @@ export default class extends Component {
         </BackgroundImage>
       );
     }
+
+    // TODO: Rename suggestions and suggestion
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer onWheel={this.handleWheel}>

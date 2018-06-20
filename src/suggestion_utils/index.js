@@ -5,7 +5,7 @@ export const icons = {
   tab: 'tab',
   closedTab: 'restore_page',
   history: 'history',
-  recentlyViewed: 'recently_viewed',
+  recentlyViewed: 'history',
   bookmark: 'bookmark_border',
   incognito: 'visibility_off'
 };
