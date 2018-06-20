@@ -2,7 +2,7 @@ const browser = require('sinon-chrome/webextensions');
 
 import closedTabSuggestions from 'suggestion_engine/server/providers/closedTab.js';
 
-describe('server/providers/bookmark ', () => {
+describe('server/providers/closedTabs ', () => {
   beforeAll(() => {
     global.browser = browser;
   });
@@ -15,6 +15,7 @@ describe('server/providers/bookmark ', () => {
     it('should return all closed tabs when no search string provided', async () => {
       const queryResults = [
         {
+          lastModified: 123456,
           tab: {
             id: 1,
             windowId: 0,
@@ -34,7 +35,8 @@ describe('server/providers/bookmark ', () => {
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
           sessionId: undefined,
           score: undefined,
-          incognito: false
+          incognito: false,
+          lastAccessed: 123456
         }
       ];
 
@@ -48,6 +50,7 @@ describe('server/providers/bookmark ', () => {
     it('should filter out entries for saka in recently closed tabs', async () => {
       const queryResults = [
         {
+          lastModified: 123456,
           tab: {
             id: 1,
             windowId: 0,
@@ -58,6 +61,7 @@ describe('server/providers/bookmark ', () => {
           }
         },
         {
+          lastModified: 654321,
           tab: {
             id: 2,
             windowId: 0,
@@ -77,7 +81,8 @@ describe('server/providers/bookmark ', () => {
           favIconUrl: null,
           sessionId: undefined,
           score: undefined,
-          incognito: true
+          incognito: true,
+          lastAccessed: 123456
         }
       ];
 
@@ -91,6 +96,7 @@ describe('server/providers/bookmark ', () => {
     it('should return all closed tabs matching searchString', async () => {
       const queryResults = [
         {
+          lastModified: 123456,
           tab: {
             id: 1,
             windowId: 0,
@@ -101,6 +107,7 @@ describe('server/providers/bookmark ', () => {
           }
         },
         {
+          lastModified: 654321,
           tab: {
             id: 2,
             windowId: 0,
@@ -121,6 +128,7 @@ describe('server/providers/bookmark ', () => {
           sessionId: undefined,
           score: undefined,
           incognito: true,
+          lastAccessed: 654321,
           matches: [
             {
               indices: [[0, 3]],

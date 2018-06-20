@@ -20,7 +20,8 @@ describe('server/providers/tab ', () => {
           title: 'Google',
           url: 'https://google.com',
           favIconUrl: 'https://google.com/icon.png',
-          incognito: false
+          incognito: false,
+          lastAccessed: 123456
         },
         {
           id: 0,
@@ -28,7 +29,8 @@ describe('server/providers/tab ', () => {
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
-          incognito: true
+          incognito: true,
+          lastAccessed: 654321
         }
       ];
 
@@ -55,7 +57,8 @@ describe('server/providers/tab ', () => {
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: null,
-          incognito: true
+          incognito: true,
+          lastAccessed: 654321
         },
         {
           type: 'tab',
@@ -64,7 +67,8 @@ describe('server/providers/tab ', () => {
           title: 'Google',
           url: 'https://google.com',
           favIconUrl: 'https://google.com/icon.png',
-          incognito: false
+          incognito: false,
+          lastAccessed: 123456
         }
       ];
 
@@ -82,7 +86,8 @@ describe('server/providers/tab ', () => {
           title: 'Saka',
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
-          incognito: false
+          incognito: false,
+          lastAccessed: 123456
         },
         {
           id: 0,
@@ -90,7 +95,8 @@ describe('server/providers/tab ', () => {
           title: 'Google',
           url: 'https://google.com',
           favIconUrl: 'https://google.com/icon.png',
-          incognito: false
+          incognito: false,
+          lastAccessed: 654321
         }
       ];
 
@@ -103,6 +109,7 @@ describe('server/providers/tab ', () => {
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
           incognito: false,
+          lastAccessed: 123456,
           matches: [
             {
               indices: [[0, 3]],
