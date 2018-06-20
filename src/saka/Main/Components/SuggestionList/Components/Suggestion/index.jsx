@@ -22,8 +22,6 @@ export default ({
   const incognitoIcon = icons.incognito;
   let suggestionIcon;
 
-  console.log('Platform: ', SAKA_PLATFORM);
-  console.log('Favicon: ', favIconUrl);
   if (incognito) {
     suggestionIcon = (
       <i className="material-icons" aria-hidden="true" style={{ color }}>

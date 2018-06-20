@@ -35,11 +35,6 @@ async function filteredRecentlyViewedSuggestions(searchString) {
   const closedTabs = await getAllClosedTabs(searchString);
   const historyTabs = await getAllHistoryTabs(searchString);
 
-  console.warn('Filtered: ', [
-    ...tabs,
-    ...Object.values(closedTabs),
-    ...Object.values(historyTabs)
-  ]);
   return [
     ...tabs,
     ...Object.values(closedTabs),
@@ -50,7 +45,6 @@ async function filteredRecentlyViewedSuggestions(searchString) {
 export default async function recentlyViewedSuggestions(searchString) {
   if (searchString === '') {
     const suggestions = await allRecentlyViewedSuggestions(searchString);
-    console.warn('Suggestions: ', suggestions);
     return suggestions.sort(compareRecentlyViewedSuggestions);
   }
 
