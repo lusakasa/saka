@@ -2,7 +2,6 @@ import { isSakaUrl } from 'lib/url.js';
 import { getFilteredSuggestions } from 'lib/utils.js';
 
 export async function allHistorySuggestions(searchText) {
-  console.log('Starting History....');
   const results = await browser.history.search({
     text: searchText
   });

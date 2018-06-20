@@ -2,7 +2,6 @@ import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
 
 export async function allTabSuggestions() {
   const tabs = await browser.tabs.query({});
-  console.error(tabs);
   return tabs.map(
     ({
       id: tabId,
@@ -38,8 +37,6 @@ async function recentTabSuggestions() {
 }
 
 export default async function tabSuggestions(searchString) {
-  console.log('Tab Search: ', searchString);
-
   return searchString === ''
     ? recentTabSuggestions()
     : getFilteredSuggestions(searchString, {

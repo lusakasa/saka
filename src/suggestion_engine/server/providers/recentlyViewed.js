@@ -21,7 +21,9 @@ async function allRecentlyViewedSuggestions(searchString) {
     tab => !openAndClosedTabsMap.hasOwnProperty(tab.url)
   );
 
-  return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs];
+  return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs].map(
+    tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' })
+  );
 }
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {

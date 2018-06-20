@@ -243,7 +243,6 @@ export default class extends Component {
       this.props.mode,
       searchStringAtLookup
     );
-    console.log('Suggestions: ', suggestions)
     const { searchString: searchStringNow } = this.state;
     if (searchStringNow === searchStringAtLookup) {
       this.setState({
@@ -278,7 +277,6 @@ export default class extends Component {
       maxSuggestions
     } = this.state;
     const suggestion = suggestions[firstVisibleIndex + selectedIndex];
-    // console.log('render suggestions', suggestions);
 
     if (!showEmptySearchSuggestions && !searchString) {
       return (

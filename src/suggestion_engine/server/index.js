@@ -19,6 +19,12 @@ export async function activateSuggestion(suggestion) {
     case 'history':
       await browser.tabs.create({ url: suggestion.url });
       break;
+    case 'recentlyViewed':
+      await activateSuggestion({
+        ...suggestion,
+        type: suggestion.originalType
+      });
+      break;
     default:
       console.error(
         `activation not yet implemented for suggestions of type ${
