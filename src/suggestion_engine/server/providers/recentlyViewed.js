@@ -8,17 +8,14 @@ async function allRecentlyViewedSuggestions(searchString) {
   const closedTabs = await getAllClosedTabs(searchString);
   const historyTabs = await getAllHistoryTabs(searchString);
 
-  const openTabsMap = objectFromArray(openTabs, 'url');
-  const filteredClosedTabs = closedTabs.filter(
-    tab => !openTabsMap.hasOwnProperty(tab.url)
+  const filteredClosedTabs = closedTabs.filter(tab =>
+    openTabs.every(openTab => openTab.url !== tab.url)
   );
 
-  const openAndClosedTabsMap = objectFromArray(
-    [...openTabs, ...filteredClosedTabs],
-    'url'
-  );
-  const filteredHistoryTabs = historyTabs.filter(
-    tab => !openAndClosedTabsMap.hasOwnProperty(tab.url)
+  const filteredHistoryTabs = historyTabs.filter(tab =>
+    [...openTabs, ...filteredClosedTabs].every(
+      openOrClosedTab => openOrClosedTab.url !== tab.url
+    )
   );
 
   return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs].map(
