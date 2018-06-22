@@ -28,6 +28,7 @@ async function recentTabSuggestions() {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
   const { tabHistory } = await browser.runtime.getBackgroundPage();
+
   const recentTabs = tabHistory.map(tabId => {
     const tab = tabsMap[tabId];
     delete tabsMap[tabId];

@@ -34,32 +34,9 @@ describe('server/providers/tab ', () => {
         }
       ];
 
-      const tabHistory = {
-        tabHistory: [
-          {
-            type: 'tab',
-            tabId: 1,
-            windowId: 0,
-            title: 'Google',
-            url: 'https://google.com',
-            favIconUrl: 'https://google.com/icon.png',
-            incognito: false
-          }
-        ]
-      };
+      const tabHistory = { tabHistory: [1] };
 
       const expectedResult = [
-        undefined,
-        {
-          type: 'tab',
-          tabId: 0,
-          windowId: 0,
-          title: 'Saka',
-          url: 'https://github.com/lusakasa/saka',
-          favIconUrl: null,
-          incognito: true,
-          lastAccessed: 654321
-        },
         {
           type: 'tab',
           tabId: 1,
@@ -69,6 +46,16 @@ describe('server/providers/tab ', () => {
           favIconUrl: 'https://google.com/icon.png',
           incognito: false,
           lastAccessed: 123456
+        },
+        {
+          type: 'tab',
+          tabId: 0,
+          windowId: 0,
+          title: 'Saka',
+          url: 'https://github.com/lusakasa/saka',
+          favIconUrl: null,
+          incognito: true,
+          lastAccessed: 654321
         }
       ];
 
