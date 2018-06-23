@@ -1,4 +1,4 @@
-import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
+import { getFilteredSuggestions } from 'lib/utils.js';
 import tabSuggestions, { allTabSuggestions } from './tab.js';
 import { getAllSuggestions as getAllClosedTabs } from './closedTab.js';
 import { allHistorySuggestions as getAllHistoryTabs } from './history.js';
