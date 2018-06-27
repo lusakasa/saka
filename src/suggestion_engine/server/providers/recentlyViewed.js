@@ -49,9 +49,9 @@ async function getFirefoxRecentlyViewed(searchString) {
     )
   );
 
-  return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs].map(
-    tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' })
-  );
+  return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs]
+    .map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }))
+    .sort(compareRecentlyViewedSuggestions);
 }
 
 async function allRecentlyViewedSuggestions(searchString) {
@@ -93,7 +93,7 @@ async function getFilteredRecentlyViewedSuggestions(searchString) {
 
 export default async function recentlyViewedSuggestions(searchString) {
   if (searchString === '') {
-    return allRecentlyViewedSuggestions(searchString);
+    return allRecentlyViewedSuggestions(searchString, SAKA_PLATFORM);
   }
 
   return getFilteredRecentlyViewedSuggestions(searchString);
