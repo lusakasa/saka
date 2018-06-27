@@ -34,7 +34,12 @@ describe('server/providers/tab ', () => {
         }
       ];
 
-      const tabHistory = { tabHistory: [1] };
+      const tabHistory = {
+        tabHistory: [
+          { tabId: 1, lastAccessed: 123456 },
+          { tabId: 0, lastAccessed: 654321 }
+        ]
+      };
 
       const expectedResult = [
         {

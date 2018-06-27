@@ -13,7 +13,12 @@ describe('server/providers/recentlyViewed ', () => {
 
   describe('recentlyViewedSuggestions ', () => {
     it('should return all recently viewed tabs when search string is empty', async () => {
-      const tabHistory = { tabHistory: [1] };
+      const tabHistory = {
+        tabHistory: [
+          { tabId: 1, lastAccessed: 123456 },
+          { tabId: 0, lastAccessed: 654321 }
+        ]
+      };
       const tabResults = [
         {
           id: 1,
@@ -234,32 +239,6 @@ describe('server/providers/recentlyViewed ', () => {
               arrayIndex: 0
             })
           ]
-        },
-        {
-          type: 'recentlyViewed',
-          tabId: 1,
-          title: 'Saka',
-          url: 'https://github.com/lusakasa/saka',
-          favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
-          incognito: false,
-          lastAccessed: 123456,
-          originalType: 'closedTab',
-          matches: [
-            Object({
-              indices: [[0, 3]],
-              value: 'Saka',
-              key: 'title',
-              arrayIndex: 0
-            }),
-            Object({
-              indices: [[4, 4], [21, 24]],
-              value: 'https://github.com/lusakasa/saka',
-              key: 'url',
-              arrayIndex: 0
-            })
-          ],
-          sessionId: 'abc123',
-          score: undefined
         },
         {
           type: 'recentlyViewed',
