@@ -3,7 +3,10 @@ import tabSuggestions, {
   allTabSuggestions,
   recentVisitedTabSuggestions
 } from './tab.js';
-import { getAllSuggestions as getAllClosedTabs } from './closedTab.js';
+import {
+  getAllSuggestions as getAllClosedTabs,
+  recentlyClosedTabSuggestions
+} from './closedTab.js';
 import { allHistorySuggestions as getAllHistoryTabs } from './history.js';
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
@@ -11,15 +14,19 @@ function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
 }
 
 async function allRecentlyViewedSuggestions(searchString) {
-  const closedTabs = await getAllClosedTabs(searchString);
   const historyTabs = await getAllHistoryTabs(searchString);
   let openTabs = null;
+  let closedTabs = null;
 
   if (SAKA_PLATFORM === 'chrome') {
     openTabs = await recentVisitedTabSuggestions(searchString);
+    closedTabs = await recentlyClosedTabSuggestions(searchString);
   } else {
     openTabs = await tabSuggestions(searchString);
+    closedTabs = await getAllClosedTabs(searchString);
   }
+  console.warn('Open: ', openTabs);
+  console.warn('Closed: ', closedTabs);
 
   const filteredClosedTabs = closedTabs.filter(tab =>
     openTabs.every(openTab => openTab.url !== tab.url)
@@ -31,6 +38,12 @@ async function allRecentlyViewedSuggestions(searchString) {
     )
   );
 
+  console.warn(
+    'Result: ',
+    [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs]
+      .map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }))
+      .sort(compareRecentlyViewedSuggestions)
+  );
   return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs]
     .map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }))
     .sort(compareRecentlyViewedSuggestions);

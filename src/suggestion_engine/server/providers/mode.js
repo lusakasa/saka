@@ -38,6 +38,15 @@ const suggestions = [
     color: colorMap.history,
     fadedColor: fadedColorMap.history,
     icon: 'history'
+  },
+  {
+    type: 'mode',
+    label: 'Recently Viewed',
+    mode: 'recentlyViewed',
+    shortcut: `${ctrlChar}-shift-x`,
+    color: colorMap.recentlyViewed,
+    fadedColor: fadedColorMap.recentlyViewed,
+    icon: 'timelapse'
   }
 
   // {

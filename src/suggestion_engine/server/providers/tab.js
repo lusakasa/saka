@@ -27,6 +27,7 @@ export async function allTabSuggestions() {
 async function recentTabSuggestions() {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
+  console.log('ASD: ', await browser.runtime.getBackgroundPage());
   const { tabHistory } = await browser.runtime.getBackgroundPage();
 
   const recentTabs = tabHistory.map(recentlyUsedTab => {

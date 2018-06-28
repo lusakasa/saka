@@ -1,7 +1,10 @@
 import 'lib/browser_polyfill.js';
 
 // list of tab ids in order of increasing age since last visit
-const tabHistory = [];
+export const tabHistory = [];
+
+// list of tab ids in order of increasing age since closed
+export const recentlyClosed = [];
 
 const log = listener => (...args) => {
   listener(...args);
@@ -17,6 +20,15 @@ function setMostRecentTab(tabInfo) {
   tabHistory.unshift(tabInfo);
 }
 
+function setMostRecentClosedTab(tabInfo) {
+  const tabIndex = recentlyClosed.findIndex(tab => tab.tabId === tabInfo.tabId);
+
+  if (tabIndex !== -1) {
+    recentlyClosed.splice(tabIndex, 1);
+  }
+  recentlyClosed.unshift(tabInfo);
+}
+
 browser.tabs.onActivated.addListener(
   log(({ tabId }) => {
     setMostRecentTab({ tabId, lastAccessed: Date.now() });
@@ -27,6 +39,7 @@ browser.tabs.onRemoved.addListener(
   log(tabId => {
     const i = tabHistory.findIndex(tab => tab.tabId === tabId);
     tabHistory.splice(i, 1);
+    setMostRecentClosedTab({ tabId, lastAccessed: Date.now() });
   })
 );
 
@@ -43,5 +56,3 @@ browser.windows.onFocusChanged.addListener(async windowId => {
     setMostRecentTab({ tabId: tab.id, lastAccessed: Date.now() });
   }
 });
-
-export default tabHistory;
