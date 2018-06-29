@@ -5,6 +5,7 @@ import tabHistory from './tabHistory.js';
 window.tabHistory = tabHistory;
 
 let lastTabId;
+let timer = null;
 
 async function toggleSaka(tabId) {
   if (SAKA_DEBUG) console.group('toggleSaka');
@@ -121,13 +122,20 @@ chrome.commands.onCommand.addListener(command => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message, sender) => {
-  switch (message) {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  switch (message.key) {
     case 'toggleSaka':
       toggleSaka();
       break;
     case 'closeSaka':
       closeSaka(sender.tab);
+      break;
+    case 'saveSearchString':
+      clearTimeout(timer);
+      timer = window.setTimeout(
+        sendResponse({ searchString: message.newSearchString }),
+        1000
+      );
       break;
     default:
       console.error(`Unknown message: '${message}'`);

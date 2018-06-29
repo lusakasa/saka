@@ -52,6 +52,7 @@
     "<all_urls>",
     "tabs",
     "activeTab",
+    "alarms",
     "sessions",
     "history",
     "bookmarks",

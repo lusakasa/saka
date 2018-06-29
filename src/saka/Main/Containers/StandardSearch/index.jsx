@@ -20,7 +20,8 @@ export default class extends Component {
     suggestions: [],
     selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
-    maxSuggestions: 6
+    maxSuggestions: 6,
+    searchHistory: []
   };
 
   componentDidMount() {
@@ -32,6 +33,18 @@ export default class extends Component {
         });
       }
     });
+
+    this.timer = null;
+
+    // browser.alarms.onAlarm.addListener(alarm => {
+    //   if (alarm.name === 'saveSearchString') {
+    //     console.log('Search: ', this.state.searchString);
+
+    //     this.setState({
+    //       searchHistory: [...this.state.searchHistory, this.state.searchString]
+    //     });
+    //   }
+    // });
   }
 
   componentDidUpdate(prevProps) {
@@ -53,11 +66,11 @@ export default class extends Component {
   handleKeyDown = e => {
     switch (e.key) {
       case 'Escape':
-        browser.runtime.sendMessage('closeSaka');
+        browser.runtime.sendMessage({ key: 'closeSaka' });
         break;
       case 'Backspace':
         if (!e.repeat && e.target.value === '') {
-          browser.runtime.sendMessage('closeSaka');
+          browser.runtime.sendMessage({ key: 'closeSaka' });
         }
         break;
       case 'ArrowLeft':
@@ -147,6 +160,10 @@ export default class extends Component {
           this.props.setMode('history');
         }
         break;
+      case 'L':
+        e.preventDefault();
+        console.log('History: ', this.state.searchHistory);
+        break;
       default:
         break;
     }
@@ -220,7 +237,7 @@ export default class extends Component {
         this.props.setMode(suggestion.mode);
       } else {
         activateSuggestion(suggestion);
-        await browser.runtime.sendMessage('closeSaka');
+        await browser.runtime.sendMessage({ key: 'closeSaka' });
       }
     }
   };
@@ -235,6 +252,23 @@ export default class extends Component {
         searchString: newSearchString
       });
       this.updateAutocompleteSuggestions(newSearchString);
+
+      // setTimeout(console.log('asd'), 1000);
+      // browser.alarms.create('saveSearchString', {
+      //   when: Date.now() + 1000
+      // });
+
+      const sending = browser.runtime.sendMessage({
+        key: 'saveSearchString',
+        newSearchString
+      });
+
+      sending.then(({ searchString }) => {
+        console.log('Message: ', searchString);
+        this.setState({
+          searchHistory: [...this.state.searchHistory, searchString]
+        });
+      });
     }
   };
 
