@@ -4,9 +4,8 @@ import {
   activateSuggestion
 } from 'suggestion_engine/client/index.js';
 import { preprocessSuggestion } from 'suggestion_utils/index.js';
-import { ctrlKey, addToSearchHistory } from 'lib/utils.js';
+import { ctrlKey } from 'lib/utils.js';
 import { slowWheelEvent } from 'lib/dom.js';
-import { debounce } from 'decko';
 import SearchBar from '../../Components/SearchBar/index.jsx';
 import SuggestionList from '../../Components/SuggestionList/index.jsx';
 import PaginationBar from '../../Components/PaginationBar/index.jsx';
@@ -226,11 +225,6 @@ export default class extends Component {
     }
   };
 
-  @debounce(2500)
-  saveSearchString = searchString => {
-    addToSearchHistory(searchString);
-  };
-
   handleInput = e => {
     const newSearchString = e.target.value;
     const { oldSearchString } = this.state;
@@ -241,7 +235,6 @@ export default class extends Component {
         searchString: newSearchString
       });
       this.updateAutocompleteSuggestions(newSearchString);
-      this.saveSearchString(newSearchString);
     }
   };
 
