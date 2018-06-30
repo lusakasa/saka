@@ -11,7 +11,8 @@ export default class Main extends Component {
       mode: 'tab',
       modes: ['mode', 'tab', 'closedTab', 'bookmark', 'history'],
       isLoading: true,
-      showEmptySearchSuggestions: true
+      showEmptySearchSuggestions: true,
+      searchHistory: new Set([])
     };
   }
 
@@ -33,23 +34,39 @@ export default class Main extends Component {
 
   fetchSakaSettings = async function fetchSakaSettings() {
     const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    const { searchHistory } = await browser.storage.sync.get(['searchHistory']);
 
     if (sakaSettings !== undefined) {
       const { mode, showEmptySearchSuggestions } = sakaSettings;
       return {
         isLoading: false,
         mode,
-        showEmptySearchSuggestions
+        showEmptySearchSuggestions,
+        searchHistory:
+          searchHistory.length === 0 ? new Set(['']) : new Set(searchHistory)
       };
     }
 
     return {
-      isLoading: false
+      isLoading: false,
+      searchHistory:
+        searchHistory.length === 0 ? new Set(['']) : new Set(searchHistory)
     };
   };
 
+  updateSearchHistory = searchString => {
+    this.setState({
+      searchHistory: new Set([...this.state.searchHistory, searchString])
+    });
+  };
+
   render() {
-    const { mode, isLoading, showEmptySearchSuggestions } = this.state;
+    const {
+      mode,
+      isLoading,
+      showEmptySearchSuggestions,
+      searchHistory
+    } = this.state;
     const { setMode, shuffleMode } = this;
 
     if (!isLoading) {
@@ -62,6 +79,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         case 'tab':
@@ -72,6 +91,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         case 'closedTab':
@@ -82,6 +103,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         case 'bookmark':
@@ -92,6 +115,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         case 'history':
@@ -102,6 +127,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         default:

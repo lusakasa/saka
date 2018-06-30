@@ -21,7 +21,7 @@ export default class extends Component {
     selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
     maxSuggestions: 6,
-    searchHistory: []
+    undoIndex: this.props.searchHistory.length
   };
 
   componentDidMount() {
@@ -33,18 +33,6 @@ export default class extends Component {
         });
       }
     });
-
-    this.timer = null;
-
-    // browser.alarms.onAlarm.addListener(alarm => {
-    //   if (alarm.name === 'saveSearchString') {
-    //     console.log('Search: ', this.state.searchString);
-
-    //     this.setState({
-    //       searchHistory: [...this.state.searchHistory, this.state.searchString]
-    //     });
-    //   }
-    // });
   }
 
   componentDidUpdate(prevProps) {
@@ -52,6 +40,14 @@ export default class extends Component {
       this.updateAutocompleteSuggestions(this.state.searchString);
     }
   }
+
+  getPreviousSearchString = () => {
+    if (this.state.undoIndex !== 0) {
+      this.setState({
+        searchString: this.props.searchHistory[undoIndex]
+      });
+    }
+  };
 
   handleWheel = slowWheelEvent(
     50,
@@ -66,11 +62,17 @@ export default class extends Component {
   handleKeyDown = e => {
     switch (e.key) {
       case 'Escape':
-        browser.runtime.sendMessage({ key: 'closeSaka' });
+        browser.runtime.sendMessage({
+          key: 'closeSaka',
+          searchHistory: this.props.searchHistory
+        });
         break;
       case 'Backspace':
         if (!e.repeat && e.target.value === '') {
-          browser.runtime.sendMessage({ key: 'closeSaka' });
+          browser.runtime.sendMessage({
+            key: 'closeSaka',
+            searchHistory: this.props.searchHistory
+          });
         }
         break;
       case 'ArrowLeft':
@@ -160,9 +162,11 @@ export default class extends Component {
           this.props.setMode('history');
         }
         break;
-      case 'L':
-        e.preventDefault();
-        console.log('History: ', this.state.searchHistory);
+      case 'Z':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          getPreviousSearchString();
+        }
         break;
       default:
         break;
@@ -237,7 +241,10 @@ export default class extends Component {
         this.props.setMode(suggestion.mode);
       } else {
         activateSuggestion(suggestion);
-        await browser.runtime.sendMessage({ key: 'closeSaka' });
+        await browser.runtime.sendMessage({
+          key: 'closeSaka',
+          searchHistory: this.props.searchHistory
+        });
       }
     }
   };
@@ -252,23 +259,6 @@ export default class extends Component {
         searchString: newSearchString
       });
       this.updateAutocompleteSuggestions(newSearchString);
-
-      // setTimeout(console.log('asd'), 1000);
-      // browser.alarms.create('saveSearchString', {
-      //   when: Date.now() + 1000
-      // });
-
-      const sending = browser.runtime.sendMessage({
-        key: 'saveSearchString',
-        newSearchString
-      });
-
-      sending.then(({ searchString }) => {
-        console.log('Message: ', searchString);
-        this.setState({
-          searchHistory: [...this.state.searchHistory, searchString]
-        });
-      });
     }
   };
 
@@ -291,6 +281,7 @@ export default class extends Component {
 
   handleBlur = e => {
     e.target.focus();
+    this.props.updateSearchHistory(e.target.value);
   };
 
   handleButtonClick = () => {
@@ -311,7 +302,6 @@ export default class extends Component {
       maxSuggestions
     } = this.state;
     const suggestion = suggestions[firstVisibleIndex + selectedIndex];
-    // console.log('render suggestions', suggestions);
 
     if (!showEmptySearchSuggestions && !searchString) {
       return (
