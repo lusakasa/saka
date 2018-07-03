@@ -30,8 +30,8 @@ To help develop Saka, follow the instructions below to build from source.
 
 
     ```sh
-    git clone https://github.com/lusakasa/saka-key.git
-    cd saka-key
+    git clone https://github.com/lusakasa/saka.git
+    cd saka
     npm install
     npm run build:chrome
     # or if you want to generate an optimized production build
@@ -52,8 +52,8 @@ To help develop Saka, follow the instructions below to build from source.
     An extension you can run will be generated in the 'dist' directory.
 
     ```sh
-    git clone https://github.com/lusakasa/saka-key.git
-    cd saka-key
+    git clone https://github.com/lusakasa/saka.git
+    cd saka
     npm install
     npm run build:firefox
     # or if you want to generate an optimized production build
