@@ -9,23 +9,13 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 
 ![Preview](./images/preview.png)
 
-## Index
-
-* [Intro](#intro)
-* [Install](#install)
-* [Development Tips](#development-tips)
-* [License](#license)
-
 ## Install
 
 Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/addon/saka/) or [Chrome Webstore](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
 
-## Development
-To help develop Saka, follow the instructions below to build from source.
-
 ### Install on Chrome
 
-1.  Run the following commands in your terminal to clone and build Saka Key.
+1.  Run the following commands in your terminal to clone and build Saka.
     An extension you can run will be generated in the 'dist' directory.
 
 
@@ -44,11 +34,11 @@ To help develop Saka, follow the instructions below to build from source.
 
 4.  Select the dist directory, and 🚀.
 
-5.  Refresh existing tabs to load Saka Key into them
+5.  Refresh existing tabs to load Saka into them
 
 ### Install on Firefox
 
-1.  Run the following commands in your terminal to clone and build Saka Key.
+1.  Run the following commands in your terminal to clone and build Saka.
     An extension you can run will be generated in the 'dist' directory.
 
     ```sh
