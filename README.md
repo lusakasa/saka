@@ -9,19 +9,9 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 
 ![Preview](./images/preview.png)
 
-## Index
-
-* [Intro](#intro)
-* [Install](#install)
-* [Development Tips](#development-tips)
-* [License](#license)
-
 ## Install
 
 Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/addon/saka/) or [Chrome Webstore](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
-
-## Development
-To help develop Saka, follow the instructions below to build from source.
 
 ### Install on Chrome
 
@@ -30,7 +20,7 @@ To help develop Saka, follow the instructions below to build from source.
 
 
     ```sh
-    git clone https://github.com/lusakasa/saka-key.git
+    git clone https://github.com/lusakasa/saka.git
     cd saka-key
     npm install
     npm run build:chrome
@@ -52,7 +42,7 @@ To help develop Saka, follow the instructions below to build from source.
     An extension you can run will be generated in the 'dist' directory.
 
     ```sh
-    git clone https://github.com/lusakasa/saka-key.git
+    git clone https://github.com/lusakasa/saka.git
     cd saka-key
     npm install
     npm run build:firefox
