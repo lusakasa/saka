@@ -85,6 +85,7 @@ describe('server/providers/history ', () => {
           typedCount: 0
         }
       ];
+
       const expectedResult = [
         {
           type: 'history',
