@@ -43,21 +43,31 @@ export default class Main extends Component {
         mode,
         showEmptySearchSuggestions,
         searchHistory:
-          searchHistory.length === 0 ? new Set(['']) : new Set(searchHistory)
+          searchHistory !== undefined && searchHistory.length > 0
+            ? new Set(searchHistory)
+            : new Set([''])
       };
     }
 
     return {
       isLoading: false,
       searchHistory:
-        searchHistory.length === 0 ? new Set(['']) : new Set(searchHistory)
+        searchHistory !== undefined && searchHistory.length > 0
+          ? new Set(searchHistory)
+          : new Set([''])
     };
   };
 
   updateSearchHistory = searchString => {
-    this.setState({
-      searchHistory: new Set([...this.state.searchHistory, searchString])
-    });
+    if (this.state.searchHistory.size !== 0) {
+      this.setState({
+        searchHistory: new Set([...this.state.searchHistory, searchString])
+      });
+    } else {
+      this.setState({
+        searchHistory: new Set([searchString])
+      });
+    }
   };
 
   render() {

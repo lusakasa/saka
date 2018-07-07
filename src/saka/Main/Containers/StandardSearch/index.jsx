@@ -21,7 +21,7 @@ export default class extends Component {
     selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
     maxSuggestions: 6,
-    undoIndex: this.props.searchHistory.length
+    undoIndex: this.props.searchHistory.size - 1
   };
 
   componentDidMount() {
@@ -44,7 +44,17 @@ export default class extends Component {
   getPreviousSearchString = () => {
     if (this.state.undoIndex !== 0) {
       this.setState({
-        searchString: this.props.searchHistory[undoIndex]
+        searchString: [...this.props.searchHistory][this.state.undoIndex],
+        undoIndex: this.state.undoIndex - 1
+      });
+    }
+  };
+
+  getNextSearchString = () => {
+    if (this.state.undoIndex < this.props.searchHistory.size) {
+      this.setState({
+        searchString: [...this.props.searchHistory][this.state.undoIndex],
+        undoIndex: this.state.undoIndex + 1
       });
     }
   };
@@ -64,14 +74,14 @@ export default class extends Component {
       case 'Escape':
         browser.runtime.sendMessage({
           key: 'closeSaka',
-          searchHistory: this.props.searchHistory
+          searchHistory: [...this.props.searchHistory]
         });
         break;
       case 'Backspace':
         if (!e.repeat && e.target.value === '') {
           browser.runtime.sendMessage({
             key: 'closeSaka',
-            searchHistory: this.props.searchHistory
+            searchHistory: [...this.props.searchHistory]
           });
         }
         break;
@@ -105,6 +115,8 @@ export default class extends Component {
         break;
       case 'Enter':
         e.preventDefault();
+        console.warn('this.state.searchString: ', this.state.searchString);
+        this.props.updateSearchHistory(this.state.searchString);
         this.tryActivateSuggestion();
         break;
       case 'k':
@@ -162,10 +174,16 @@ export default class extends Component {
           this.props.setMode('history');
         }
         break;
-      case 'Z':
+      case 'z':
         if (ctrlKey(e)) {
           e.preventDefault();
-          getPreviousSearchString();
+          this.getPreviousSearchString();
+        }
+        break;
+      case 'y':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.getNextSearchString();
         }
         break;
       default:
@@ -240,11 +258,11 @@ export default class extends Component {
       if (suggestion.type === 'mode') {
         this.props.setMode(suggestion.mode);
       } else {
-        activateSuggestion(suggestion);
         await browser.runtime.sendMessage({
           key: 'closeSaka',
-          searchHistory: this.props.searchHistory
+          searchHistory: [...this.props.searchHistory]
         });
+        activateSuggestion(suggestion);
       }
     }
   };

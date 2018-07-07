@@ -106,6 +106,7 @@ async function closeSaka(tab) {
 }
 
 async function saveSettings(searchHistory) {
+  console.warn('searchHistory: ', [...searchHistory]);
   await browser.storage.sync.set({ searchHistory: [...searchHistory] });
 }
 
