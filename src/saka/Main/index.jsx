@@ -58,15 +58,21 @@ export default class Main extends Component {
     };
   };
 
-  updateSearchHistory = searchString => {
+  updateSearchHistory = (searchString, callback) => {
     if (this.state.searchHistory.size !== 0) {
-      this.setState({
-        searchHistory: new Set([...this.state.searchHistory, searchString])
-      });
+      this.setState(
+        {
+          searchHistory: new Set([...this.state.searchHistory, searchString])
+        },
+        callback
+      );
     } else {
-      this.setState({
-        searchHistory: new Set([searchString])
-      });
+      this.setState(
+        {
+          searchHistory: new Set([searchString])
+        },
+        callback
+      );
     }
   };
 

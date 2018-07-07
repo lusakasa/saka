@@ -90,14 +90,17 @@ export default class extends Component {
         break;
       case 'ArrowDown':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         this.incrementSelectedIndex(1);
         break;
       case 'ArrowUp':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         this.incrementSelectedIndex(-1);
         break;
       case 'Tab':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         e.shiftKey
           ? this.incrementSelectedIndex(-1)
           : this.incrementSelectedIndex(1);
@@ -115,9 +118,10 @@ export default class extends Component {
         break;
       case 'Enter':
         e.preventDefault();
-        console.warn('this.state.searchString: ', this.state.searchString);
-        this.props.updateSearchHistory(this.state.searchString);
-        this.tryActivateSuggestion();
+        this.props.updateSearchHistory(
+          this.state.searchString,
+          this.tryActivateSuggestion
+        );
         break;
       case 'k':
         if (ctrlKey(e)) {
@@ -187,6 +191,9 @@ export default class extends Component {
         }
         break;
       default:
+        this.setState({
+          undoIndex: this.props.searchHistory.size - 1
+        });
         break;
     }
   };
@@ -258,11 +265,11 @@ export default class extends Component {
       if (suggestion.type === 'mode') {
         this.props.setMode(suggestion.mode);
       } else {
+        activateSuggestion(suggestion);
         await browser.runtime.sendMessage({
           key: 'closeSaka',
           searchHistory: [...this.props.searchHistory]
         });
-        activateSuggestion(suggestion);
       }
     }
   };
