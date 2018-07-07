@@ -47,6 +47,7 @@ export default class extends Component {
         searchString: [...this.props.searchHistory][this.state.undoIndex],
         undoIndex: this.state.undoIndex - 1
       });
+      this.updateAutocompleteSuggestions(this.state.searchString);
     }
   };
 
@@ -56,6 +57,7 @@ export default class extends Component {
         searchString: [...this.props.searchHistory][this.state.undoIndex],
         undoIndex: this.state.undoIndex + 1
       });
+      this.updateAutocompleteSuggestions(this.state.searchString);
     }
   };
 

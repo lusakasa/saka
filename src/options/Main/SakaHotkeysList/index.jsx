@@ -57,6 +57,10 @@ const SakaHotkeysList = function SakaHotkeysList({
           <li role="separator" className="mdc-list-divider options-separator" />
           <HotkeyListRow title="Clear Search" keys={[ctrlChar, 'k']} />
           <li role="separator" className="mdc-list-divider options-separator" />
+          <HotkeyListRow title="View previous search" keys={[ctrlChar, 'z']} />
+          <li role="separator" className="mdc-list-divider options-separator" />
+          <HotkeyListRow title="View next search" keys={[ctrlChar, 'y']} />
+          <li role="separator" className="mdc-list-divider options-separator" />
           <HotkeyListRow
             title="Switch to next page of results"
             keys={[ctrlChar, 'd']}
