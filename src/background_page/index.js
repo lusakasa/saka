@@ -5,6 +5,7 @@ import tabHistory from './tabHistory.js';
 window.tabHistory = tabHistory;
 
 let lastTabId;
+let timer = null;
 
 async function toggleSaka(tabId) {
   if (SAKA_DEBUG) console.group('toggleSaka');
@@ -104,6 +105,11 @@ async function closeSaka(tab) {
   }
 }
 
+async function saveSettings(searchHistory) {
+  console.warn('searchHistory: ', [...searchHistory]);
+  await browser.storage.sync.set({ searchHistory: [...searchHistory] });
+}
+
 chrome.browserAction.onClicked.addListener(() => {
   toggleSaka();
 });
@@ -121,12 +127,13 @@ chrome.commands.onCommand.addListener(command => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message, sender) => {
-  switch (message) {
+chrome.runtime.onMessage.addListener(async (message, sender) => {
+  switch (message.key) {
     case 'toggleSaka':
       toggleSaka();
       break;
     case 'closeSaka':
+      await saveSettings(message.searchHistory);
       closeSaka(sender.tab);
       break;
     default:

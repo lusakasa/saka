@@ -20,7 +20,8 @@ export default class extends Component {
     suggestions: [],
     selectedIndex: 0, // 0 <= selectedIndex < maxSuggestions
     firstVisibleIndex: 0, // 0 <= firstVisibleIndex < suggestion.length
-    maxSuggestions: 6
+    maxSuggestions: 6,
+    undoIndex: this.props.searchHistory.size - 1
   };
 
   componentDidMount() {
@@ -40,6 +41,26 @@ export default class extends Component {
     }
   }
 
+  getPreviousSearchString = () => {
+    if (this.state.undoIndex !== 0) {
+      this.setState({
+        searchString: [...this.props.searchHistory][this.state.undoIndex],
+        undoIndex: this.state.undoIndex - 1
+      });
+      this.updateAutocompleteSuggestions(this.state.searchString);
+    }
+  };
+
+  getNextSearchString = () => {
+    if (this.state.undoIndex < this.props.searchHistory.size) {
+      this.setState({
+        searchString: [...this.props.searchHistory][this.state.undoIndex],
+        undoIndex: this.state.undoIndex + 1
+      });
+      this.updateAutocompleteSuggestions(this.state.searchString);
+    }
+  };
+
   handleWheel = slowWheelEvent(
     50,
     () => {
@@ -53,11 +74,17 @@ export default class extends Component {
   handleKeyDown = e => {
     switch (e.key) {
       case 'Escape':
-        browser.runtime.sendMessage('closeSaka');
+        browser.runtime.sendMessage({
+          key: 'closeSaka',
+          searchHistory: [...this.props.searchHistory]
+        });
         break;
       case 'Backspace':
         if (!e.repeat && e.target.value === '') {
-          browser.runtime.sendMessage('closeSaka');
+          browser.runtime.sendMessage({
+            key: 'closeSaka',
+            searchHistory: [...this.props.searchHistory]
+          });
         }
         break;
       case 'ArrowLeft':
@@ -65,14 +92,17 @@ export default class extends Component {
         break;
       case 'ArrowDown':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         this.incrementSelectedIndex(1);
         break;
       case 'ArrowUp':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         this.incrementSelectedIndex(-1);
         break;
       case 'Tab':
         e.preventDefault();
+        this.props.updateSearchHistory(this.state.searchString);
         e.shiftKey
           ? this.incrementSelectedIndex(-1)
           : this.incrementSelectedIndex(1);
@@ -90,7 +120,10 @@ export default class extends Component {
         break;
       case 'Enter':
         e.preventDefault();
-        this.tryActivateSuggestion();
+        this.props.updateSearchHistory(
+          this.state.searchString,
+          this.tryActivateSuggestion
+        );
         break;
       case 'k':
         if (ctrlKey(e)) {
@@ -147,7 +180,22 @@ export default class extends Component {
           this.props.setMode('history');
         }
         break;
+      case 'z':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.getPreviousSearchString();
+        }
+        break;
+      case 'y':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.getNextSearchString();
+        }
+        break;
       default:
+        this.setState({
+          undoIndex: this.props.searchHistory.size - 1
+        });
         break;
     }
   };
@@ -220,7 +268,10 @@ export default class extends Component {
         this.props.setMode(suggestion.mode);
       } else {
         activateSuggestion(suggestion);
-        await browser.runtime.sendMessage('closeSaka');
+        await browser.runtime.sendMessage({
+          key: 'closeSaka',
+          searchHistory: [...this.props.searchHistory]
+        });
       }
     }
   };
@@ -258,6 +309,7 @@ export default class extends Component {
 
   handleBlur = e => {
     e.target.focus();
+    this.props.updateSearchHistory(e.target.value);
   };
 
   handleButtonClick = () => {
@@ -278,7 +330,6 @@ export default class extends Component {
       maxSuggestions
     } = this.state;
     const suggestion = suggestions[firstVisibleIndex + selectedIndex];
-    // console.log('render suggestions', suggestions);
 
     if (!showEmptySearchSuggestions && !searchString) {
       return (

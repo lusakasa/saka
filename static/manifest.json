@@ -1,6 +1,6 @@
 {
   "name": "Saka",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "author": "Sufyan Dawoodjee, Uzair Shamim",
   "description": "Saka - elegent tab search, selection, and beyond",
   "manifest_version": 2,
@@ -52,6 +52,7 @@
     "<all_urls>",
     "tabs",
     "activeTab",
+    "alarms",
     "sessions",
     "history",
     "bookmarks",

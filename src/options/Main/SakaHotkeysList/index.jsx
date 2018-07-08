@@ -15,6 +15,7 @@ const SakaHotkeysList = function SakaHotkeysList({
           aria-pressed="false"
           aria-label="Back to Saka settings"
           onClick={handleOpenSakaKeybindings}
+          onKeyDown={handleOpenSakaKeybindings}
         >
           arrow_back
         </i>
@@ -56,6 +57,10 @@ const SakaHotkeysList = function SakaHotkeysList({
           <HotkeyListRow title="Previous Result" keys={['shift', 'tab']} />
           <li role="separator" className="mdc-list-divider options-separator" />
           <HotkeyListRow title="Clear Search" keys={[ctrlChar, 'k']} />
+          <li role="separator" className="mdc-list-divider options-separator" />
+          <HotkeyListRow title="View previous search" keys={[ctrlChar, 'z']} />
+          <li role="separator" className="mdc-list-divider options-separator" />
+          <HotkeyListRow title="View next search" keys={[ctrlChar, 'y']} />
           <li role="separator" className="mdc-list-divider options-separator" />
           <HotkeyListRow
             title="Switch to next page of results"

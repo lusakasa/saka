@@ -1,5 +1,8 @@
 import Fuse from 'fuse.js';
 
+export const isMac = navigator.appVersion.indexOf('Mac') !== -1;
+export const ctrlChar = isMac ? '⌘' : 'ctrl';
+
 export function rangedIncrement(value, increment, min, max) {
   const result = value + increment;
 
@@ -11,9 +14,6 @@ export function rangedIncrement(value, increment, min, max) {
 
   return result;
 }
-
-export const isMac = navigator.appVersion.indexOf('Mac') !== -1;
-export const ctrlChar = isMac ? '⌘' : 'ctrl';
 
 /**
  * @param {KeyboardEvent} e
@@ -30,7 +30,11 @@ export function objectFromArray(array, key) {
   return out;
 }
 
-export async function getFilteredSuggestions(searchString, getSuggestions, threshold) {
+export async function getFilteredSuggestions(
+  searchString,
+  getSuggestions,
+  threshold
+) {
   const suggestions = await getSuggestions(searchString);
   const fuse = new Fuse(suggestions, {
     shouldSort: true,
