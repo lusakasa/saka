@@ -15,6 +15,7 @@ const SakaHotkeysList = function SakaHotkeysList({
           aria-pressed="false"
           aria-label="Back to Saka settings"
           onClick={handleOpenSakaKeybindings}
+          onKeyDown={handleOpenSakaKeybindings}
         >
           arrow_back
         </i>

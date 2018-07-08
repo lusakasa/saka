@@ -59,10 +59,13 @@ export default class Main extends Component {
   };
 
   updateSearchHistory = (searchString, callback) => {
-    if (this.state.searchHistory.size !== 0) {
+    const { searchHistory } = this.state;
+    searchHistory.delete(searchString);
+
+    if (searchHistory.size !== 0) {
       this.setState(
         {
-          searchHistory: new Set([...this.state.searchHistory, searchString])
+          searchHistory: new Set([...searchHistory, searchString])
         },
         callback
       );
