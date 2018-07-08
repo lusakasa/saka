@@ -1,5 +1,6 @@
 import { isSakaUrl } from 'lib/url.js';
 import { filter } from 'rxjs/operator/filter';
+import { allTabSuggestions } from './tab.js';
 import { getFilteredSuggestions } from 'lib/utils.js';
 
 export async function getAllSuggestions() {

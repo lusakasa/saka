@@ -41,7 +41,11 @@ export default class Main extends Component {
 
   fetchSakaSettings = async function fetchSakaSettings() {
     const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
-    const { searchHistory } = await browser.storage.sync.get(['searchHistory']);
+    let { searchHistory } = await browser.storage.sync.get(['searchHistory']);
+    searchHistory =
+      searchHistory !== undefined && searchHistory.length > 0
+        ? new Set(searchHistory)
+        : new Set(['']);
 
     if (sakaSettings !== undefined) {
       const { mode, showEmptySearchSuggestions } = sakaSettings;
@@ -49,19 +53,13 @@ export default class Main extends Component {
         isLoading: false,
         mode,
         showEmptySearchSuggestions,
-        searchHistory:
-          searchHistory !== undefined && searchHistory.length > 0
-            ? new Set(searchHistory)
-            : new Set([''])
+        searchHistory
       };
     }
 
     return {
       isLoading: false,
-      searchHistory:
-        searchHistory !== undefined && searchHistory.length > 0
-          ? new Set(searchHistory)
-          : new Set([''])
+      searchHistory
     };
   };
 
@@ -152,6 +150,8 @@ export default class Main extends Component {
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
+              searchHistory={searchHistory}
+              updateSearchHistory={this.updateSearchHistory}
             />
           );
         default:

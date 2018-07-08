@@ -19,7 +19,7 @@ export async function allTabSuggestions() {
       url,
       favIconUrl: incognito ? null : favIconUrl,
       incognito,
-      lastAccessed
+      lastAccessed: lastAccessed * 0.001
     })
   );
 }
@@ -27,7 +27,6 @@ export async function allTabSuggestions() {
 async function recentTabSuggestions() {
   const tabs = await allTabSuggestions();
   const tabsMap = objectFromArray(tabs, 'tabId');
-  console.log('ASD: ', await browser.runtime.getBackgroundPage());
   const { tabHistory } = await browser.runtime.getBackgroundPage();
 
   const recentTabs = tabHistory.map(recentlyUsedTab => {
@@ -48,7 +47,7 @@ export async function recentVisitedTabSuggestions() {
   const recentTabs = tabHistory.map(recentlyUsedTab => {
     const tab = tabsMap[recentlyUsedTab.tabId];
     delete tabsMap[recentlyUsedTab.tabId];
-    return { ...tab, lastAccessed: recentlyUsedTab.lastAccessed };
+    return { ...tab, lastAccessed: recentlyUsedTab.lastAccessed * 0.001 };
   });
 
   return [...recentTabs];

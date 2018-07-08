@@ -17,7 +17,7 @@ export async function allHistorySuggestions(searchText) {
     ({ url, title, lastVisitTime, visitCount, typedCount }) => ({
       type: 'history',
       score: visitCount + typedCount,
-      lastAccessed: lastVisitTime,
+      lastAccessed: lastVisitTime * 0.001,
       title,
       url
     })

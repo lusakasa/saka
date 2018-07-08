@@ -62,6 +62,11 @@ async function filteredRecentlyViewedSuggestions(searchString) {
 }
 
 async function getFilteredRecentlyViewedSuggestions(searchString) {
+  console.warn(
+    'filteredRecentlyViewedSuggestions: ',
+    await filteredRecentlyViewedSuggestions(searchString)
+  );
+
   const filteredSuggestions = await getFilteredSuggestions(searchString, {
     getSuggestions: filteredRecentlyViewedSuggestions,
     threshold: 0.5,
