@@ -5,7 +5,6 @@ import tabHistory from './tabHistory.js';
 window.tabHistory = tabHistory;
 
 let lastTabId;
-let timer = null;
 
 async function toggleSaka(tabId) {
   if (SAKA_DEBUG) console.group('toggleSaka');
@@ -106,7 +105,6 @@ async function closeSaka(tab) {
 }
 
 async function saveSettings(searchHistory) {
-  console.warn('searchHistory: ', [...searchHistory]);
   await browser.storage.sync.set({ searchHistory: [...searchHistory] });
 }
 
