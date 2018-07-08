@@ -25,7 +25,12 @@ async function allBookmarkSuggestions(searchText) {
 export default async function bookmarkSuggestions(searchString) {
   const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
 
-  if (searchString && sakaSettings.enableFuzzySearch) {
+  const enableFuzzySearch =
+    sakaSettings && sakaSettings.enableFuzzySearch !== undefined
+      ? sakaSettings.enableFuzzySearch
+      : true;
+
+  if (searchString && enableFuzzySearch) {
     return getFilteredSuggestions(searchString, {
       getSuggestions: allBookmarkSuggestions,
       threshold: 1,

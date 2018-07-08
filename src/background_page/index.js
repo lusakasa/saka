@@ -105,6 +105,10 @@ async function closeSaka(tab) {
   }
 }
 
+async function saveSettings(searchHistory) {
+  await browser.storage.sync.set({ searchHistory: [...searchHistory] });
+}
+
 chrome.browserAction.onClicked.addListener(() => {
   toggleSaka();
 });
@@ -122,12 +126,13 @@ chrome.commands.onCommand.addListener(command => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message, sender) => {
-  switch (message) {
+chrome.runtime.onMessage.addListener(async (message, sender) => {
+  switch (message.key) {
     case 'toggleSaka':
       toggleSaka();
       break;
     case 'closeSaka':
+      await saveSettings(message.searchHistory);
       closeSaka(sender.tab);
       break;
     default:
