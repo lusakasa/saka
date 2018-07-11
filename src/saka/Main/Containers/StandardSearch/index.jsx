@@ -192,6 +192,12 @@ export default class extends Component {
           this.getNextSearchString();
         }
         break;
+      case 'X':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.props.setMode('recentlyViewed');
+        }
+        break;
       default:
         this.setState({
           undoIndex: this.props.searchHistory.size - 1
