@@ -13,12 +13,17 @@ describe('server/providers/recentlyViewed ', () => {
 
   describe('recentlyViewedSuggestions ', () => {
     it('should return all recently viewed tabs when search string is empty', async () => {
-      const tabHistory = {
+      const trackedHistory = {
         tabHistory: [
           { tabId: 1, lastAccessed: 123456 },
           { tabId: 0, lastAccessed: 654321 }
+        ],
+        recentlyClosed: [
+          { tab: { tabId: 1, lastAccessed: 111111 } },
+          { tab: { tabId: 4, lastAccessed: 222222 } }
         ]
       };
+
       const tabResults = [
         {
           id: 1,
@@ -91,9 +96,21 @@ describe('server/providers/recentlyViewed ', () => {
           type: 'recentlyViewed',
           url: 'https://example.com',
           title: 'Example',
-          lastAccessed: 1524794200,
+          lastAccessed: 1524794.2,
           score: 1,
           originalType: 'history'
+        },
+        {
+          lastAccessed: 19191,
+          tabId: 2,
+          title: 'Recently Viewed Mode',
+          url: 'https://github.com/lusakasa/saka/pull/45',
+          favIconUrl: null,
+          incognito: true,
+          sessionId: '123abc',
+          score: undefined,
+          type: 'recentlyViewed',
+          originalType: 'closedTab'
         },
         {
           type: 'recentlyViewed',
@@ -103,7 +120,7 @@ describe('server/providers/recentlyViewed ', () => {
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: null,
           incognito: true,
-          lastAccessed: 654321,
+          lastAccessed: 654.321,
           originalType: 'tab'
         },
         {
@@ -114,20 +131,8 @@ describe('server/providers/recentlyViewed ', () => {
           url: 'https://google.com',
           favIconUrl: 'https://google.com/icon.png',
           incognito: false,
-          lastAccessed: 123456,
+          lastAccessed: 123.456,
           originalType: 'tab'
-        },
-        {
-          type: 'recentlyViewed',
-          tabId: 2,
-          title: 'Recently Viewed Mode',
-          url: 'https://github.com/lusakasa/saka/pull/45',
-          favIconUrl: null,
-          incognito: true,
-          lastAccessed: 19191,
-          sessionId: '123abc',
-          score: undefined,
-          originalType: 'closedTab'
         }
       ];
 
@@ -135,7 +140,7 @@ describe('server/providers/recentlyViewed ', () => {
       const sakaId = 'abcdefg/saka.html';
       browser.tabs.query.returns(tabResults);
       browser.runtime.getURL.returns(sakaId);
-      browser.runtime.getBackgroundPage.returns(tabHistory);
+      browser.runtime.getBackgroundPage.returns(trackedHistory);
       browser.sessions.getRecentlyClosed.returns(recentlyClosedResults);
       browser.history.search.returns(historyResults);
       //   browser.storage.sync.get.returns(settingsStore);
@@ -222,7 +227,7 @@ describe('server/providers/recentlyViewed ', () => {
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: null,
           incognito: true,
-          lastAccessed: 654321,
+          lastAccessed: 654.321,
           originalType: 'tab',
           score: undefined,
           matches: [
@@ -244,7 +249,7 @@ describe('server/providers/recentlyViewed ', () => {
           type: 'recentlyViewed',
           url: 'https://github.com/lusakasa/saka',
           title: 'Saka Github',
-          lastAccessed: 1524795334,
+          lastAccessed: 1524795.334,
           score: undefined,
           originalType: 'history',
           matches: [

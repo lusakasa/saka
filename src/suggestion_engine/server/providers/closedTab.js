@@ -37,11 +37,8 @@ export async function getAllSuggestions() {
 // TODO: Remove when Chrome gets proper timestamp
 export async function recentlyClosedTabSuggestions() {
   const { recentlyClosed } = await browser.runtime.getBackgroundPage();
-  const tabs = await allTabSuggestions();
   const sessions = await browser.sessions.getRecentlyClosed();
   const filteredSessions = [];
-
-  console.log('RECENT: ', recentlyClosed);
 
   // TODO: This for loop is currently flagged by the airbnb eslint rules.
   // See: https://github.com/airbnb/javascript/issues/1271
@@ -55,9 +52,7 @@ export async function recentlyClosedTabSuggestions() {
 
   return filteredSessions
     .map(session => {
-      console.log('Session: ', session);
       const foundTab = recentlyClosed.findIndex(tab => {
-        console.log('Tab: ', tab);
         return tab.tabId === session.tab.id;
       });
 

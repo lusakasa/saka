@@ -25,8 +25,6 @@ async function allRecentlyViewedSuggestions(searchString) {
     openTabs = await tabSuggestions(searchString);
     closedTabs = await getAllClosedTabs(searchString);
   }
-  console.warn('Open: ', openTabs);
-  console.warn('Closed: ', closedTabs);
 
   const filteredClosedTabs = closedTabs.filter(tab =>
     openTabs.every(openTab => openTab.url !== tab.url)
@@ -38,12 +36,6 @@ async function allRecentlyViewedSuggestions(searchString) {
     )
   );
 
-  console.warn(
-    'Result: ',
-    [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs]
-      .map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }))
-      .sort(compareRecentlyViewedSuggestions)
-  );
   return [...openTabs, ...filteredClosedTabs, ...filteredHistoryTabs]
     .map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }))
     .sort(compareRecentlyViewedSuggestions);

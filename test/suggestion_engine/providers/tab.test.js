@@ -101,7 +101,7 @@ describe('server/providers/tab ', () => {
           url: 'https://github.com/lusakasa/saka',
           favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
           incognito: false,
-          lastAccessed: 123456,
+          lastAccessed: 123.456,
           matches: [
             {
               indices: [[0, 3]],

@@ -41,14 +41,14 @@ describe('server/providers/history ', () => {
           type: 'history',
           url: 'https://github.com/lusakasa/saka',
           title: 'Saka Github',
-          lastAccessed: 1524795334,
+          lastAccessed: 1524795.334,
           score: 15
         },
         {
           type: 'history',
           title: 'Example',
           url: 'https://example.com',
-          lastAccessed: 1524794200,
+          lastAccessed: 1524794.2,
           score: 1
         }
       ];
@@ -91,7 +91,7 @@ describe('server/providers/history ', () => {
           type: 'history',
           url: 'https://github.com/lusakasa/saka',
           title: 'Saka Github',
-          lastAccessed: 1524795334,
+          lastAccessed: 1524795.334,
           score: undefined,
           matches: [
             {
@@ -112,7 +112,7 @@ describe('server/providers/history ', () => {
           type: 'history',
           title: 'Example',
           url: 'https://example.com',
-          lastAccessed: 1524794200,
+          lastAccessed: 1524794.2,
           score: undefined,
           matches: [
             {
@@ -168,7 +168,7 @@ describe('server/providers/history ', () => {
           type: 'history',
           url: 'https://github.com/lusakasa/saka',
           title: 'Saka Github',
-          lastAccessed: 1524795334,
+          lastAccessed: 1524795.334,
           score: 15
         }
       ];
