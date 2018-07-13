@@ -143,7 +143,6 @@ describe('server/providers/recentlyViewed ', () => {
       browser.runtime.getBackgroundPage.returns(trackedHistory);
       browser.sessions.getRecentlyClosed.returns(recentlyClosedResults);
       browser.history.search.returns(historyResults);
-      //   browser.storage.sync.get.returns(settingsStore);
       expect(await recentlyViewedSuggestions(searchString)).toEqual(
         expectedResult
       );
