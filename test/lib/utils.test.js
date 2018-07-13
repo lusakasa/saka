@@ -50,7 +50,7 @@ describe('lib/util ', () => {
   describe('getFilteredSuggestions ', () => {
     it('should only return valid matches to search string', async () => {
       const searchString = 'hello';
-      const getSuggestions = function(searchString) {
+      const getSuggestions = function() {
         return [
           {
             title: 'Hello',
@@ -85,10 +85,11 @@ describe('lib/util ', () => {
         }
       ];
 
-      const results = await libUtil.getFilteredSuggestions(
-        searchString,
-        getSuggestions
-      );
+      const results = await libUtil.getFilteredSuggestions(searchString, {
+        getSuggestions,
+        threshold: 0.6,
+        keys: ['title', 'url']
+      });
       expect(results).toEqual(expectedResults);
     });
   });

@@ -1,7 +1,7 @@
 import { isSakaUrl } from 'lib/url.js';
 import { getFilteredSuggestions } from 'lib/utils.js';
 
-async function allHistorySuggestions(searchText) {
+export async function allHistorySuggestions(searchText) {
   const results = await browser.history.search({
     text: searchText
   });
@@ -17,7 +17,7 @@ async function allHistorySuggestions(searchText) {
     ({ url, title, lastVisitTime, visitCount, typedCount }) => ({
       type: 'history',
       score: visitCount + typedCount,
-      lastVisitTime,
+      lastAccessed: lastVisitTime * 0.001,
       title,
       url
     })
@@ -30,8 +30,13 @@ export default async function historySuggestions(searchString) {
     sakaSettings && sakaSettings.enableFuzzySearch !== undefined
       ? sakaSettings.enableFuzzySearch
       : true;
+
   if (searchString && enableFuzzySearch) {
-    return getFilteredSuggestions(searchString, allHistorySuggestions, 1);
+    return getFilteredSuggestions(searchString, {
+      getSuggestions: allHistorySuggestions,
+      threshold: 1,
+      keys: ['title', 'url']
+    });
   }
 
   return allHistorySuggestions(searchString);

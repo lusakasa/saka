@@ -32,8 +32,7 @@ export function objectFromArray(array, key) {
 
 export async function getFilteredSuggestions(
   searchString,
-  getSuggestions,
-  threshold
+  { getSuggestions, threshold, keys }
 ) {
   const suggestions = await getSuggestions(searchString);
   const fuse = new Fuse(suggestions, {
@@ -41,8 +40,9 @@ export async function getFilteredSuggestions(
     threshold,
     minMatchCharLength: 1,
     includeMatches: true,
-    keys: ['title', 'url']
+    keys
   });
+
   return fuse.search(searchString).map(({ item, matches, score }) => ({
     ...item,
     score,

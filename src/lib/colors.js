@@ -1,4 +1,3 @@
-
 export const colors = {
   red: 'rgba(228,26,28,1)',
   black: 'rgba(0,0,0,1)',
@@ -9,6 +8,7 @@ export const colors = {
   yellow: 'rgba(255,255,51,1)',
   brown: 'rgba(166,86,40,1)',
   pink: 'rgba(247,129,191,1)',
+  teal: 'rgb(0,77,64,1)',
   gray: 'rgba(153,153,153,1)'
 };
 
@@ -22,6 +22,7 @@ export const fadedColors = {
   yellow: 'rgba(255,255,51,0.44)',
   brown: 'rgba(166,86,40,0.44)',
   pink: 'rgba(247,129,191,0.44)',
+  teal: 'rgb(0,77,64,0.44)',
   gray: 'rgba(153,153,153,0.44)'
 };
 
@@ -30,11 +31,12 @@ export const colorMap = {
   closedTab: colors.black,
   search: colors.green,
   history: colors.red,
+  recentlyViewed: colors.purple,
   bookmark: colors.orange,
   mode: colors.purple,
   // dictionary: colors.purple,
   calculator: colors.brown,
-  command: colors.pink,
+  // command: colors.pink,
   unknown: colors.gray
 };
 
@@ -43,10 +45,11 @@ export const fadedColorMap = {
   closedTab: fadedColors.black,
   search: fadedColors.green,
   history: fadedColors.red,
+  recentlyViewed: fadedColors.purple,
   bookmark: fadedColors.orange,
   mode: fadedColors.purple,
   // dictionary: colors.purple,
   calculator: fadedColors.brown,
-  command: fadedColors.pink,
+  // command: fadedColors.pink,
   unknown: fadedColors.gray
 };

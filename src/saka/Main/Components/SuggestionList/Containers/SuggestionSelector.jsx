@@ -4,6 +4,7 @@ import TabSuggestion from './TabSuggestion/index.jsx';
 import ClosedTabSuggestion from './ClosedTabSuggestion/index.jsx';
 import BookmarkSuggestion from './BookmarkSuggestion/index.jsx';
 import HistorySuggestion from './HistorySuggestion/index.jsx';
+import RecentlyViewedSuggestion from './RecentlyViewedSuggestion/index.jsx';
 import CommandSuggestion from './CommandSuggestion/index.jsx';
 import SearchEngineSuggestion from './SearchEngineSuggestion/index.jsx';
 import UnknownSuggestion from './UnknownSuggestion/index.jsx';
@@ -20,6 +21,8 @@ export default props => {
       return <BookmarkSuggestion {...props} />;
     case 'history':
       return <HistorySuggestion {...props} />;
+    case 'recentlyViewed':
+      return <RecentlyViewedSuggestion {...props} />;
     case 'command':
       return <CommandSuggestion {...props} />;
     case 'searchEngine':

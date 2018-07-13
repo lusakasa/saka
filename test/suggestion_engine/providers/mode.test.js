@@ -41,6 +41,15 @@ describe('server/providers/mode ', () => {
           color: colorMap.history,
           fadedColor: fadedColorMap.history,
           icon: 'history'
+        },
+        {
+          type: 'mode',
+          label: 'Recently Viewed',
+          mode: 'recentlyViewed',
+          shortcut: `${ctrlChar}-shift-x`,
+          color: colorMap.recentlyViewed,
+          fadedColor: fadedColorMap.recentlyViewed,
+          icon: 'timelapse'
         }
       ];
 
@@ -63,6 +72,24 @@ describe('server/providers/mode ', () => {
             {
               indices: [[2, 2], [6, 6], [9, 10]],
               value: 'Recently Closed Tabs',
+              key: 'label',
+              arrayIndex: 0
+            }
+          ]
+        },
+        {
+          type: 'mode',
+          label: 'Recently Viewed',
+          mode: 'recentlyViewed',
+          shortcut: `${ctrlChar}-shift-x`,
+          color: 'rgba(152,78,163,1)',
+          fadedColor: 'rgba(152,78,163,0.44)',
+          icon: 'timelapse',
+          score: undefined,
+          matches: [
+            {
+              indices: [[2, 2], [6, 6]],
+              value: 'Recently Viewed',
               key: 'label',
               arrayIndex: 0
             }

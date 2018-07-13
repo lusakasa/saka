@@ -5,6 +5,7 @@ export const icons = {
   tab: 'tab',
   closedTab: 'restore_page',
   history: 'history',
+  recentlyViewed: 'history',
   bookmark: 'bookmark_border',
   incognito: 'visibility_off'
 };
@@ -38,6 +39,14 @@ export function preprocessSuggestion(suggestion, searchText) {
       };
     }
     case 'history': {
+      const prettyURL = prettifyURL(suggestion.url, searchText);
+      return {
+        ...suggestion,
+        prettyURL,
+        text: prettyURL
+      };
+    }
+    case 'recentlyViewed': {
       const prettyURL = prettifyURL(suggestion.url, searchText);
       return {
         ...suggestion,

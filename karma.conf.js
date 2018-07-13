@@ -59,7 +59,7 @@ module.exports = function karmaConfig(config) {
       maxLogLines: 5, // limit number of lines logged per test
       suppressErrorSummary: true, // do not print error summary
       suppressFailed: false, // print information about failed tests
-      suppressPassed: false, //  print information about passed tests
+      suppressPassed: true, //  do not print information about passed tests
       suppressSkipped: false, // print information about skipped tests
       showSpecTiming: true // print the time elapsed for each spec
     },

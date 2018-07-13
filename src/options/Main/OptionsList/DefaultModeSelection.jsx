@@ -34,6 +34,9 @@ const DefaultModeSelection = function DefaultModeSelection({
           <option value="history" selected="">
             History
           </option>
+          <option value="recentlyViewed" selected="">
+            Recently Viewed
+          </option>
           <option value="mode" selected="">
             Modes
           </option>
