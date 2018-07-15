@@ -7,7 +7,7 @@ node_js:
 - lts/*
 
 # auto-release from tagged commits
-script:
+before_deploy:
   - npm run build:chrome
   - npm run zip saka-chrome-dev.zip dist/*
   - npm run build:chrome:prod
@@ -21,10 +21,11 @@ deploy:
   api_key:
     secure: UXpxguYgvL0clkrmjZw9KtLBgRCbXALVi4uz4nU7j96Qcobps2Ui5JFNJc243x2K0oHENYF3GN72j7zw3cclDeGL4/KXa/gOwM/LpHnAD3kJnKlDuVpUTARbp+dm8C2AvcwjtDT/qMY4L+wmfdUEaHKw3DHDJGVWnTEeC35CQ/uAzQJuMd8QGHSUNylY3pcBY2FPXMWaX9JlW7lHjTQW4CY/kBENKmloPrdB2WlnWXlNw7RgkqTk75zLPxUK3VyNW8qH3yInj0vlDD2mfQb4e2s+OjipcGK7Z82fqz4tLEjvi5w/9vIHv3WELF3W36J47LowWUskc+ET3VXULFa2+eMoxtpfyc07KNEVNN9oiEe7jh3zYmvaooq2baBmePBnntmZVPe3zggTvbn7fjqUnp+4oP+KatuPTeuR9QWRvehhO+CftN5m2q66D+L+M4HBQK4SwVt+JR59DMmDja/CfB72Zsz4nSTyFOLRieJLyiM+z4gcCdF78nhKywxrllAmSp+wixW0fnGoTRMyE1YchxSg/uwxvCTQhVZnnIKjm4lxD73VNURsPI7HOyvcy+kxkscB+E6glUQykJfCLdrZZaUa8doVWBI+XNR9IGPhOr+p5jT+w8BRFdwc7VPp4hRsIcWDKXDUMLasyEmQB0H9bgPw27d5R7Lkammud5Sv0Kw=
   file:
-    - "saka-chrome-dev.zip"
-    - "saka-chrome-prod.zip"
-    - "saka-firefox-dev.zip"
-    - "saka-firefox-prod.zip"
+    - saka-chrome-dev.zip
+    - saka-chrome-prod.zip
+    - saka-firefox-dev.zip
+    - saka-firefox-prod.zip
   on:
     repo: lusakasa/saka
+    branch: master
     tags: true

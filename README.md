@@ -68,6 +68,8 @@ Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/a
 
 4. Push the commit to github with tags: `git push origin --follow-tags`
 
+5. View the build status at https://travis-ci.org/lusakasa/saka/ and generated releases at https://github.com/lusakasa/saka/releases
+
 ## License
 
 MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee, Uzair Shamim
