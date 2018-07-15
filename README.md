@@ -22,10 +22,10 @@ Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/a
     ```sh
     git clone https://github.com/lusakasa/saka.git
     cd saka
-    yarn install
-    yarn run build:chrome
+    npm install
+    npm run build:chrome
     # or if you want to generate an optimized production build
-    yarn run build:prod:chrome
+    npm run build:prod:chrome
     ```
 
 2.  Navigate to `chrome://extensions`
@@ -44,10 +44,10 @@ Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/a
     ```sh
     git clone https://github.com/lusakasa/saka.git
     cd saka
-    yarn install
-    yarn run build:firefox
+    npm install
+    npm run build:firefox
     # or if you want to generate an optimized production build
-    yarn run build:prod:firefox
+    npm run build:prod:firefox
     ```
 
 2.  Navigate to `about:debugging`
