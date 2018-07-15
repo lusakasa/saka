@@ -25,6 +25,7 @@ deploy:
     - saka-chrome-prod.zip
     - saka-firefox-dev.zip
     - saka-firefox-prod.zip
+  skip_cleanup: true
   on:
     repo: lusakasa/saka
     branch: master
