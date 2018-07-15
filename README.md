@@ -58,6 +58,16 @@ Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/a
 
 5.  Firefox will load Saka automatically into all valid existing tabs
 
+## Release Instructions (for maintainers)
+
+1. Update the version number in `/static/manifest.json`
+
+2. Make a commit and set the message to the version: `git commit -m "v0.15.2"`
+
+3. Tag the commit with the version and a message describing changes since the last release: `git tag -a v0.15.2`
+
+4. Push the commit to github with tags: `git push origin --follow-tags`
+
 ## License
 
 MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee, Uzair Shamim
