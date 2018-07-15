@@ -9,3 +9,4 @@ debug.log
 yarn-error.log
 coverage
 saka-*.zip
+package-lock.json
