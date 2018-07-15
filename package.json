@@ -3,25 +3,20 @@
   "description": "A keyboard interface to the web",
   "scripts": {
     "build": "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:firefox\"",
-    "build:chrome": "npm run clean && webpack --config webpack.config.js --env=dev:chrome:benchmark --progress --colors",
-    "build:firefox": "npm run clean && webpack --config webpack.config.js --env=dev:firefox:benchmark --progress --colors",
     "build:prod": "echo \"You must specify the target browser (firefox or chrome). Example: npm run build:prod:firefox\"",
-    "build:prod:chrome": "npm run clean && webpack --config webpack.config.js --env=prod:chrome:nobenchmark --progress --colors && npm run zip-dist",
-    "build:prod:firefox": "npm run clean && webpack --config webpack.config.js --env=prod:firefox:nobenchmark --progress --colors && npm run zip-dist",
-    "build:benchmark:chrome": "npm run clean && webpack --config webpack.config.js --env=prod:chrome:benchmark --progress --colors && npm run zip-dist",
-    "build:benchmark:firefox": "npm run clean && webpack --config webpack.config.js --env=prod:firefox:benchmark --progress --colors && npm run zip-dist",
+    "build:chrome": "npm run clean && webpack --config webpack.config.js --env=dev:chrome:benchmark --progress --colors",
+    "build:chrome:prod": "npm run clean && webpack --config webpack.config.js --env=prod:chrome:nobenchmark --progress --colors",
+    "build:firefox": "npm run clean && webpack --config webpack.config.js --env=dev:firefox:benchmark --progress --colors",
+    "build:firefox:prod": "npm run clean && webpack --config webpack.config.js --env=prod:firefox:nobenchmark --progress --colors",
     "build:profile": "npm run clean && webpack --config webpack.config.js --progress --profile --colors && cp ./static/* ./dist",
+    "zip": "bestzip",
     "clean": "rimraf dist",
-    "zip-dist": "bestzip dist.zip dist/*",
-    "book:dev": "cd book && npm run dev",
-    "book:build": "cd book && npm run build",
-    "book:publish": "cd book && npm run publish",
     "test": "karma start karma.conf.js",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eejdoowad/saka-bar.git"
+    "url": "git+https://github.com/lusakasa/saka.git"
   },
   "license": "MIT",
   "devDependencies": {

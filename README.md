@@ -56,7 +56,7 @@ Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/a
 
 4.  Select any file within the dist directory, and 🚀.
 
-5.  Firefox will load Saka Key automatically into all valid existing tabs
+5.  Firefox will load Saka automatically into all valid existing tabs
 
 ## License
 
