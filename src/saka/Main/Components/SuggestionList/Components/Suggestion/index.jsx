@@ -76,7 +76,7 @@ export default ({
           </span>
         )}
       </span>
-      <span className="result__end-icon-container">
+      <span className="result__right-icon-container">
         {selected ? (
           <i className="result__icon result__icon--material" style={{ color }}>
             {icon}

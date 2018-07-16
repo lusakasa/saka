@@ -7,7 +7,7 @@ import { preprocessSuggestion } from 'suggestion_utils/index.js';
 import { ctrlKey } from 'lib/utils.js';
 import { slowWheelEvent } from 'lib/dom.js';
 import SearchBar from '../../Components/SearchBar/index.jsx';
-import SuggestionList from '../../Components/SuggestionList/index.jsx';
+import ResultList from '../../Components/ResultList/index.jsx';
 import PaginationBar from '../../Components/PaginationBar/index.jsx';
 import GUIContainer from '../../Components/GUIContainer/index.jsx';
 import BackgroundImage from '../../Components/BackgroundImage/index.jsx';
@@ -103,9 +103,7 @@ export default class extends Component {
       case 'Tab':
         e.preventDefault();
         this.props.updateSearchHistory(this.state.searchString);
-        e.shiftKey
-          ? this.incrementSelectedIndex(-1)
-          : this.incrementSelectedIndex(1);
+        this.incrementSelectedIndex(e.shiftKey ? -1 : 1);
         break;
       case '1':
       case '2':
@@ -372,7 +370,7 @@ export default class extends Component {
             onSuggestionClick={this.handleSuggestionClick}
             mode={mode}
           />
-          <SuggestionList
+          <ResultList
             searchString={searchString}
             suggestions={suggestions}
             selectedIndex={selectedIndex}
