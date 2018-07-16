@@ -1,6 +1,5 @@
 import { h } from 'preact';
 import { colorMap } from 'lib/colors.js';
-import 'scss/styles.scss';
 
 const Item = ({ label, color }) => (
   <span
@@ -14,7 +13,7 @@ const Item = ({ label, color }) => (
 );
 
 export default () => (
-  <section id="settings-bar">
+  <section className="settings-bar">
     <Item label="Commands" color={colorMap.command} />
     <Item label="Tabs" color={colorMap.tabs} />
     <Item label="Search" color={colorMap.search} />

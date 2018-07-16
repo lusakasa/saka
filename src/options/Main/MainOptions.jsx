@@ -1,5 +1,4 @@
 import { Component, h } from 'preact';
-import 'material-components-web/dist/material-components-web.css';
 import 'scss/options.scss';
 
 import OptionsList from './OptionsList/index.jsx';

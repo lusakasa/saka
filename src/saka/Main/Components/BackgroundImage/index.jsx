@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client.js';
-import 'scss/styles.scss';
 
 export default class BackgroundImage extends Component {
   state = {
@@ -21,7 +20,7 @@ export default class BackgroundImage extends Component {
     const { screenshot } = this.state;
     return (
       <div
-        id="background-image"
+        className="background-image-container"
         style={screenshot && `background-image: url("${screenshot}")`}
       >
         {children}

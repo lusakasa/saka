@@ -1,14 +1,13 @@
 import { h } from 'preact';
 
 // import { Component, h } from 'preact';
-import 'material-components-web/dist/material-components-web.css';
 
 const DefaultModeSelection = function DefaultModeSelection({
   mode,
   handleModeChange
 }) {
   return (
-    <li className="mdc-list-item option">
+    <li className="option">
       <span className="mdc-list-item__text">
         Default Mode
         <span className="mdc-list-item__secondary-text">

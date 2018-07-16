@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client.js';
-import 'scss/styles.scss';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {
@@ -32,7 +31,7 @@ export default class GUIContainer extends Component {
     // from rendering/mounting in the DOM, which would preven the search bar from focusing
     return (
       <main
-        id="GUIContainer"
+        className="ui-container"
         onWheel={onWheel}
         style={
           zoom === 0

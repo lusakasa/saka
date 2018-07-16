@@ -1,8 +1,5 @@
 import { Component, h } from 'preact';
-
 import React from 'react';
-// import '@material/textfield/dist/mdc.textfield.min.css';
-import 'scss/styles.scss';
 
 export default class Input extends Component {
   render() {
@@ -15,10 +12,9 @@ export default class Input extends Component {
     } = this.props;
 
     return (
-      <section className="mdc-text-field mdc-text-field--fullwidth search-field-wrapper">
+      <section className="search-bar__input-wrapper">
         <input
-          id="search-bar"
-          className="mdc-text-field__input search-field-input"
+          className="search-bar__input"
           type="text"
           placeholder={placeholder}
           aria-label={placeholder}

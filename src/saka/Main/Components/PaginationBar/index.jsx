@@ -1,6 +1,5 @@
 import { h } from 'preact';
 import { ctrlChar } from 'lib/utils.js';
-import 'scss/styles.scss';
 
 export default ({
   firstVisibleIndex,
@@ -12,17 +11,17 @@ export default ({
   suggestions.length === 0 ? (
     undefined
   ) : (
-    <section id="pagination-bar">
+    <section className="pagination-bar">
       <div
         role="button"
         onClick={onClickPrevious}
         onKeyPress={onClickPrevious}
-        className="paginator-next-button"
+        className="pagination-bar__button"
         tabIndex={0}
       >
-        <span className="arrow-normalizer">◄</span> {ctrlChar}-S
+        <span className="pagination-bar__left-arrow">◄</span> {ctrlChar}-S
       </div>
-      <div className="paginator-text-info">
+      <div className="pagination-bar__info">
         {`${firstVisibleIndex + 1} - ${firstVisibleIndex +
           Math.min(suggestions.length, maxSuggestions)} / ${
           suggestions.length
@@ -32,7 +31,7 @@ export default ({
         role="button"
         onClick={onClickNext}
         onKeyPress={onClickNext}
-        className="paginator-next-button"
+        className="pagination-bar__button"
         tabIndex={0}
       >
         {ctrlChar}-D ►

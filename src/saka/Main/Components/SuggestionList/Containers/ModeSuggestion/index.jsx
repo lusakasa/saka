@@ -4,7 +4,7 @@ import highlight from 'lib/highlight.jsx';
 import { fadedColorMap } from 'lib/colors.js';
 
 const Icon = ({ icon, color }) => (
-  <i className="material-icons" aria-hidden="true" style={{ color }}>
+  <i aria-hidden="true" style={{ color }}>
     {icon}
   </i>
 );
@@ -16,7 +16,7 @@ export default ({
   onClick
 }) => (
   <li
-    className="mdc-list-item search-item"
+    className="result"
     style={{
       backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
       borderLeftColor: fadedColor
@@ -24,21 +24,18 @@ export default ({
     onClick={() => onClick(index)}
     onKeyPress={() => onClick(index)}
   >
-    <span className="mdc-list-item__graphic search-icon" role="presentation">
+    <span className="search-icon" role="presentation">
       <Icon icon={icon} color={fadedColor} />
     </span>
-    <span className="mdc-list-item__text">
+    <span className="">
       <span className="suggestion-wrap-text">
         {highlight(label, 'label', matches)}
       </span>
-      <span
-        className="mdc-list-item__secondary-text suggestion-wrap-text"
-        style={{ color: 'gray' }}
-      >
+      <span className="suggestion-wrap-text" style={{ color: 'gray' }}>
         {shortcut}
       </span>
     </span>
-    <span className="mdc-list-item__meta kbd-end-detail">
+    <span className="kbd-end-detail">
       {selected ? (
         <Icon icon="forward" color={fadedColorMap.mode} />
       ) : (

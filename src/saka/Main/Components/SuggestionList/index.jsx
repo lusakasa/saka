@@ -1,6 +1,4 @@
-import 'material-components-web/dist/material-components-web.css';
-import 'scss/styles.scss';
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import Suggestion from './Containers/SuggestionSelector.jsx';
 
 export default ({
@@ -11,19 +9,17 @@ export default ({
   maxSuggestions,
   onSuggestionClick
 }) => (
-  <ul className="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container">
+  <ul className="result-list">
     {suggestions
       .slice(firstVisibleIndex, firstVisibleIndex + maxSuggestions)
-      .map((suggestion, index) => {
-        return (
-          <Suggestion
-            suggestion={suggestion}
-            searchString={searchString}
-            selected={index === selectedIndex}
-            index={index}
-            onClick={onSuggestionClick}
-          />
-        );
-      })}
+      .map((suggestion, index) => (
+        <Suggestion
+          suggestion={suggestion}
+          searchString={searchString}
+          selected={index === selectedIndex}
+          index={index}
+          onClick={onSuggestionClick}
+        />
+      ))}
   </ul>
 );

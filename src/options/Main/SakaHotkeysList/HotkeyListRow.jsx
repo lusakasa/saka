@@ -1,7 +1,5 @@
 import { h } from 'preact';
 
-import 'material-components-web/dist/material-components-web.css';
-
 const HotkeyListRow = function HotkeyListRow({ title, keys }) {
   const hotkeyShortcut = keys.map((key, index, keysArray) => (
     <span>
@@ -10,9 +8,9 @@ const HotkeyListRow = function HotkeyListRow({ title, keys }) {
     </span>
   ));
   return (
-    <li className="mdc-list-item option">
-      <span className="mdc-list-item__text">{title}</span>
-      <div className="mdc-list-item__meta mdc-switch">{hotkeyShortcut}</div>
+    <li className="option">
+      <span className="">{title}</span>
+      <div className="">{hotkeyShortcut}</div>
     </li>
   );
 };

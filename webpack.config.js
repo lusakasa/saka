@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const BabiliPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // process.traceDeprecation = true;
@@ -126,8 +125,8 @@ module.exports = function webpackConfig(env) {
   //   on chrome but css selectors on firefox and edge for link hint styling
 
   if (mode === 'prod') {
+    config.mode = 'development';
     config.plugins = config.plugins.concat([
-      new BabiliPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
         SAKA_DEBUG: JSON.stringify(false),
@@ -137,6 +136,7 @@ module.exports = function webpackConfig(env) {
       })
     ]);
   } else {
+    config.mode = 'production';
     config.devtool = 'source-map';
     config.plugins = config.plugins.concat([
       new webpack.DefinePlugin({

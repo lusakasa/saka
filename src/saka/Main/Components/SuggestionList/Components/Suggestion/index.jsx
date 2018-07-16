@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { fadedColorMap } from 'lib/colors.js';
 import { ctrlChar } from 'lib/utils.js';
 import { icons } from 'suggestion_utils/index.js';
-import 'scss/styles.scss';
 
 export default ({
   type,
@@ -24,24 +23,30 @@ export default ({
 
   if (incognito) {
     suggestionIcon = (
-      <i className="material-icons" aria-hidden="true" style={{ color }}>
+      <i
+        className="result__icon result__icon--material"
+        aria-hidden="true"
+        style={{ color }}
+      >
         {incognitoIcon}
       </i>
     );
   } else if (SAKA_PLATFORM === 'chrome' && url) {
     suggestionIcon = (
       <div
-        className="suggestion-icon"
+        className="result__icon"
         style={`content: -webkit-image-set(url(chrome://favicon/size/16@1x/${url}) 1x, url(chrome://favicon/size/16@2x/${url}) 2x)`}
       />
     );
   } else if (SAKA_PLATFORM === 'firefox' && favIconUrl) {
-    suggestionIcon = (
-      <img className="suggestion-icon" src={favIconUrl} alt="" />
-    );
+    suggestionIcon = <img className="result__icon" src={favIconUrl} alt="" />;
   } else {
     suggestionIcon = (
-      <i className="material-icons" aria-hidden="true" style={{ color }}>
+      <i
+        className="result__icon result__icon--material"
+        aria-hidden="true"
+        style={{ color }}
+      >
         {icon}
       </i>
     );
@@ -49,33 +54,31 @@ export default ({
 
   return (
     <li
-      className="mdc-list-item search-item"
+      className="result"
       style={{
-        backgroundColor: selected ? 'rgb(237, 237, 237)' : '#ffffff',
+        // backgroundColor: selected && 'rgb(237, 237, 237)',
         borderLeftColor: color
       }}
       onKeyPress={() => onClick(index)}
       onClick={() => onClick(index)}
     >
-      <span className="mdc-list-item__graphic search-icon" role="presentation">
-        {suggestionIcon}
-      </span>
-      <span className="mdc-list-item__text">
-        <span className="suggestion-wrap-text" style={{ color: titleColor }}>
+      <span className="result__icon-container">{suggestionIcon}</span>
+      <span className="result__text-section">
+        <span className="result__title" style={{ color: titleColor }}>
           {title}
         </span>
         {secondary && (
           <span
-            className="mdc-list-item__secondary-text suggestion-wrap-text"
+            className="result__url"
             style={{ color: secondaryColor || 'inherit' }}
           >
             {secondary}
           </span>
         )}
       </span>
-      <span className="mdc-list-item__meta kbd-end-detail">
+      <span className="result__end-icon-container">
         {selected ? (
-          <i className="material-icons" aria-hidden="true" style={{ color }}>
+          <i className="result__icon result__icon--material" style={{ color }}>
             {icon}
           </i>
         ) : (
