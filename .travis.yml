@@ -8,14 +8,14 @@ node_js:
 
 # auto-release from tagged commits
 before_deploy:
-  - npm run build:chrome
-  - npm run zip saka-chrome-dev.zip dist/*
-  - npm run build:chrome:prod
-  - npm run zip saka-chrome-prod.zip dist/*
-  - npm run build:firefox
-  - npm run zip saka-firefox-dev.zip dist/*
-  - npm run build:firefox:prod
-  - npm run zip saka-firefox-prod.zip dist/*
+  - yarn run build:chrome
+  - yarn run zip saka-chrome-dev.zip dist/*
+  - yarn run build:chrome:prod
+  - yarn run zip saka-chrome-prod.zip dist/*
+  - yarn run build:firefox
+  - yarn run zip saka-firefox-dev.zip dist/*
+  - yarn run build:firefox:prod
+  - yarn run zip saka-firefox-prod.zip dist/*
 deploy:
   provider: releases
   api_key:
