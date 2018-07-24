@@ -6,6 +6,7 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 * Search recently closed tabs
 * Search all bookmarks
 * Search all browsing history
+* Search all modes at once
 
 ![Preview](./images/preview.png)
 
@@ -13,50 +14,8 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 
 Install Saka from the [Firefox Marketplace](https://addons.mozilla.org/firefox/addon/saka/) or [Chrome Webstore](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi).
 
-### Install on Chrome
-
-1.  Run the following commands in your terminal to clone and build Saka.
-    An extension you can run will be generated in the 'dist' directory.
-
-
-    ```sh
-    git clone https://github.com/lusakasa/saka.git
-    cd saka
-    yarn install
-    yarn run build:chrome
-    # or if you want to generate an optimized production build
-    yarn run build:chrome:prod
-    ```
-
-2.  Navigate to `chrome://extensions`
-
-3.  Enable developer mode and click 'Load Unpacked Extension'
-
-4.  Select the dist directory, and 🚀.
-
-5.  Refresh existing tabs to load Saka into them
-
-### Install on Firefox
-
-1.  Run the following commands in your terminal to clone and build Saka.
-    An extension you can run will be generated in the 'dist' directory.
-
-    ```sh
-    git clone https://github.com/lusakasa/saka.git
-    cd saka
-    yarn install
-    yarn run build:firefox
-    # or if you want to generate an optimized production build
-    yarn run build:firefox:prod
-    ```
-
-2.  Navigate to `about:debugging`
-
-3.  Enable add-on debugging and click 'Load Temporary Add-on'
-
-4.  Select any file within the dist directory, and 🚀.
-
-5.  Firefox will load Saka automatically into all valid existing tabs
+## Development
+See the [Getting Started](https://github.com/lusakasa/saka/wiki/Getting-Started) page on the project Wiki.
 
 ## Release Instructions (for maintainers)
 
