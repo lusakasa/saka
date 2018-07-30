@@ -10,7 +10,6 @@ Does this close any current open issues?
 
 ## Checklist
 - [ ] Tests are passing locally
-- [ ] New code passes ESLint (if it doesnt, explain why in Additional Comments)
 - [ ] Updated the README/Wiki documentation (if relevant)
 
 ## Additional Comments
