@@ -342,7 +342,6 @@ export default class extends Component {
       return (
         <BackgroundImage suggestion={suggestion}>
           <GUIContainer onWheel={this.handleWheel}>
-            <ModeSwitcher setMode={this.props.setMode} />
             <SearchBar
               placeholder={placeholder}
               searchString={searchString}
@@ -354,6 +353,7 @@ export default class extends Component {
               onSuggestionClick={this.handleSuggestionClick}
               mode={mode}
             />
+            <ModeSwitcher setMode={this.props.setMode} />
           </GUIContainer>
         </BackgroundImage>
       );
@@ -363,7 +363,6 @@ export default class extends Component {
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer onWheel={this.handleWheel}>
-          <ModeSwitcher setMode={this.props.setMode} />
           <SearchBar
             placeholder={placeholder}
             searchString={searchString}
@@ -375,6 +374,7 @@ export default class extends Component {
             onSuggestionClick={this.handleSuggestionClick}
             mode={mode}
           />
+          <ModeSwitcher setMode={this.props.setMode} />
           <SuggestionList
             searchString={searchString}
             suggestions={suggestions}

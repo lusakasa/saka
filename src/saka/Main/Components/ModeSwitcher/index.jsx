@@ -20,5 +20,5 @@ export default ({ setMode }) => {
     );
   });
 
-  return <div>{validModes}</div>;
+  return <div className="mode-switcher-wrapper">{validModes}</div>;
 };

@@ -209,6 +209,16 @@ span.kbd-end-detail {
   height: 25px;
 }
 
+.mode-switcher-wrapper {
+  width: 100%;
+  display: flex;
+}
+
 .mode-switcher-icon {
   position: relative;
+  float: left;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
