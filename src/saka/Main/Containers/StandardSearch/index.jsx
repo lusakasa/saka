@@ -11,6 +11,7 @@ import SuggestionList from '../../Components/SuggestionList/index.jsx';
 import PaginationBar from '../../Components/PaginationBar/index.jsx';
 import GUIContainer from '../../Components/GUIContainer/index.jsx';
 import BackgroundImage from '../../Components/BackgroundImage/index.jsx';
+import ModeSwitcher from '../../Components/ModeSwitcher/index.jsx';
 
 // provides suggestions but doesn't autocomplete input
 
@@ -341,6 +342,7 @@ export default class extends Component {
       return (
         <BackgroundImage suggestion={suggestion}>
           <GUIContainer onWheel={this.handleWheel}>
+            <ModeSwitcher setMode={this.props.setMode} />
             <SearchBar
               placeholder={placeholder}
               searchString={searchString}
@@ -361,6 +363,7 @@ export default class extends Component {
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer onWheel={this.handleWheel}>
+          <ModeSwitcher setMode={this.props.setMode} />
           <SearchBar
             placeholder={placeholder}
             searchString={searchString}

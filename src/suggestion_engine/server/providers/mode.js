@@ -2,7 +2,7 @@ import { ctrlChar } from 'lib/utils.js';
 import { colorMap, fadedColorMap } from 'lib/colors.js';
 import Fuse from 'fuse.js';
 
-const suggestions = [
+export const suggestions = [
   {
     type: 'mode',
     mode: 'tab',
