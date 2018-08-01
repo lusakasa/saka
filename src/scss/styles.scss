@@ -212,13 +212,16 @@ span.kbd-end-detail {
 .mode-switcher-wrapper {
   width: 100%;
   display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mode-switcher-icon {
-  position: relative;
-  float: left;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  flex-grow: 1;
+  flex-flow: row no-wrap;
+  flex-wrap: nowrap;
+  background-color: white;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
