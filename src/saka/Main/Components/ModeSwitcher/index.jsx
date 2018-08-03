@@ -8,11 +8,18 @@ const Icon = ({ icon, color }) => (
   </i>
 );
 
-export default ({ setMode }) => {
+export default ({ mode, setMode }) => {
   const validModes = suggestions.map(suggestion => {
     return (
       <div
         className="mode-switcher-icon"
+        style={
+          suggestion.mode === mode
+            ? `background-color: white; border-top: 3px solid  ${
+                suggestion.fadedColor
+              };`
+            : {}
+        }
         onClick={() => setMode(suggestion.mode)}
       >
         <Icon icon={suggestion.icon} color={suggestion.fadedColor} />

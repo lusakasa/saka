@@ -342,6 +342,7 @@ export default class extends Component {
       return (
         <BackgroundImage suggestion={suggestion}>
           <GUIContainer onWheel={this.handleWheel}>
+            <ModeSwitcher setMode={this.props.setMode} />
             <SearchBar
               placeholder={placeholder}
               searchString={searchString}
@@ -353,7 +354,6 @@ export default class extends Component {
               onSuggestionClick={this.handleSuggestionClick}
               mode={mode}
             />
-            <ModeSwitcher setMode={this.props.setMode} />
           </GUIContainer>
         </BackgroundImage>
       );
@@ -363,34 +363,36 @@ export default class extends Component {
     return (
       <BackgroundImage suggestion={suggestion}>
         <GUIContainer onWheel={this.handleWheel}>
-          <SearchBar
-            placeholder={placeholder}
-            searchString={searchString}
-            suggestion={suggestion}
-            onKeyDown={this.handleKeyDown}
-            onInput={this.handleInput}
-            onBlur={this.handleBlur}
-            onButtonClick={this.handleButtonClick}
-            onSuggestionClick={this.handleSuggestionClick}
-            mode={mode}
-          />
-          <ModeSwitcher setMode={this.props.setMode} />
-          <SuggestionList
-            searchString={searchString}
-            suggestions={suggestions}
-            selectedIndex={selectedIndex}
-            firstVisibleIndex={firstVisibleIndex}
-            maxSuggestions={maxSuggestions}
-            onSuggestionClick={this.handleSuggestionClick}
-          />
-          <PaginationBar
-            selectedIndex={selectedIndex}
-            suggestions={suggestions}
-            firstVisibleIndex={firstVisibleIndex}
-            maxSuggestions={maxSuggestions}
-            onClickPrevious={this.previousPage}
-            onClickNext={this.nextPage}
-          />
+          <ModeSwitcher mode={mode} setMode={this.props.setMode} />
+          <div>
+            <SearchBar
+              placeholder={placeholder}
+              searchString={searchString}
+              suggestion={suggestion}
+              onKeyDown={this.handleKeyDown}
+              onInput={this.handleInput}
+              onBlur={this.handleBlur}
+              onButtonClick={this.handleButtonClick}
+              onSuggestionClick={this.handleSuggestionClick}
+              mode={mode}
+            />
+            <SuggestionList
+              searchString={searchString}
+              suggestions={suggestions}
+              selectedIndex={selectedIndex}
+              firstVisibleIndex={firstVisibleIndex}
+              maxSuggestions={maxSuggestions}
+              onSuggestionClick={this.handleSuggestionClick}
+            />
+            <PaginationBar
+              selectedIndex={selectedIndex}
+              suggestions={suggestions}
+              firstVisibleIndex={firstVisibleIndex}
+              maxSuggestions={maxSuggestions}
+              onClickPrevious={this.previousPage}
+              onClickNext={this.nextPage}
+            />
+          </div>
         </GUIContainer>
       </BackgroundImage>
     );
