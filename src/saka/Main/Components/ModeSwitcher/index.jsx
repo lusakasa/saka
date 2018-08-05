@@ -3,11 +3,14 @@ import { suggestions } from 'src/suggestion_engine/server/providers/mode.js';
 import { fadedColorMap } from 'lib/colors.js';
 import 'scss/styles.scss';
 
-const Icon = ({ selected, icon, selectedColor }) => {
-  const color = selected ? selectedColor : fadedColorMap.unknown;
-
+export const Icon = ({ icon, color }) => {
   return (
-    <i className="material-icons" aria-hidden="true" style={{ color }}>
+    <i
+      id="icon"
+      className="material-icons"
+      aria-hidden="true"
+      style={{ color }}
+    >
       {icon}
     </i>
   );
@@ -15,6 +18,9 @@ const Icon = ({ selected, icon, selectedColor }) => {
 
 export default ({ mode, setMode }) => {
   const validModes = suggestions.map(suggestion => {
+    const color =
+      suggestion.mode === mode ? suggestion.fadedColor : fadedColorMap.unknown;
+
     return (
       <div
         className="mode-switcher-icon"
@@ -25,11 +31,7 @@ export default ({ mode, setMode }) => {
         }
         onClick={() => setMode(suggestion.mode)}
       >
-        <Icon
-          selected={suggestion.mode === mode}
-          icon={suggestion.icon}
-          selectedColor={suggestion.fadedColor}
-        />
+        <Icon icon={suggestion.icon} color={color} />
       </div>
     );
   });
