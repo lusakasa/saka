@@ -1,20 +1,8 @@
 import { h } from 'preact';
 import { suggestions } from 'src/suggestion_engine/server/providers/mode.js';
+import Icon from 'src/saka/Main/Components/Icon/index.jsx';
 import { fadedColorMap } from 'lib/colors.js';
 import 'scss/styles.scss';
-
-export const Icon = ({ icon, color }) => {
-  return (
-    <i
-      id="icon"
-      className="material-icons"
-      aria-hidden="true"
-      style={{ color }}
-    >
-      {icon}
-    </i>
-  );
-};
 
 export default ({ mode, setMode }) => {
   const validModes = suggestions.map(suggestion => {
