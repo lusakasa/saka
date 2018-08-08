@@ -90,6 +90,7 @@ section.search-field-wrapper {
 
 #search-bar {
   color: #000000;
+  padding-left: 20px;
 }
 
 #search-bar::selection {
@@ -207,4 +208,28 @@ span.kbd-end-detail {
 .suggestion-icon {
   width: 25px;
   height: 25px;
+}
+
+.mode-switcher-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mode-switcher-icon {
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  background-color: white;
+  text-align: center;
+  padding: 2px 0px 2px 0px;
+  border-top: 3px solid transparent;
+}
+
+.mode-switcher-icon + .mode-switcher-icon {
+  border-left: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.mode-switcher-icon:hover {
+  background-color: rgb(245, 245, 245);
 }

@@ -16,17 +16,10 @@ describe('SearchBar component ', () => {
     };
 
     const searchBarRender = render(<SearchBar {...props} />);
-
     const searchInput = searchBarRender.find('#search-bar');
-    const searchButton = searchBarRender.find('#action-button');
-    const searchButtonIcon = searchButton
-      .children()
-      .at(0)
-      .children();
 
     expect(searchInput.attr('value')).toBe('');
     expect(searchInput.attr('placeholder')).toBe('Tabs');
-    expect(searchButtonIcon.text()).toBe('tab');
   });
 
   it('should show the search string when search string is provided', () => {
@@ -42,15 +35,8 @@ describe('SearchBar component ', () => {
     };
 
     const searchBarRender = render(<SearchBar {...props} />);
-
     const searchInput = searchBarRender.find('#search-bar');
-    const searchButton = searchBarRender.find('#action-button');
-    const searchButtonIcon = searchButton
-      .children()
-      .at(0)
-      .children();
 
     expect(searchInput.attr('value')).toBe('Saka github');
-    expect(searchButtonIcon.text()).toBe('tab');
   });
 });
