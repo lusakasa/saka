@@ -11,7 +11,8 @@
     "build:profile": "npm run clean && webpack --config webpack.config.js --progress --profile --colors && cp ./static/* ./dist",
     "zip": "bestzip",
     "clean": "rimraf dist",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
