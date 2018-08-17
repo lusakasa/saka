@@ -1,5 +1,5 @@
-import SuggestionList from 'src/saka/Main/Components/SuggestionList/index.jsx';
-import { render } from 'preact-render-spy';
+import SuggestionList from '@/saka/Main/Components/SuggestionList/index.jsx';
+import { render } from 'preact-testing-library';
 import { h } from 'preact';
 
 const MAX_SUGGESTIONS = 6;
@@ -10,7 +10,7 @@ describe('SuggestionList component ', () => {
 
     const searchString = {};
 
-    const wrapper = render(
+    const { container } = render(
       <SuggestionList
         searchString={searchString}
         suggestions={suggestions}

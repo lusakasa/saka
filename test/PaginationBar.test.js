@@ -1,4 +1,4 @@
-import PaginationBar from 'src/saka/Main/Components/PaginationBar/index.jsx';
+import PaginationBar from '@/saka/Main/Components/PaginationBar/index.jsx';
 import { render } from 'preact-render-spy';
 import { h } from 'preact';
 
