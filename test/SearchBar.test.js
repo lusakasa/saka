@@ -32,6 +32,10 @@ test('should show the search string when search string is provided', async () =>
     onButtonClick() {}
   };
 
-  const { container } = render(<SearchBar {...props} />);
-  expect(container).toMatchSnapshot();
+  const { debug, container, getByPlaceholderText } = render(
+    <SearchBar {...props} />
+  );
+
+  debug(container);
+  expect(getByPlaceholderText('Tabs').value).toBe('Saka github');
 });
