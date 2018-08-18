@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SuggestionList component  should be empty when no values provided 1`] = `
+<div>
+  <ul
+    class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo list-container"
+  />
+</div>
+`;

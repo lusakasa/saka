@@ -1,55 +1,23 @@
-import ModeSwitcher from '../src/saka/Main/Components/ModeSwitcher/index.jsx';
-import { render } from 'preact-render-spy';
+import ModeSwitcher from '@/saka/Main/Components/ModeSwitcher/index.jsx';
+import { render, cleanup } from 'preact-testing-library';
 import { fadedColorMap } from 'lib/colors.js';
 import { h } from 'preact';
 
+afterEach(cleanup);
+
 describe('ModeSwitcher component ', () => {
-  it('should render tabs with selected tab colored, rest of tabs gray', () => {
+  it('should render tabs with selected tab colored, rest of tabs gray', async () => {
     const props = {
       mode: 'tab',
       setMode: () => {}
     };
 
-    const modeSwitcherRender = render(<ModeSwitcher {...props} />);
-    const modeSwitcher = modeSwitcherRender.find('.mode-switcher-wrapper');
-    const tab = modeSwitcher
-      .children()
-      .at(0)
-      .children();
+    const { getByText } = render(<ModeSwitcher {...props} />);
 
-    const recentClosed = modeSwitcher
-      .children()
-      .at(1)
-      .children();
-
-    const bookmark = modeSwitcher
-      .children()
-      .at(2)
-      .children();
-
-    const history = modeSwitcher
-      .children()
-      .at(3)
-      .children();
-
-    const recentlyViewed = modeSwitcher
-      .children()
-      .at(4)
-      .children();
-
-    expect(tab.attr('icon')).toBe('tab');
-    expect(tab.attr('color')).toBe(fadedColorMap.tab);
-
-    expect(recentClosed.attr('icon')).toBe('restore_page');
-    expect(recentClosed.attr('color')).toBe(fadedColorMap.unknown);
-
-    expect(bookmark.attr('icon')).toBe('bookmark_border');
-    expect(bookmark.attr('color')).toBe(fadedColorMap.unknown);
-
-    expect(history.attr('icon')).toBe('history');
-    expect(history.attr('color')).toBe(fadedColorMap.unknown);
-
-    expect(recentlyViewed.attr('icon')).toBe('timelapse');
-    expect(recentlyViewed.attr('color')).toBe(fadedColorMap.unknown);
+    expect(getByText('tab')).toMatchSnapshot();
+    expect(getByText('restore_page')).toMatchSnapshot();
+    expect(getByText('bookmark_border')).toMatchSnapshot();
+    expect(getByText('history')).toMatchSnapshot();
+    expect(getByText('timelapse')).toMatchSnapshot();
   });
 });

@@ -9,6 +9,9 @@ describe('server/providers/recentlyViewed ', () => {
 
   beforeEach(() => {
     browser.flush();
+    // Clears the database and adds some testing data.
+    // Jest will wait for this promise to resolve before running tests.
+    global.SAKA_PLATFORM = 'chrome';
   });
 
   describe('recentlyViewedSuggestions ', () => {

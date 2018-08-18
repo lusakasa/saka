@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be empty when no there is no search string provided 1`] = `
+<div>
+  <form
+    class="search-bar-container"
+  >
+    <section
+      class="mdc-text-field mdc-text-field--fullwidth search-field-wrapper"
+    >
+      <input
+        aria-label="Tabs"
+        class="mdc-text-field__input search-field-input"
+        id="search-bar"
+        placeholder="Tabs"
+        type="text"
+      />
+    </section>
+  </form>
+</div>
+`;
