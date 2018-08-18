@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { render, cleanup } from 'preact-testing-library';
+import { render, cleanup, flushPromises } from 'preact-testing-library';
 import SearchBar from '@/saka/Main/Components/SearchBar/index';
 
 afterEach(cleanup);
@@ -32,10 +32,7 @@ test('should show the search string when search string is provided', async () =>
     onButtonClick() {}
   };
 
-  const { debug, container, getByPlaceholderText } = render(
-    <SearchBar {...props} />
-  );
+  const { getByPlaceholderText } = render(<SearchBar {...props} />);
 
-  debug(container);
   expect(getByPlaceholderText('Tabs').value).toBe('Saka github');
 });
