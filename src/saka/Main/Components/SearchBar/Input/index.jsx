@@ -1,6 +1,5 @@
 import { Component, h } from 'preact';
 
-import React from 'react';
 // import '@material/textfield/dist/mdc.textfield.min.css';
 import 'scss/styles.scss';
 
