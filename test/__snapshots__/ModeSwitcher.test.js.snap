@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModeSwitcher component  should render tabs with selected tab colored, rest of tabs gray 1`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  id="icon"
+  style="color: rgba(55, 126, 184, 0.44);"
+>
+  tab
+</i>
+`;
+
+exports[`ModeSwitcher component  should render tabs with selected tab colored, rest of tabs gray 2`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  id="icon"
+  style="color: rgba(153, 153, 153, 0.44);"
+>
+  restore_page
+</i>
+`;
+
+exports[`ModeSwitcher component  should render tabs with selected tab colored, rest of tabs gray 3`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  id="icon"
+  style="color: rgba(153, 153, 153, 0.44);"
+>
+  bookmark_border
+</i>
+`;
+
+exports[`ModeSwitcher component  should render tabs with selected tab colored, rest of tabs gray 4`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  id="icon"
+  style="color: rgba(153, 153, 153, 0.44);"
+>
+  history
+</i>
+`;
+
+exports[`ModeSwitcher component  should render tabs with selected tab colored, rest of tabs gray 5`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  id="icon"
+  style="color: rgba(153, 153, 153, 0.44);"
+>
+  timelapse
+</i>
+`;
