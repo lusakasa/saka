@@ -1,8 +1,9 @@
 module.exports = {
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
-    'suggestion_utils/(.*)$': '<rootDir>/src/suggestion_utils/$1',
-    'suggestion_engine/(.*)$': '<rootDir>/src/suggestion_engine/$1',
+    '^src/(.*)$': '<rootDir>/src/$1',
+    '^suggestion_utils/(.*)$': '<rootDir>/src/suggestion_utils/$1',
+    '^suggestion_engine/(.*)$': '<rootDir>/src/suggestion_engine/$1',
     '^lib/(.*)$': '<rootDir>/src/lib/$1',
     '^.*\\.(css|less|sass|scss)$': '<rootDir>/test/__mocks__/styleMock.scss',
     '^react-dom/server$':
