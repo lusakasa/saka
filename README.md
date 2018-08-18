@@ -31,4 +31,4 @@ See the [Getting Started](https://github.com/lusakasa/saka/wiki/Getting-Started)
 
 ## License
 
-MIT Licensed, Copyright (c) 2017 Sufyan Dawoodjee, Uzair Shamim
+MIT Licensed, Copyright (c) 2018 Sufyan Dawoodjee, Uzair Shamim
