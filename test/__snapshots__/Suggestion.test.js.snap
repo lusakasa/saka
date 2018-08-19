@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should use correct favicon path when using firefox 1`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  style="color: rgba(55, 126, 184, 0.44);"
+>
+  tab
+</i>
+`;
+
+exports[`should use default favicon when no url to favicon 1`] = `
+<i
+  aria-hidden="true"
+  class="material-icons"
+  style="color: rgba(55, 126, 184, 0.44);"
+>
+  tab
+</i>
+`;

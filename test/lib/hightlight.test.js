@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import highlight from 'lib/highlight';
 
 test('should return source text when matches is undefined', async () => {

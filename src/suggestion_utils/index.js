@@ -54,28 +54,6 @@ export function preprocessSuggestion(suggestion, searchText) {
         text: prettyURL
       };
     }
-    case 'command': {
-      return {
-        ...suggestion,
-        text: suggestion.title
-      };
-    }
-    case 'searchEngine': {
-      if (isURL(suggestion.title)) {
-        const prettyURL = prettifyURL(suggestion.title, searchText);
-        return {
-          ...suggestion,
-          isURL: true,
-          prettyURL,
-          text: prettyURL
-        };
-      }
-      return {
-        ...suggestion,
-        isURL: false,
-        text: suggestion.title
-      };
-    }
     default:
       return {
         type: 'error',

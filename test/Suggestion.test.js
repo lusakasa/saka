@@ -96,8 +96,7 @@ test('should use correct favicon path when using firefox', () => {
     onClick
   };
 
-  const { debug, getByText } = render(<Suggestion {...props} />);
-  debug();
+  const { getByText } = render(<Suggestion {...props} />);
   expect(getByText('tab')).toMatchSnapshot();
 });
 
