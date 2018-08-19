@@ -5,6 +5,7 @@ module.exports = {
     '^suggestion_utils/(.*)$': '<rootDir>/src/suggestion_utils/$1',
     '^suggestion_engine/(.*)$': '<rootDir>/src/suggestion_engine/$1',
     '^lib/(.*)$': '<rootDir>/src/lib/$1',
+    '^msg/(.*)$': '<rootDir>/src/msg/$1',
     '^.*\\.(css|less|sass|scss)$': '<rootDir>/test/__mocks__/styleMock.scss',
     '^react-dom/server$':
       '<rootDir>/node_modules/preact-render-to-string/dist/index.js',
@@ -15,7 +16,7 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'jsx'],
   transform: {
-    '^.+\\.jsx?$': '<rootDir>/jest.transform.js'
+    '^.+\\.(js|jsx)?$': '<rootDir>/jest.transform.js'
   },
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,jsx}'],
@@ -26,5 +27,8 @@ module.exports = {
       lines: 80,
       statements: -10
     }
-  }
+  },
+  coverageReporters: ['json', 'lcov', 'html'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!msgx).+(js|jsx)$'],
+  setupFiles: ['<rootDir>/test/__mocks__/browser-mocks.js']
 };

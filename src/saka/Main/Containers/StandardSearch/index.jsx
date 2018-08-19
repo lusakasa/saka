@@ -3,7 +3,6 @@ import {
   getSuggestions,
   activateSuggestion
 } from 'suggestion_engine/client/index.js';
-import { preprocessSuggestion } from 'suggestion_utils/index.js';
 import { ctrlKey } from 'lib/utils.js';
 import { slowWheelEvent } from 'lib/dom.js';
 import SearchBar from '../../Components/SearchBar/index.jsx';
@@ -12,6 +11,7 @@ import PaginationBar from '../../Components/PaginationBar/index.jsx';
 import GUIContainer from '../../Components/GUIContainer/index.jsx';
 import BackgroundImage from '../../Components/BackgroundImage/index.jsx';
 import ModeSwitcher from '../../Components/ModeSwitcher/index.jsx';
+import api from './api.js';
 
 // provides suggestions but doesn't autocomplete input
 
@@ -43,13 +43,12 @@ export default class extends Component {
   }
 
   getPreviousSearchString = () => {
-    if (this.state.undoIndex !== 0) {
-      this.setState({
-        searchString: [...this.props.searchHistory][this.state.undoIndex],
-        undoIndex: this.state.undoIndex - 1
-      });
-      this.updateAutocompleteSuggestions(this.state.searchString);
-    }
+    const prevSearch = api.getPreviousSearchString(
+      this.state.undoIndex,
+      this.props.searchHistory
+    );
+    this.setState(prevSearch);
+    this.updateAutocompleteSuggestions(this.state.searchString);
   };
 
   getNextSearchString = () => {
@@ -73,138 +72,8 @@ export default class extends Component {
   );
 
   handleKeyDown = e => {
-    switch (e.key) {
-      case 'Escape':
-        browser.runtime.sendMessage({
-          key: 'closeSaka',
-          searchHistory: [...this.props.searchHistory]
-        });
-        break;
-      case 'Backspace':
-        if (!e.repeat && e.target.value === '') {
-          browser.runtime.sendMessage({
-            key: 'closeSaka',
-            searchHistory: [...this.props.searchHistory]
-          });
-        }
-        break;
-      case 'ArrowLeft':
-      case 'ArrowRight':
-        break;
-      case 'ArrowDown':
-        e.preventDefault();
-        this.props.updateSearchHistory(this.state.searchString);
-        this.incrementSelectedIndex(1);
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        this.props.updateSearchHistory(this.state.searchString);
-        this.incrementSelectedIndex(-1);
-        break;
-      case 'Tab':
-        e.preventDefault();
-        this.props.updateSearchHistory(this.state.searchString);
-        e.shiftKey
-          ? this.incrementSelectedIndex(-1)
-          : this.incrementSelectedIndex(1);
-        break;
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.tryActivateSuggestion(Number.parseInt(10, e.key) - 1);
-        }
-        break;
-      case 'Enter':
-        e.preventDefault();
-        this.props.updateSearchHistory(
-          this.state.searchString,
-          this.tryActivateSuggestion
-        );
-        break;
-      case 'k':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.setState({ searchString: '' });
-          this.updateAutocompleteSuggestions('');
-        }
-        break;
-      case 's':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.previousPage();
-        }
-        break;
-      case 'd':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.nextPage();
-        }
-        break;
-      case ' ':
-        if (e.shiftKey || this.state.searchString === '') {
-          e.preventDefault();
-          this.props.shuffleMode();
-        }
-        break;
-      case 'A':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('tab');
-        }
-        break;
-      case 'C':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('closedTab');
-        }
-        break;
-      case 'M':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('mode');
-        }
-        break;
-      case 'b':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('bookmark');
-        }
-        break;
-      case 'E':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('history');
-        }
-        break;
-      case 'z':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.getPreviousSearchString();
-        }
-        break;
-      case 'y':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.getNextSearchString();
-        }
-        break;
-      case 'X':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.props.setMode('recentlyViewed');
-        }
-        break;
-      default:
-        this.setState({
-          undoIndex: this.props.searchHistory.size - 1
-        });
-        break;
-    }
+    const eventHandler = api.getEventHandler(e);
+    eventHandler();
   };
 
   nextPage = () => {
@@ -302,16 +171,11 @@ export default class extends Component {
       searchStringAtLookup
     );
 
-    const { searchString: searchStringNow } = this.state;
-    if (searchStringNow === searchStringAtLookup) {
-      this.setState({
-        suggestions: suggestions.map(suggestion =>
-          preprocessSuggestion(suggestion, searchStringAtLookup)
-        ),
-        firstVisibleIndex: 0,
-        selectedIndex: 0
-      });
-    }
+    await api.updateAutocompleteSuggestions(
+      suggestions,
+      searchStringAtLookup,
+      this.state.searchString
+    );
   };
 
   handleBlur = e => {
