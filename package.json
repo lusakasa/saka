@@ -13,6 +13,7 @@
     "clean": "rimraf dist",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --watch",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {

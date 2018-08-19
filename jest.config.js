@@ -16,5 +16,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx'],
   transform: {
     '^.+\\.jsx?$': '<rootDir>/jest.transform.js'
-  }
+  },
+  collectCoverage: true,
+  collectCoverageFrom: ['**/*.{js,jsx}']
 };
