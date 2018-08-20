@@ -29,6 +29,5 @@ module.exports = {
     }
   },
   coverageReporters: ['json', 'lcov', 'html'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!msgx).+(js|jsx)$'],
   setupFiles: ['<rootDir>/test/__mocks__/browser-mocks.js']
 };

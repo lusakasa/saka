@@ -15,7 +15,7 @@ export default {
     };
   },
   updateAutocompleteSuggestions: (
-    suggestions,
+    suggestions = [],
     searchStringAtLookup,
     searchStringNow
   ) => {

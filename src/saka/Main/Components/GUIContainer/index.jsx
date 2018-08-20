@@ -22,7 +22,7 @@ export default class GUIContainer extends Component {
   };
 
   setZoom = zoom => {
-    this.setState({ zoom });
+    // this.setState({ zoom });
   };
 
   render() {

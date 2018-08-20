@@ -8,12 +8,12 @@ export default class BackgroundImage extends Component {
   };
 
   componentDidMount() {
-    (async () => {
-      const { screenshot } = await browser.storage.local.get('screenshot');
-      this.setState({ screenshot });
-      await msg('focusTab');
-      await browser.storage.local.remove('screenshot');
-    })();
+    // (async () => {
+    //   const { screenshot } = await browser.storage.local.get('screenshot');
+    //   this.setState({ screenshot });
+    //   await msg('focusTab');
+    //   await browser.storage.local.remove('screenshot');
+    // })();
   }
 
   render() {
