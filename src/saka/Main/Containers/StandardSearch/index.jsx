@@ -12,7 +12,6 @@ import PaginationBar from '../../Components/PaginationBar/index.jsx';
 import GUIContainer from '../../Components/GUIContainer/index.jsx';
 import BackgroundImage from '../../Components/BackgroundImage/index.jsx';
 import ModeSwitcher from '../../Components/ModeSwitcher/index.jsx';
-import api from './api.js';
 
 // provides suggestions but doesn't autocomplete input
 
@@ -44,12 +43,13 @@ export default class extends Component {
   }
 
   getPreviousSearchString = () => {
-    const prevSearch = api.getPreviousSearchString(
-      this.state.undoIndex,
-      this.props.searchHistory
-    );
-    this.setState(prevSearch);
-    this.updateAutocompleteSuggestions(this.state.searchString);
+    if (this.state.undoIndex !== 0) {
+      this.setState({
+        searchString: [...this.props.searchHistory][this.state.undoIndex],
+        undoIndex: this.state.undoIndex - 1
+      });
+      this.updateAutocompleteSuggestions(this.state.searchString);
+    }
   };
 
   getNextSearchString = () => {
