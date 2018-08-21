@@ -1,7 +1,7 @@
-// const chrome = require('sinon-chrome/extensions');
-// const browser = require('sinon-chrome/webextensions');
-// global.chrome = chrome;
-// global.browser = browser;
+const chrome = require('sinon-chrome/extensions');
+const browser = require('sinon-chrome/webextensions');
+global.chrome = chrome;
+global.browser = browser;
 
 jest.mock('msgx/client.js', () =>
   jest.fn().mockImplementation(() => {

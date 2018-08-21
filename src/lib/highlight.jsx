@@ -5,7 +5,7 @@ function highlighted(text, indices) {
   let unit = '';
   let pairIndex = 0;
   let pair = indices[pairIndex];
-  pairIndex += 2;
+  pairIndex += 1;
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
     if (pair && i === pair[0]) {

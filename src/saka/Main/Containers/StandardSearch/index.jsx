@@ -315,7 +315,6 @@ export default class extends Component {
   };
 
   handleBlur = e => {
-    e.target.focus();
     this.props.updateSearchHistory(e.target.value);
   };
 
