@@ -43,9 +43,7 @@ test('should render and allow user input to search for suggestion', () => {
     shuffleMode: jest.fn()
   };
 
-  const { container, getByPlaceholderText } = render(
-    <StandardSearch {...props} />
-  );
+  const { getByPlaceholderText } = render(<StandardSearch {...props} />);
 
   getByPlaceholderText('Tabs').value = 'Test input';
   fireEvent.input(getByPlaceholderText('Tabs'));
@@ -129,7 +127,7 @@ test('should allow going back and forward through search history', () => {
   });
 });
 
-test('should allow switching between search modes', () => {
+test('should allow switching between search modes', async () => {
   const props = {
     placeholder: 'Tabs',
     mode: 'tab',
@@ -147,31 +145,38 @@ test('should allow switching between search modes', () => {
   });
   expect(props.shuffleMode.mock.calls.length).toBe(1);
 
+  // Recently Closed
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'C',
     ctrlKey: true
   });
 
+  // Tabs
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'A',
     ctrlKey: true
   });
 
+  // Bookmarks
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'b',
     ctrlKey: true
   });
 
+  // History
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'E',
     ctrlKey: true
   });
 
+  // Recently Viewed
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'X',
     ctrlKey: true
   });
 
+  // Modes
+  // TODO: Deprecate this feature
   fireEvent.keyDown(getByPlaceholderText('Tabs'), {
     key: 'M',
     ctrlKey: true

@@ -22,8 +22,6 @@ test('should not', async () => {
   await flushPromises();
 
   getByText('Saka Options');
-
-  debug();
 });
 
 afterEach(cleanup);
