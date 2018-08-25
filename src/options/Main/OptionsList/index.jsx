@@ -49,6 +49,7 @@ export default class OptionsList extends Component {
   };
 
   handleModeChange = e => {
+    console.log(e.target.value);
     this.setState({
       mode: e.target.value
     });

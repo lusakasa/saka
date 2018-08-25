@@ -14,6 +14,7 @@ const EnableFuzzySearch = function EnableFuzzySearch() {
         <input
           type="checkbox"
           id="basic-switch"
+          aria-label="Enable fuzzy search"
           className="mdc-switch__native-control"
           checked={checked}
           onChange={handleEnableFuzzySearch}
