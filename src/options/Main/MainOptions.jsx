@@ -21,22 +21,6 @@ export default class MainOptions extends Component {
   };
 
   render() {
-    let pageContent;
-
-    if (this.state.showSakaKeybindings) {
-      pageContent = (
-        <SakaHotkeysList
-          handleOpenSakaKeybindings={this.handleOpenSakaKeybindings}
-        />
-      );
-    } else {
-      pageContent = (
-        <OptionsList
-          handleOpenSakaKeybindings={this.handleOpenSakaKeybindings}
-        />
-      );
-    }
-
     return (
       <body>
         <header className="mdc-top-app-bar mdc-top-app-bar--short">
@@ -50,7 +34,15 @@ export default class MainOptions extends Component {
           id="background-image"
           className="mdc-elevation--z1 options-container"
         >
-          {pageContent}
+          {this.state.showSakaKeybindings ? (
+            <SakaHotkeysList
+              handleOpenSakaKeybindings={this.handleOpenSakaKeybindings}
+            />
+          ) : (
+            <OptionsList
+              handleOpenSakaKeybindings={this.handleOpenSakaKeybindings}
+            />
+          )}
         </div>
       </body>
     );

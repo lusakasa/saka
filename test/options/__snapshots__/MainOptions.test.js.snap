@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should only show key bindings when setting is true 1`] = `
+<i
+  aria-label="Back to Saka settings"
+  aria-pressed="false"
+  class="mdc-icon-toggle material-icons"
+  role="button"
+>
+  arrow_back
+</i>
+`;
+
+exports[`should only show key bindings when setting is true 2`] = `
+<i
+  aria-label="Info about Saka custom hotkeys"
+  aria-pressed="false"
+  class="mdc-icon-toggle material-icons"
+  id="custom-hotkey-info"
+>
+  info
+</i>
+`;

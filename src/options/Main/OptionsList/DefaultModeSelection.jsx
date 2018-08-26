@@ -19,6 +19,7 @@ const DefaultModeSelection = function DefaultModeSelection({
         <select
           value={mode}
           id="defaultModeSelect"
+          aria-label="Select default mode"
           className=" mdc-select__native-control"
           onChange={handleModeChange}
         >

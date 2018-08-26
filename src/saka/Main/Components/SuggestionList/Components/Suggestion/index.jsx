@@ -22,7 +22,7 @@ export default ({
   const incognitoIcon = icons.incognito;
   let suggestionIcon;
 
-  if (incognito) {
+  if (incognito === true) {
     suggestionIcon = (
       <i className="material-icons" aria-hidden="true" style={{ color }}>
         {incognitoIcon}

@@ -15,6 +15,7 @@ const OnlyShowSearchBarSelector = function OnlyShowSearchBarSelector() {
           type="checkbox"
           id="basic-switch"
           className="mdc-switch__native-control"
+          aria-label="Suggestions on load"
           checked={checked}
           onChange={handleShowSearchSuggestionsChange}
         />

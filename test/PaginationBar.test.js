@@ -1,5 +1,5 @@
 import PaginationBar from '@/saka/Main/Components/PaginationBar/index.jsx';
-import { render } from 'preact-render-spy';
+import { render, getByText } from 'preact-testing-library';
 import { h } from 'preact';
 
 describe('PaginationBar component ', () => {
@@ -12,12 +12,10 @@ describe('PaginationBar component ', () => {
       onClickNext() {}
     };
 
-    const paginationBarRender = render(<PaginationBar {...props} />);
-    const paginationList = paginationBarRender
-      .find('.paginator-text-info')
-      .text();
-
-    expect(paginationList).toBe('');
+    const { queryByText } = render(<PaginationBar {...props} />);
+    expect(queryByText('◄')).toBeNull();
+    expect(queryByText('ctrl-S')).toBeNull();
+    expect(queryByText('ctrl-D ►')).toBeNull();
   });
 
   it('should show correct amount of suggestions when there are suggestions found', () => {
@@ -40,11 +38,10 @@ describe('PaginationBar component ', () => {
       onClickNext() {}
     };
 
-    const paginationBarRender = render(<PaginationBar {...props} />);
-    const paginationList = paginationBarRender
-      .find('.paginator-text-info')
-      .text();
-
-    expect(paginationList).toBe('1 - 2 / 2');
+    const { getByText } = render(<PaginationBar {...props} />);
+    getByText('◄');
+    getByText('ctrl-S');
+    getByText('1 - 2 / 2');
+    getByText('ctrl-D ►');
   });
 });
