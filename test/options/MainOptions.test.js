@@ -76,6 +76,8 @@ test('should save settings when save button clicked', async () => {
 
   fireEvent.click(getByValue('Save'), { button: 0 });
   await flushPromises();
+
+  expect(browser.storage.sync.get.calledOnce);
 });
 
 afterEach(cleanup);
