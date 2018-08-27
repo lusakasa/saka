@@ -6,7 +6,7 @@
 
 ## Summary Of Changes
 #### Why is this change needed?
-#### Does this close any current open issues?
+#### Does this close any open issues?
 
 ## Checklist
 - [ ] Tests are passing locally

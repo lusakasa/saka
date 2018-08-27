@@ -109,11 +109,11 @@ async function saveSettings(searchHistory) {
   await browser.storage.sync.set({ searchHistory: [...searchHistory] });
 }
 
-chrome.browserAction.onClicked.addListener(() => {
+browser.browserAction.onClicked.addListener(() => {
   toggleSaka();
 });
 
-chrome.commands.onCommand.addListener(command => {
+browser.commands.onCommand.addListener(command => {
   switch (command) {
     case 'toggleSaka':
     case 'toggleSaka2':
@@ -126,7 +126,7 @@ chrome.commands.onCommand.addListener(command => {
   }
 });
 
-chrome.runtime.onMessage.addListener(async (message, sender) => {
+browser.runtime.onMessage.addListener(async (message, sender) => {
   switch (message.key) {
     case 'toggleSaka':
       toggleSaka();
@@ -140,7 +140,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
   }
 });
 
-chrome.runtime.onMessageExternal.addListener(message => {
+browser.runtime.onMessageExternal.addListener(message => {
   switch (message) {
     case 'toggleSaka':
       toggleSaka();
@@ -150,7 +150,7 @@ chrome.runtime.onMessageExternal.addListener(message => {
   }
 });
 
-chrome.contextMenus.create({
+browser.contextMenus.create({
   title: 'Saka',
   contexts: ['all'],
   onclick: () => toggleSaka()
