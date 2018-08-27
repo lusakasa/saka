@@ -9,8 +9,7 @@
     "open_in_tab": true
   },
   "background": {
-    "page": "background_page.html",
-    "persistent": true
+    "page": "background_page.html"
   },
   "commands": {
     "toggleSaka": {
@@ -34,8 +33,7 @@
       "suggested_key": {
         "default": "Ctrl+Shift+1"
       },
-      "description": "Toggle Saka",
-      "global": true
+      "description": "Toggle Saka"
     }
   },
   "browser_action": {
@@ -56,7 +54,6 @@
     "sessions",
     "history",
     "bookmarks",
-    "chrome://favicon/",
     "storage",
     "contextMenus"
   ],
@@ -64,12 +61,5 @@
     "saka.html",
     "material-icons.css",
     "MaterialIcons-Regular.woff2"
-  ],
-  "key":
-    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsgFNwezxiHxK/AIKh9K4LVefUPIDisRzQLmmRBjFftr3yrxJuLBaO1LvMISsRlvbFmbZ0B6KHzyGDEnmOMIo3X9wUxBwSV+q3kigp3XFryllhOHbKcl+FUVMRQabBs49CS6ttq2l4Jx+ULEsmprqub+IV+cvY3slXxxuyMF0TjmnRwDYnSREgbfzK7g/msZ8e0gi+hrPETNVKOibbVwd8S7gSy0hDug71WOA338FGe08DiXpnVoKLL0fmd+TO6Z4fAhH+oSqr15WIt6qCglYmZi2BEydL0zhUcidkis0zJjNX5nQi0xzggmxwsMJyfmfGoniwsUg3rAy+M0v5gaSUQIDAQAB",
-  "applications": {
-    "gecko": {
-      "id": "{7d7cad35-2182-4457-972d-5a41a2051240}"
-    }
-  }
+  ]
 }
