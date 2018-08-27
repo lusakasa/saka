@@ -60,10 +60,11 @@ export default ({
       <span className="mdc-list-item__graphic search-icon" role="presentation">
         {suggestionIcon}
       </span>
-      <span className="mdc-list-item__text">
+      <span className="mdc-list-item__text suggestion-text">
         <span className="suggestion-wrap-text" style={{ color: titleColor }}>
           {title}
         </span>
+
         {secondary && (
           <span
             className="mdc-list-item__secondary-text suggestion-wrap-text"
