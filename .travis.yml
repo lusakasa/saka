@@ -4,8 +4,9 @@ node_js:
 
 install:
   - yarn global add codecov
+  - yarn install
 script:
-  - yarn test -- --coverage && codecov
+  - yarn test --coverage && codecov
   # auto-release from tagged commits
 before_deploy:
   - yarn run build:chrome
