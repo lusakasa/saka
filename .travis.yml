@@ -2,6 +2,11 @@ language: node_js
 node_js:
   - lts/*
 
+install:
+  - yarn global add codecov
+  - yarn install
+script:
+  - yarn test --coverage && codecov
   # auto-release from tagged commits
 before_deploy:
   - yarn run build:chrome
