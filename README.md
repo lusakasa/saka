@@ -1,4 +1,6 @@
-# Saka [![Build Status](https://travis-ci.org/lusakasa/saka.svg?branch=master)](https://travis-ci.org/lusakasa/saka)
+# Saka 
+[![Build Status](https://travis-ci.org/lusakasa/saka.svg?branch=master&style=popout-square)](https://travis-ci.org/lusakasa/saka)
+[![GitHub license](https://img.shields.io/github/license/lusakasa/saka.svg?style=popout-square)](https://github.com/lusakasa/saka/blob/master/LICENSE)
 
 A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka/) and [Chrome](https://chrome.google.com/webstore/detail/saka/nbdfpcokndmapcollfpjdpjlabnibjdi) designed to be fast, intuitive, and beautiful. Inspired by Spotlight. Keyboard-focused but mouse friendly too.
 
