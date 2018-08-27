@@ -1,16 +1,19 @@
 const webpack = require('webpack');
 const BabiliPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-// process.traceDeprecation = true;
-// markdown convert to html
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const marked = require('marked');
+const path = require('path');
+const merge = require('webpack-merge');
+const { version } = require('./manifest/common.json'); // mode controls:
 
 const renderer = new marked.Renderer();
-
-const path = require('path');
+// process.traceDeprecation = true;
+// markdown convert to html
 
 module.exports = function webpackConfig(env) {
+  const [mode, platform, benchmark] = env.split(':');
+
   const config = {
     resolve: {
       alias: {
@@ -107,13 +110,20 @@ module.exports = function webpackConfig(env) {
           from: '**/config.json',
           to: 'config_[folder].json'
         }
-      ])
+      ]),
+      new GenerateJsonPlugin(
+        'manifest.json',
+        merge(
+          require('./manifest/common.json'),
+          require(`./manifest/${platform}.json`),
+          { version }
+        ),
+        null,
+        2
+      )
     ]
   };
 
-  const [mode, platform, benchmark] = env.split(':');
-  const version = require('./static/manifest.json').version;
-  // mode controls:
   // 1. SAKA_DEBUG: boolean(true | false)
   //   * true for development builds
   //   * false for production build
