@@ -40,7 +40,8 @@ export async function getFilteredSuggestions(
     threshold,
     minMatchCharLength: 1,
     includeMatches: true,
-    keys
+    keys,
+    distance: 500
   });
 
   return fuse.search(searchString).map(({ item, matches, score }) => ({
