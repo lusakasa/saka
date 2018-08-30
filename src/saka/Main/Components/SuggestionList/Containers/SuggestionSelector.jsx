@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import ModeSuggestion from './ModeSuggestion/index.jsx';
 import TabSuggestion from './TabSuggestion/index.jsx';
 import ClosedTabSuggestion from './ClosedTabSuggestion/index.jsx';
 import BookmarkSuggestion from './BookmarkSuggestion/index.jsx';
@@ -11,8 +10,6 @@ import UnknownSuggestion from './UnknownSuggestion/index.jsx';
 
 export default props => {
   switch (props.suggestion.type) {
-    case 'mode':
-      return <ModeSuggestion {...props} />;
     case 'tab':
       return <TabSuggestion {...props} />;
     case 'closedTab':

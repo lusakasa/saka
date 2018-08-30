@@ -9,14 +9,7 @@ export default class Main extends Component {
 
     this.state = {
       mode: 'tab',
-      modes: [
-        'mode',
-        'tab',
-        'closedTab',
-        'bookmark',
-        'history',
-        'recentlyViewed'
-      ],
+      modes: ['tab', 'closedTab', 'bookmark', 'history', 'recentlyViewed'],
       isLoading: true,
       showEmptySearchSuggestions: true,
       searchHistory: new Set([])
@@ -82,18 +75,6 @@ export default class Main extends Component {
 
     if (!isLoading) {
       switch (mode) {
-        case 'mode':
-          return (
-            <StandardSearch
-              mode={mode}
-              placeholder="Modes"
-              setMode={setMode}
-              shuffleMode={shuffleMode}
-              showEmptySearchSuggestions={showEmptySearchSuggestions}
-              searchHistory={searchHistory}
-              updateSearchHistory={this.updateSearchHistory}
-            />
-          );
         case 'tab':
           return (
             <StandardSearch
