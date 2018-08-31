@@ -48,16 +48,6 @@ export const suggestions = [
     fadedColor: fadedColorMap.recentlyViewed,
     icon: 'timelapse'
   }
-
-  // {
-  //   type: 'mode',
-  //   label: 'History',
-  //   mode: 'history',
-  //   shortcut: `${ctrlChar}-shift-H`,
-  //   color: colorMap.history,
-  //   fadedColor: fadedColorMap.history,
-  //   icon: 'history'
-  // },
 ];
 
 const fuse = new Fuse(suggestions, {
