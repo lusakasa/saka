@@ -6,7 +6,7 @@ install:
   - yarn global add codecov
   - yarn install
 script:
-  - yarn test --coverage && codecov
+  - yarn test --coverage && codecov --token=b3458594432a40dda8ffda6bf92ad7f7
   # auto-release from tagged commits
 before_deploy:
   - yarn run build:chrome
