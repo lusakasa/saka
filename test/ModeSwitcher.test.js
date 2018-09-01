@@ -28,10 +28,6 @@ describe('ModeSwitcher component ', () => {
     fireEvent.click(getByText('restore_page'), 'click');
     await flushPromises();
     expect(setMode.mock.calls.length).toBe(1);
-
-    fireEvent.mouseEnter(getByText('bookmark_border'), 'mouseEnter');
-    await flushPromises();
-    expect(setMode.mock.calls.length).toBe(2);
   });
 });
 
