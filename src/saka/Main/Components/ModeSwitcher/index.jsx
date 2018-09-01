@@ -18,7 +18,6 @@ export default ({ mode, setMode }) => {
             : {}
         }
         onClick={() => setMode(suggestion.mode)}
-        onMouseEnter={() => setMode(suggestion.mode)}
       >
         <Icon icon={suggestion.icon} color={color} />
       </div>
