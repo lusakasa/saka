@@ -91,7 +91,7 @@ export default class Main extends Component {
           return (
             <StandardSearch
               mode={mode}
-              placeholder="Recently Closed Tabs"
+              placeholder="Recently Closed"
               setMode={setMode}
               shuffleMode={shuffleMode}
               showEmptySearchSuggestions={showEmptySearchSuggestions}
