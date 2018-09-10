@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { ctrlChar } from 'lib/utils.js';
-import modes from './modes';
+import modes from 'modes/client.js';
 
 const ResultContainer = ({ children, onClick }) => (
   <li className="result" onClick={onClick}>
@@ -8,9 +8,8 @@ const ResultContainer = ({ children, onClick }) => (
   </li>
 );
 
-//-----------------------------------------------------------------------------
-// Shared Icon Components
-//-----------------------------------------------------------------------------
+// left icon
+
 const ChromeFavIcon = ({ url }) => (
   <div
     className="result__icon"
@@ -26,28 +25,28 @@ const MaterialIcon = ({ name, color }) => (
     {name}
   </i>
 );
-
-//-----------------------------------------------------------------------------
-// Left Icon
-//-----------------------------------------------------------------------------
 const LeftIconSection = ({ children }) => (
-  <span className="result__icon">{children}</span>
+  <span className="result__icon-container">{children}</span>
 );
 const LeftIcon = ({ url, name, color }) =>
   url ? <FavIcon url={url} /> : <MaterialIcon name={name} color={color} />;
 
-//-----------------------------------------------------------------------------
-// Text
-//-----------------------------------------------------------------------------
+// text section
+
 const TextSection = ({ children }) => (
   <span className="result__text-section">{children}</span>
 );
-const Title = () => <span className="result__title">Title</span>;
-const Subtitle = () => <span className="result__url">Subtitle</span>;
+const Title = ({ children, color }) => (
+  <span className="result__title" style={{ color }}>
+    {children}
+  </span>
+);
+const Subtitle = ({ children, color }) => (
+  <span className="result__url" style={{ color }}>
+    {children}
+  </span>
+);
 
-//-----------------------------------------------------------------------------
-// Right Icon
-//-----------------------------------------------------------------------------
 const RightIconSection = ({ children }) => (
   <span className="result__right-icon-container">{children}</span>
 );
@@ -58,10 +57,7 @@ const RightIcon = ({ name, color, selected, index }) =>
     `${ctrlChar}-${index + 1}`
   );
 
-//-----------------------------------------------------------------------------
-// Result
-//-----------------------------------------------------------------------------
-const Result = ({ rawResult, ui }) => {
+const Result = ({ raw, ui }) => {
   // const {
   //   // properties unique to the result
   //   result: {
@@ -79,37 +75,42 @@ const Result = ({ rawResult, ui }) => {
   //   },
   //   ui: { query, firstVisibleIndex, selectedIndex }
   // } = props;
-  const { mode, transform, activate } = modes[rawResult.mode];
-  const result = transform(rawResult.result);
-  const handleClick = () => activate(result);
 
-  const selected = result.index === ui.selectedIndex;
+  const result = modes[raw.type].transform(raw, ui.query);
+  const selected = false; // result.index === ui.selectedIndex;
   const index = result.index - ui.firstVisibleIndex;
-  const colors = { ...mode.colors, ...result.colors };
+  console.log('modes', modes);
+  console.log('raw', raw);
+  console.log('result', result);
+  console.log('result.mode.colors', result.mode.colors);
 
   return (
     <ResultContainer
       selected={selected}
-      leftBorderColor={colors.theme}
-      onClick={handleClick}
+      leftBorderColor={result.mode.colors.theme}
+      onClick={() => {
+        console.log('todo');
+      }}
     >
       <LeftIconSection>
         <LeftIcon
           url={result.icon.url}
           name={result.icon.name}
-          color={colors.theme}
+          color={result.mode.colors.theme}
         />
       </LeftIconSection>
 
       <TextSection>
-        <Title title={result.title} color={colors.title} />
-        <Subtitle subtitle={result.subtitle} color={colors.subtitle} />
+        <Title color={result.mode.colors.title}>{result.title}</Title>
+        <Subtitle color={result.mode.colors.subtitle}>
+          {result.subtitle}
+        </Subtitle>
       </TextSection>
 
       <RightIconSection>
         <RightIcon
-          name={mode.icon}
-          color={mode.color}
+          name={result.mode.icon}
+          color={result.mode.color}
           selected={selected}
           index={index}
         />
