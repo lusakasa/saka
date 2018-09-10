@@ -1,6 +1,8 @@
 const browser = require('sinon-chrome/webextensions');
 
-import closedTabSuggestions from 'suggestion_engine/server/providers/closedTab.js';
+import closedTabSuggestions, {
+  getAllSuggestions
+} from 'suggestion_engine/server/providers/closedTab.js';
 
 describe('server/providers/closedTabs ', () => {
   beforeAll(() => {
@@ -151,6 +153,46 @@ describe('server/providers/closedTabs ', () => {
       browser.runtime.getURL.returns(sakaId);
       browser.sessions.getRecentlyClosed.returns(queryResults);
       expect(await closedTabSuggestions(searchString)).toEqual(expectedResult);
+    });
+  });
+
+  describe('getAllSuggestions', () => {
+    it('should work for window sessions', async () => {
+      const queryResults = [
+        {
+          window: {
+            lastModified: 123456,
+            tabs: [
+              {
+                id: 1,
+                windowId: 0,
+                title: 'Saka',
+                url: 'https://github.com/lusakasa/saka',
+                favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+                incognito: false
+              }
+            ]
+          }
+        }
+      ];
+      const expectedResult = [
+        {
+          type: 'closedTab',
+          tabId: 1,
+          title: 'Saka',
+          url: 'https://github.com/lusakasa/saka',
+          favIconUrl: 'https://github.com/lusakasa/saka/icon.png',
+          sessionId: undefined,
+          score: undefined,
+          incognito: false,
+          lastAccessed: 123456
+        }
+      ];
+
+      const sakaId = 'abcdefg/saka.html';
+      browser.runtime.getURL.returns(sakaId);
+      browser.sessions.getRecentlyClosed.returns(queryResults);
+      expect(await getAllSuggestions()).toEqual(expectedResult);
     });
   });
 

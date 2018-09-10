@@ -12,8 +12,17 @@ export async function getAllSuggestions() {
   // Not disabling the rule as this might be fixable in the future using filter.
   // This for loop is needed at the moment as a workaround since filter does not support async.
   for (const session of sessions) {
-    if (session.tab && !await isSakaUrl(session.tab.url)) {
+    if (session.tab && !(await isSakaUrl(session.tab.url))) {
       filteredSessions.push(session);
+    } else if (session.window && session.window.tabs) {
+      for (const tabSession of session.window.tabs) {
+        if (tabSession && !(await isSakaUrl(tabSession.url))) {
+          filteredSessions.push({
+            lastModified: session.window.lastModified,
+            tab: tabSession
+          });
+        }
+      }
     }
   }
 
@@ -45,7 +54,7 @@ export async function recentlyClosedTabSuggestions() {
   // Not disabling the rule as this might be fixable in the future using filter.
   // This for loop is needed at the moment as a workaround since filter does not support async.
   for (const session of sessions) {
-    if (session.tab && !await isSakaUrl(session.tab.url)) {
+    if (session.tab && !(await isSakaUrl(session.tab.url))) {
       filteredSessions.push(session);
     }
   }
