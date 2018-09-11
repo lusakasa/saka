@@ -19,7 +19,7 @@ See the [Getting Started](https://github.com/lusakasa/saka/wiki/Getting-Started)
 
 ## Release Instructions (for maintainers)
 
-1.  Update the version number in `/static/manifest.json`
+1.  Update the version number in `manifest/common.json`
 
 2.  Make a commit and set the message to the version: `git commit -m "v0.15.2"`
 
