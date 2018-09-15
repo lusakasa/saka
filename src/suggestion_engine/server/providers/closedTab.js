@@ -6,7 +6,6 @@ import { getFilteredSuggestions } from 'lib/utils.js';
 export async function getAllSuggestions() {
   const sessions = await browser.sessions.getRecentlyClosed();
   const filteredSessions = [];
-  console.log('sessions: ', sessions);
 
   // TODO: This for loop is currently flagged by the airbnb eslint rules.
   // See: https://github.com/airbnb/javascript/issues/1271
