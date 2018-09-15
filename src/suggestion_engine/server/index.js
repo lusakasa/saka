@@ -11,6 +11,7 @@ export async function activateSuggestion(suggestion) {
       await browser.windows.update(suggestion.windowId, { focused: true });
       break;
     case 'closedTab':
+      console.log('Suggestion: ', suggestion);
       await browser.sessions.restore(suggestion.sessionId);
       break;
     case 'bookmark':
