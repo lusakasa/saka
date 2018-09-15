@@ -19,7 +19,10 @@ export async function getAllSuggestions() {
         if (tabSession && !(await isSakaUrl(tabSession.url))) {
           filteredSessions.push({
             lastModified: session.window.lastModified,
-            tab: tabSession
+            tab: {
+              ...tabSession,
+              sessionId: session.window.sessionId
+            }
           });
         }
       }
