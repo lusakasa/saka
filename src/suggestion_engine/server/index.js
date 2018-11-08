@@ -35,6 +35,5 @@ export async function activateSuggestion(suggestion) {
 }
 
 export async function closeTab(suggestion) {
-  console.log('Suggestion: ', suggestion);
-  browser.tabs.remove(suggestion.tabId);
+  await browser.tabs.remove(suggestion.tabId);
 }
