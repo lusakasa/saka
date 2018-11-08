@@ -7,3 +7,7 @@ export async function getSuggestions(mode, searchString) {
 export async function activateSuggestion(suggestion) {
   return msg('activateSuggestion', suggestion);
 }
+
+export async function closeTab(suggestion) {
+  return msg('closeTab', suggestion);
+}

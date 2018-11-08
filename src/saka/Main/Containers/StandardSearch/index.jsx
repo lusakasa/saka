@@ -1,7 +1,8 @@
 import { Component, h } from 'preact';
 import {
   getSuggestions,
-  activateSuggestion
+  activateSuggestion,
+  closeTab
 } from 'suggestion_engine/client/index.js';
 import { preprocessSuggestion } from 'suggestion_utils/index.js';
 import { ctrlKey } from 'lib/utils.js';
@@ -139,6 +140,12 @@ export default class extends Component {
           this.previousPage();
         }
         break;
+      case 'o':
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.closeTab();
+        }
+        break;
       case 'd':
         if (ctrlKey(e)) {
           e.preventDefault();
@@ -265,6 +272,16 @@ export default class extends Component {
       index >= 0 &&
       index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1)
     );
+  };
+
+  closeTab = async (index = this.state.selectedIndex) => {
+    console.log('close: ', index);
+    const { suggestions, firstVisibleIndex } = this.state;
+    const suggestion = suggestions[firstVisibleIndex + index];
+
+    if (suggestion) {
+      closeTab(suggestion);
+    }
   };
 
   tryActivateSuggestion = async (index = this.state.selectedIndex) => {
