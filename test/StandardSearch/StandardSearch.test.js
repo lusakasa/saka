@@ -3,7 +3,8 @@ import {
   render,
   cleanup,
   flushPromises,
-  fireEvent
+  fireEvent,
+  debounceRenderingOff
 } from 'preact-testing-library';
 
 import StandardSearch from '@/saka/Main/Containers/StandardSearch/index.jsx';
@@ -256,6 +257,33 @@ test('should select suggestion based on key press', () => {
       key: `${num}`,
       ctrlKey: true
     });
+  });
+});
+
+test('should close tab and delete suggestion when key pressed', async () => {
+  debounceRenderingOff();
+  const props = {
+    placeholder: 'Tabs',
+    mode: 'tab',
+    showEmptySearchSuggestions: true,
+    searchHistory: [],
+    updateSearchHistory: jest.fn(),
+    shuffleMode: jest.fn(),
+    suggestions: [
+      {
+        title: 'adjksdhk',
+        url: 'adasd',
+        incgnito: false
+      },
+      {}
+    ]
+  };
+
+  const { getByPlaceholderText } = render(<StandardSearch {...props} />);
+
+  fireEvent.keyDown(getByPlaceholderText('Tabs'), {
+    key: 'E',
+    ctrlKey: true
   });
 });
 

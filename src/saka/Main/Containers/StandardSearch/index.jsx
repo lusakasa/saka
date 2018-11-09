@@ -82,7 +82,10 @@ export default class extends Component {
         });
         break;
       case 'Backspace':
-        if (!e.repeat && e.target.value === '') {
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.closeTab();
+        } else if (!e.repeat && e.target.value === '') {
           browser.runtime.sendMessage({
             key: 'closeSaka',
             searchHistory: [...this.props.searchHistory]
@@ -138,12 +141,6 @@ export default class extends Component {
         if (ctrlKey(e)) {
           e.preventDefault();
           this.previousPage();
-        }
-        break;
-      case 'o':
-        if (ctrlKey(e)) {
-          e.preventDefault();
-          this.closeTab();
         }
         break;
       case 'd':

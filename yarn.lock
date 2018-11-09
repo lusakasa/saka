@@ -73,7 +73,7 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.1.5.tgz#20b7d5e7e1811ba996f8a868962ea7dd2bfcd2fc"
   integrity sha512-WXKf5K5HT6X0kKiCOezJZFljsfxKV1FpU8Tf1A7ZpGvyd/Q4hlrJm2EwoH2onaUq3O4tLDp+4gk0hHPsMyxmOg==
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.1.5":
   version "7.1.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.5.tgz#4170907641cf1f61508f563ece3725150cc6fe39"
   integrity sha512-xKnPpXG/pvK1B90JkwwxSGii90rQGKtzcMt2gI5G6+M0REXaq6rOHsGC2ay6/d0Uje7zzvSzjEzfR3ENhFlrfA==
@@ -507,6 +507,11 @@
   version "0.38.0"
   resolved "https://registry.yarnpkg.com/@material/typography/-/typography-0.38.0.tgz#fff8e4f25c5ef7b0afb5ed414bc700981e431703"
   integrity sha512-g2wigBZXSXwrZtibt6sbPO1eM2IROdo9Jk7ffGIb7GuYGLD92hWWzxusaOg4W/rcsBkWMdfquydRL3Q4HFnS2g==
+
+"@sheerun/mutationobserver-shim@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
+  integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
 "@sinonjs/formatio@3.0.0":
   version "3.0.0"
@@ -4064,15 +4069,14 @@ dom-serializer@0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom-testing-library@^2.6.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-2.9.1.tgz#813eff283b2fd97649b1382817636547329b2409"
-  integrity sha512-LFnD7mRX/6ZOuIsNmpcBrgm3ugRjuPiaFRog2tCGcm9SXMRS+datluihstDvi3u7gGMlehtGFmVZXKcLb+fJXw==
+dom-testing-library@^3.12.0:
+  version "3.12.2"
+  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-3.12.2.tgz#9828a94f6c505780bb1e1e9e29afd319594e01a4"
+  integrity sha512-kMj5UFm5lSxnMDtD6XWkJuzK0CX+XdMd5NSnvtpneeYQFORTF5Q5C6mdweH6hhwFcKYzAsHCfnvldg9c8HuFOA==
   dependencies:
-    jest-dom "^1.0.0"
-    mutationobserver-shim "^0.3.2"
-    pretty-format "^22.4.3"
-    wait-for-expect "^0.4.0"
+    "@sheerun/mutationobserver-shim" "^0.3.2"
+    pretty-format "^23.6.0"
+    wait-for-expect "^1.0.0"
 
 dom-walk@^0.1.0:
   version "0.1.1"
@@ -6426,7 +6430,7 @@ jest-docblock@^23.2.0:
   dependencies:
     detect-newline "^2.1.0"
 
-jest-dom@^1.0.0, jest-dom@^1.12.0:
+jest-dom@^1.12.0:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-1.12.1.tgz#4880c91e39e9c737188b5c952740df8912635248"
   integrity sha512-QZGnuUT3sK6YNcJq6kyrK1PE1WrkYaaXtOJD4WrT6RIv6qyrUS76xYbWGUxXAZykcqhqaTmCSuCpn//0GDtgqA==
@@ -6436,6 +6440,19 @@ jest-dom@^1.0.0, jest-dom@^1.12.0:
     jest-diff "^22.4.3"
     jest-matcher-utils "^22.4.3"
     pretty-format "^23.0.1"
+    redent "^2.0.0"
+
+jest-dom@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-2.1.1.tgz#c75515ef31147bd9684c860b0cba9605638fd4dd"
+  integrity sha512-jE1LRnP/wVGdQy6sVJ+dPwMq6rXXuvYTnzWEb8hDwfxhQesoaaukJzZaZYi14JPpdmhrncdpUsZpagN7HjuTsw==
+  dependencies:
+    chalk "^2.4.1"
+    css "^2.2.3"
+    jest-diff "^23.6.0"
+    jest-matcher-utils "^23.6.0"
+    lodash "^4.17.11"
+    pretty-format "^23.6.0"
     redent "^2.0.0"
 
 jest-each@^23.6.0:
@@ -7525,11 +7542,6 @@ msgx@^1.1.3:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/msgx/-/msgx-1.1.4.tgz#ecd18a04b25aa3d149d929e4c5e7b5bcca1f98a1"
   integrity sha512-zd0qFacBXGxnz1N+GH74AFWvTzMwUuN3zWz/2puh2cQslgan5mkMjcdzy22GosqO9qys+6ex0fMPFhebwzBbxA==
-
-mutationobserver-shim@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#f4d5dae7a4971a2207914fb5a90ebd514b65acca"
-  integrity sha1-9NXa56SXGiIHkU+1qQ69UUtlrMo=
 
 mute-stream@0.0.7:
   version "0.0.7"
@@ -8658,13 +8670,15 @@ preact-test-utils@^0.1.3:
     preact-compat "^3.11.0"
     simulate-event "^1.4.0"
 
-preact-testing-library@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/preact-testing-library/-/preact-testing-library-0.2.1.tgz#e9c7ae9ca82e7105cd0f3fb35193c12e431ef471"
-  integrity sha512-tQeMdWEBg0OypaiMvpsdmGH9LvlMQmwcMAWPWlWQGkKHTZY4SC+8aBKxnQbfZ2/BXxCUytra1zgsVSDM+bYssg==
+preact-testing-library@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/preact-testing-library/-/preact-testing-library-0.3.0.tgz#98d919041acd0f2d3f9f092c87c325f234401991"
+  integrity sha512-KS2/NyBr7aq3u04Q+s/3kOgMU5vpGro3tfGYX5iVDdBDrGl+ZSHPwuP0XLB8pZrHyPHCAXai/Grljgc0hnWE9w==
   dependencies:
+    "@babel/runtime" "^7.1.5"
     babel-plugin-module-resolver "^2.7.1"
-    dom-testing-library "^2.6.1"
+    dom-testing-library "^3.12.0"
+    jest-dom "^2.1.0"
     wait-for-expect "0.4.0"
 
 preact-transition-group@^1.1.1:
@@ -10797,10 +10811,15 @@ w3c-hr-time@^1.0.1:
   dependencies:
     browser-process-hrtime "^0.1.2"
 
-wait-for-expect@0.4.0, wait-for-expect@^0.4.0:
+wait-for-expect@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-0.4.0.tgz#341c96ab89d6102a0169a9be6cd0de354de92c17"
   integrity sha512-itHoJUKL5P8abjhWRlp3F5QLDY7LokcJkgD78tjrX08ozBakfy9YD4bgxUVuSld8yqjza3ld6Sj7UMMOH/twFA==
+
+wait-for-expect@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-1.0.1.tgz#73ab346ed56ed2ef66c380a59fd623755ceac0ce"
+  integrity sha512-TPZMSxGWUl2DWmqdspLDEy97/S1Mqq0pzbh2A7jTq0WbJurUb5GKli+bai6ayeYdeWTF0rQNWZmUvCVZ9gkrfA==
 
 walkdir@^0.0.11:
   version "0.0.11"
