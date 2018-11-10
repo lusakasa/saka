@@ -274,7 +274,6 @@ export default class extends Component {
   closeTab = async (index = this.state.selectedIndex) => {
     const { suggestions, firstVisibleIndex } = this.state;
     const suggestion = suggestions[firstVisibleIndex + index];
-
     if (suggestion) {
       await closeTab(suggestion);
       suggestions.splice(firstVisibleIndex + index, 1);
