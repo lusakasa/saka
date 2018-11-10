@@ -33,3 +33,7 @@ export async function activateSuggestion(suggestion) {
       );
   }
 }
+
+export async function closeTab(suggestion) {
+  await browser.tabs.remove(suggestion.tabId);
+}

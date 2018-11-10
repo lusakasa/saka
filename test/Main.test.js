@@ -11,13 +11,13 @@ import Main from '@/saka/Main/index.jsx';
 
 beforeEach(() => {
   browser.flush();
-  browser.storage.sync.get.returns({
-    sakaSettings: {
-      mode: 'tab',
-      showEmptySearchSuggestion: false
-    },
-    searchHistory: []
-  });
+  // browser.storage.sync.get.returns({
+  //   sakaSettings: {
+  //     mode: 'tab',
+  //     showEmptySearchSuggestions: false
+  //   },
+  //   searchHistory: []
+  // });
   browser.storage.local.get.resolves(
     Promise.resolve({
       screenshot:
@@ -28,7 +28,7 @@ beforeEach(() => {
   browser.runtime.sendMessage.returns('');
 });
 
-test('should show all options when not showing key bindings', () => {
+test('should show all options when not showing key bindings', async () => {
   render(<Main />);
 });
 

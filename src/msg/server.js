@@ -1,7 +1,8 @@
 import server from 'msgx/server.js';
 import {
   getSuggestions,
-  activateSuggestion
+  activateSuggestion,
+  closeTab
 } from 'suggestion_engine/server/index.js';
 
 const actions = {
@@ -9,7 +10,8 @@ const actions = {
   sg: getSuggestions,
   zoom: (_, sender) => browser.tabs.getZoom(sender.tab.id),
   focusTab: (_, sender) => browser.tabs.update(sender.tab.id, { active: true }),
-  activateSuggestion
+  activateSuggestion,
+  closeTab
 };
 
 const onConnect = (sender, msg, data) => {

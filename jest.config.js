@@ -24,8 +24,7 @@ module.exports = {
     global: {
       branches: 59,
       functions: 65,
-      lines: 62,
-      statements: -268
+      lines: 62
     }
   },
   coverageReporters: ['json', 'lcov', 'html'],

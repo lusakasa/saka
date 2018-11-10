@@ -1,7 +1,8 @@
 import { Component, h } from 'preact';
 import {
   getSuggestions,
-  activateSuggestion
+  activateSuggestion,
+  closeTab
 } from 'suggestion_engine/client/index.js';
 import { preprocessSuggestion } from 'suggestion_utils/index.js';
 import { ctrlKey } from 'lib/utils.js';
@@ -81,7 +82,10 @@ export default class extends Component {
         });
         break;
       case 'Backspace':
-        if (!e.repeat && e.target.value === '') {
+        if (ctrlKey(e)) {
+          e.preventDefault();
+          this.closeTab();
+        } else if (!e.repeat && e.target.value === '') {
           browser.runtime.sendMessage({
             key: 'closeSaka',
             searchHistory: [...this.props.searchHistory]
@@ -265,6 +269,16 @@ export default class extends Component {
       index >= 0 &&
       index <= Math.max(0, Math.min(suggestions.length, maxSuggestions) - 1)
     );
+  };
+
+  closeTab = async (index = this.state.selectedIndex) => {
+    const { suggestions, firstVisibleIndex } = this.state;
+    const suggestion = suggestions[firstVisibleIndex + index];
+    if (suggestion) {
+      await closeTab(suggestion);
+      suggestions.splice(firstVisibleIndex + index, 1);
+      this.setState({ suggestions });
+    }
   };
 
   tryActivateSuggestion = async (index = this.state.selectedIndex) => {

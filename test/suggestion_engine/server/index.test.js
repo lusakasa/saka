@@ -1,6 +1,7 @@
 import {
   getSuggestions,
-  activateSuggestion
+  activateSuggestion,
+  closeTab
 } from 'suggestion_engine/server/index.js';
 import * as providers from 'suggestion_engine/server/providers/index.js';
 
@@ -60,4 +61,12 @@ test('should call appropriate activation methods', async () => {
     originalType: 'tab'
   });
   expect(browser.tabs.update.calledOnce).toEqual(true);
+});
+
+test('should call close tab API', async () => {
+  const suggestion = {
+    tabId: 1
+  };
+
+  await closeTab(suggestion);
 });
