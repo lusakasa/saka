@@ -35,7 +35,6 @@ export default class Main extends Component {
   fetchSakaSettings = async function fetchSakaSettings() {
     const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
     let { searchHistory } = await browser.storage.sync.get(['searchHistory']);
-    console.log('settings: ', sakaSettings);
     searchHistory =
       searchHistory !== undefined && searchHistory.length > 0
         ? new Set(searchHistory)
