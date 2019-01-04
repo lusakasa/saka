@@ -13,10 +13,9 @@ async function focusOrCreateTab(url) {
 
     await browser.tabs.update(existingTab.id, { active: true });
     await browser.windows.update(existingTab.windowId, { focused: true });
-    return;
+  } else {
+    await browser.tabs.create({ url });
   }
-
-  await browser.tabs.create({ url });
 }
 
 export async function activateSuggestion(suggestion) {

@@ -65,7 +65,7 @@ test('should call appropriate activation methods', async () => {
 
 test('should focus bookmark and history tabs if already open', async () => {
   browser.flush();
-  browser.tabs.query.returns(Promise.resolve([{ id: '1', windowId: '1' }]));
+  browser.tabs.query.resolves([{ id: '1', windowId: '1' }]);
   await activateSuggestion({
     type: 'bookmark'
   });
@@ -73,7 +73,7 @@ test('should focus bookmark and history tabs if already open', async () => {
   expect(browser.windows.update.calledOnce).toEqual(true);
 
   browser.flush();
-  browser.tabs.query.returns(Promise.resolve([{ id: '1', windowId: '1' }]));
+  browser.tabs.query.resolves([{ id: '1', windowId: '1' }]);
   await activateSuggestion({
     type: 'history'
   });
