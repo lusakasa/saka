@@ -4,6 +4,20 @@ export async function getSuggestions([mode, searchString]) {
   return providers[mode](searchString);
 }
 
+async function focusOrCreateTab(url) {
+  const matchingTabs = await browser.tabs.query({ url });
+
+  if (matchingTabs && matchingTabs.length > 0) {
+    // If multiple matching tabs then just focus the first one
+    const existingTab = matchingTabs[0];
+
+    await browser.tabs.update(existingTab.id, { active: true });
+    await browser.windows.update(existingTab.windowId, { focused: true });
+  } else {
+    await browser.tabs.create({ url });
+  }
+}
+
 export async function activateSuggestion(suggestion) {
   switch (suggestion.type) {
     case 'tab':
@@ -14,10 +28,10 @@ export async function activateSuggestion(suggestion) {
       await browser.sessions.restore(suggestion.sessionId);
       break;
     case 'bookmark':
-      await browser.tabs.create({ url: suggestion.url });
+      await focusOrCreateTab(suggestion.url);
       break;
     case 'history':
-      await browser.tabs.create({ url: suggestion.url });
+      await focusOrCreateTab(suggestion.url);
       break;
     case 'recentlyViewed':
       await activateSuggestion({

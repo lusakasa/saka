@@ -63,6 +63,24 @@ test('should call appropriate activation methods', async () => {
   expect(browser.tabs.update.calledOnce).toEqual(true);
 });
 
+test('should focus bookmark and history tabs if already open', async () => {
+  browser.flush();
+  browser.tabs.query.resolves([{ id: '1', windowId: '1' }]);
+  await activateSuggestion({
+    type: 'bookmark'
+  });
+  expect(browser.tabs.update.calledOnce).toEqual(true);
+  expect(browser.windows.update.calledOnce).toEqual(true);
+
+  browser.flush();
+  browser.tabs.query.resolves([{ id: '1', windowId: '1' }]);
+  await activateSuggestion({
+    type: 'history'
+  });
+  expect(browser.tabs.update.calledOnce).toEqual(true);
+  expect(browser.windows.update.calledOnce).toEqual(true);
+});
+
 test('should call close tab API', async () => {
   const suggestion = {
     tabId: 1
