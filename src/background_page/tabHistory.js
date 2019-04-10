@@ -1,4 +1,4 @@
-import 'lib/browser_polyfill.js';
+import browser from 'webextension-polyfill';
 
 // list of tab ids in order of increasing age since last visit
 export const tabHistory = [];

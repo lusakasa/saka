@@ -1,4 +1,6 @@
+import browser from 'webextension-polyfill';
 import server from 'msgx/server.js';
+
 import {
   getSuggestions,
   activateSuggestion,
