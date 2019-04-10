@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill';
 import { getFilteredSuggestions, objectFromArray } from 'lib/utils.js';
 
 export async function allTabSuggestions() {

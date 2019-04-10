@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill';
 import { isURL, extractProtocol, isProtocol } from 'lib/url.js';
 import { getFilteredSuggestions } from 'lib/utils.js';
 
