@@ -8,7 +8,8 @@ A browsing assistant for [Firefox](https://addons.mozilla.org/firefox/addon/saka
 * Search all browsing history
 * Search all modes at once
 
-![Preview](./images/preview.png)
+<img src="./images/preview.png" width="70%" height="70%">
+
 
 ## Install
 
