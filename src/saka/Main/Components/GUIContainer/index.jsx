@@ -31,7 +31,8 @@ export default class GUIContainer extends Component {
   };
 
   fetchTheme = async function fetchTheme() {
-    const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    const storedSettings = ( await browser.storage.sync.get(['sakaSettings']) ) || {};
+    const { sakaSettings } = storedSettings;
     // fall back on light theme when no settings
     const resolved = Object.assign({ theme: 'light' }, sakaSettings);
     return resolved.theme;
