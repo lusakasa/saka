@@ -11,3 +11,5 @@ coverage
 saka-*.zip
 package-lock.json
 .idea
+generate-xpi.js
+*.xpi

@@ -14,7 +14,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --watch --verbose false",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "watch:build:firefox": "nodemon -q -x \"npm run build:firefox\" -w src -e jsx,scss"
   },
   "repository": {
     "type": "git",
@@ -62,6 +63,7 @@
     "prettier": "^1.14.2",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
+    "sign-addon": "^2.0.5",
     "sinon-chrome": "^2.3.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.17.0",

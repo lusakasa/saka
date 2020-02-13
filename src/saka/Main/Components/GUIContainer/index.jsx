@@ -9,17 +9,14 @@ export default class GUIContainer extends Component {
     zoom: 0
   };
 
-  componentWillMount() {
+  async componentWillMount() {
+    this.state.theme = await this.fetchTheme();
     window.addEventListener('zoom', this.onZoomChange);
     msg('zoom').then(this.setZoom);
   }
 
   componentWillUnmount() {
     window.removeEventListener('zoom', this.onZoomChange);
-  }
-
-  async componentDidMount() {
-    this.state.theme = await this.fetchTheme();
   }
 
   onZoomChange = event => {
@@ -32,6 +29,7 @@ export default class GUIContainer extends Component {
 
   fetchTheme = async function fetchTheme() {
     const storedSettings = ( await browser.storage.sync.get(['sakaSettings']) ) || {};
+    console.log(storedSettings);
     const { sakaSettings } = storedSettings;
     // fall back on light theme when no settings
     const resolved = Object.assign({ theme: 'light' }, sakaSettings);
