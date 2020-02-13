@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import msg from 'msg/client.js';
 import 'scss/styles.scss';
+import browser from 'webextension-polyfill';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {
@@ -17,12 +18,23 @@ export default class GUIContainer extends Component {
     window.removeEventListener('zoom', this.onZoomChange);
   }
 
+  async componentDidMount() {
+    this.state.theme = await this.fetchTheme();
+  }
+
   onZoomChange = event => {
     this.setZoom(event.detail.zoom);
   };
 
   setZoom = zoom => {
     this.setState({ zoom });
+  };
+
+  fetchTheme = async function fetchTheme() {
+    const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    // fall back on light theme when no settings
+    const resolved = Object.assign({ theme: 'light' }, sakaSettings);
+    return resolved.theme;
   };
 
   render() {
@@ -49,6 +61,7 @@ export default class GUIContainer extends Component {
                 // and use that instead of the constant 504
               }
         }
+        data-theme={this.state.theme}
       >
         {children}
       </main>

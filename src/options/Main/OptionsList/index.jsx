@@ -4,6 +4,7 @@ import DefaultModeSelection from './DefaultModeSelection.jsx';
 import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector.jsx';
 import ShowSakaHotkeys from './ShowSakaHotkeys.jsx';
 import EnableFuzzySearch from './EnableFuzzySearch.jsx';
+import ThemeSelection from './ThemeSelection.jsx';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class OptionsList extends Component {
       isLoading: true,
       mode: 'tab',
       showEmptySearchSuggestions: true,
-      enableFuzzySearch: true
+      enableFuzzySearch: true,
+      theme: 'light'
     };
   }
 
@@ -30,7 +32,8 @@ export default class OptionsList extends Component {
         isLoading: false,
         mode: sakaSettings.mode,
         showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions,
-        enableFuzzySearch: sakaSettings.enableFuzzySearch
+        enableFuzzySearch: sakaSettings.enableFuzzySearch,
+        theme: sakaSettings.theme || 'light'
       };
     }
 
@@ -43,7 +46,8 @@ export default class OptionsList extends Component {
     const settingsStore = {
       mode: this.state.mode,
       showEmptySearchSuggestions: this.state.showEmptySearchSuggestions,
-      enableFuzzySearch: this.state.enableFuzzySearch
+      enableFuzzySearch: this.state.enableFuzzySearch,
+      theme: this.state.theme
     };
 
     browser.storage.sync.set({ sakaSettings: settingsStore });
@@ -52,6 +56,12 @@ export default class OptionsList extends Component {
   handleModeChange = e => {
     this.setState({
       mode: e.target.value
+    });
+  };
+
+  handleThemeChange = e => {
+    this.setState({
+      theme: e.target.value
     });
   };
 
@@ -76,6 +86,14 @@ export default class OptionsList extends Component {
           <div className="mdc-list-group">
             <h3 className="mdc-list-group__subheader">General Settings</h3>
             <ul className="mdc-list mdc-list--non-interactive mdc-list--dense">
+              <ThemeSelection
+                handleThemeChange={this.handleThemeChange}
+                theme={this.state.theme}
+                />
+              <li
+                role="separator"
+                className="mdc-list-divider mdc-list-divider--padded options-separator"
+              />
               <DefaultModeSelection
                 handleModeChange={this.handleModeChange}
                 mode={this.state.mode}

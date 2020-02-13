@@ -10,3 +10,4 @@ yarn-error.log
 coverage
 saka-*.zip
 package-lock.json
+.idea
