@@ -1,9 +1,14 @@
+import { h } from 'preact';
 import 'material-components-web/dist/material-components-web.css';
+import { Themes } from './themes';
 
-const ThemeSelection = function ThemeSelection({
+export const ThemeSelection = function ThemeSelection({
    theme,
    handleThemeChange
   }) {
+  const options = Object.keys(Themes).map(
+    k => <option value={Themes[k]}>{k}</option>
+  );
   return (
     <li className="mdc-list-item option">
       <span className="mdc-list-item__text">
@@ -20,12 +25,7 @@ const ThemeSelection = function ThemeSelection({
           className=" mdc-select__native-control"
           onChange={handleThemeChange}
         >
-          <option value="light" selected="">
-            Light
-          </option>
-          <option value="inverted" selected="">
-            Inverted
-          </option>
+          {options}
         </select>
       </div>
     </li>

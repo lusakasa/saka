@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import msg from 'msg/client.js';
 import 'scss/styles.scss';
 import browser from 'webextension-polyfill';
+import { Themes } from '../../../../options/Main/OptionsList/themes';
 
 // Makes GUI constant size
 export default class GUIContainer extends Component {
@@ -32,7 +33,7 @@ export default class GUIContainer extends Component {
     console.log(storedSettings);
     const { sakaSettings } = storedSettings;
     // fall back on light theme when no settings
-    const resolved = Object.assign({ theme: 'light' }, sakaSettings);
+    const resolved = Object.assign({ theme: Themes.light }, sakaSettings);
     return resolved.theme;
   };
 

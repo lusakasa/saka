@@ -4,7 +4,8 @@ import DefaultModeSelection from './DefaultModeSelection.jsx';
 import OnlyShowSearchBarSelector from './OnlyShowSearchBarSelector.jsx';
 import ShowSakaHotkeys from './ShowSakaHotkeys.jsx';
 import EnableFuzzySearch from './EnableFuzzySearch.jsx';
-import ThemeSelection from './ThemeSelection.jsx';
+import { Themes } from './themes';
+import { ThemeSelection } from './ThemeSelection.jsx';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class OptionsList extends Component {
       mode: 'tab',
       showEmptySearchSuggestions: true,
       enableFuzzySearch: true,
-      theme: 'light'
+      theme: Themes.light
     };
   }
 
@@ -33,7 +34,7 @@ export default class OptionsList extends Component {
         mode: sakaSettings.mode,
         showEmptySearchSuggestions: sakaSettings.showEmptySearchSuggestions,
         enableFuzzySearch: sakaSettings.enableFuzzySearch,
-        theme: sakaSettings.theme || 'light'
+        theme: sakaSettings.theme || Themes.light
       };
     }
 
