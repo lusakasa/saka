@@ -1,12 +1,9 @@
-import { h } from 'preact';
-
-// import { Component, h } from 'preact';
 import 'material-components-web/dist/material-components-web.css';
 
 const ThemeSelection = function ThemeSelection({
-                                                 theme,
-                                                 handleThemeChange
-                                               }) {
+   theme,
+   handleThemeChange
+  }) {
   return (
     <li className="mdc-list-item option">
       <span className="mdc-list-item__text">
