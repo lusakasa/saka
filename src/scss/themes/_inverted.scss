@@ -3,4 +3,6 @@ html[data-theme="inverted"] {
   filter: invert(100%);
   background: #111;
   --mdc-theme-primary: #aaa;
+  border-radius: 5px;
+  border: 1px solid #555;
 }

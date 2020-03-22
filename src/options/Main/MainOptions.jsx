@@ -7,6 +7,7 @@ import OptionsList from './OptionsList/index.jsx';
 import SakaHotkeysList from './SakaHotkeysList/index.jsx';
 import browser from 'webextension-polyfill';
 import { Themes } from './OptionsList/themes';
+import { applyTheme } from '../../lib/apply-theme';
 
 export default class MainOptions extends Component {
   constructor(props) {
@@ -25,11 +26,7 @@ export default class MainOptions extends Component {
 
   async componentDidMount() {
     const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
-    const body = document.querySelector("html");
-    body.id = "saka-main-options";
-    body.setAttribute(
-      "data-theme", sakaSettings.theme || Themes.light
-    );
+    applyTheme(sakaSettings.theme || Themes.light);
   }
 
   render() {

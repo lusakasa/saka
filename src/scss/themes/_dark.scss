@@ -1,0 +1,50 @@
+$theme-primary: #343;
+$theme-secondary: #666;
+$theme-on-primary: #eee;
+$theme-text-primary-on-background: #eee;
+$theme-text-secondary-on-background: #aaa;
+$theme-text-hint-on-background: #eea;
+$theme-background: #111;
+$theme-surface: #222222;
+$disabled-text: #999;
+$border-color: #999;
+
+html[data-theme="dark"],
+#GUIContainer[data-theme="dark"] {
+  --mdc-theme-primary: #{$theme-primary};
+  --mdc-theme-secondary: #{$theme-secondary};
+  --mdc-theme-on-primary: #{$theme-on-primary};
+  --mdc-theme-text-primary-on-background: #{$theme-text-primary-on-background};
+  --mdc-theme-text-secondary-on-background: #{$theme-text-secondary-on-background};
+  --mdc-theme-text-hint-on-background: #{$theme-text-hint-on-background};
+  --mdc-theme-background: #{$theme-background};
+  --mdc-theme-surface: #{$theme-surface};
+
+  background: #{$theme-background};
+  border-radius: 4px;
+  border: 1px solid $border-color;
+
+  .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control {
+    color: $theme-text-primary-on-background;
+  }
+  .mdc-select.mdc-select--disabled .mdc-select__native-control {
+    color: $disabled-text;
+  }
+
+  option {
+    background: $theme-background;
+    color: $theme-text-primary-on-background;
+  }
+
+  .options-container,
+  .mode-switcher-icon,
+  form.search-bar-container,
+  #search-bar {
+    background: $theme-surface;
+    color: $theme-on-primary;
+  }
+
+  ::placeholder {
+    color: $disabled-text;
+  }
+}

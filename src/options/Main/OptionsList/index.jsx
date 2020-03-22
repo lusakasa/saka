@@ -6,6 +6,7 @@ import ShowSakaHotkeys from './ShowSakaHotkeys.jsx';
 import EnableFuzzySearch from './EnableFuzzySearch.jsx';
 import { Themes } from './themes';
 import { ThemeSelection } from './ThemeSelection.jsx';
+import { applyTheme } from '../../../lib/apply-theme';
 
 export default class OptionsList extends Component {
   constructor(props) {
@@ -64,6 +65,7 @@ export default class OptionsList extends Component {
     this.setState({
       theme: e.target.value
     });
+    applyTheme(this.state.theme);
   };
 
   handleShowSearchSuggestionsChange = () => {
