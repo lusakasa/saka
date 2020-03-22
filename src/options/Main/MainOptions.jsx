@@ -1,9 +1,12 @@
+import '../../scss/themes/themes.scss';
 import { Component, h } from 'preact';
 import 'material-components-web/dist/material-components-web.css';
 import 'scss/options.scss';
 
 import OptionsList from './OptionsList/index.jsx';
 import SakaHotkeysList from './SakaHotkeysList/index.jsx';
+import browser from 'webextension-polyfill';
+import { Themes } from './OptionsList/themes';
 
 export default class MainOptions extends Component {
   constructor(props) {
@@ -20,9 +23,18 @@ export default class MainOptions extends Component {
     });
   };
 
+  async componentDidMount() {
+    const { sakaSettings } = await browser.storage.sync.get(['sakaSettings']);
+    const body = document.querySelector("html");
+    body.id = "saka-main-options";
+    body.setAttribute(
+      "data-theme", sakaSettings.theme || Themes.light
+    );
+  }
+
   render() {
     return (
-      <body>
+      <div>
         <header className="mdc-top-app-bar mdc-top-app-bar--short">
           <div className="mdc-top-app-bar__row">
             <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -44,7 +56,7 @@ export default class MainOptions extends Component {
             />
           )}
         </div>
-      </body>
+      </div>
     );
   }
 }

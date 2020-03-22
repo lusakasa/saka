@@ -1,0 +1,6 @@
+#GUIContainer[data-theme="inverted"],
+html[data-theme="inverted"] {
+  filter: invert(100%);
+  background: #111;
+  --mdc-theme-primary: #aaa;
+}
