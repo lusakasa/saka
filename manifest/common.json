@@ -49,7 +49,6 @@
   "permissions": [
     "<all_urls>",
     "tabs",
-    "activeTab",
     "sessions",
     "history",
     "bookmarks",
