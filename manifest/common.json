@@ -2,7 +2,7 @@
   "name": "Saka",
   "version": "0.17.3",
   "author": "Sufyan Dawoodjee, Uzair Shamim",
-  "description": "Saka - elegent tab search, selection, and beyond",
+  "description": "Saka - elegant tab search, selection, and beyond",
   "manifest_version": 2,
   "options_ui": {
     "page": "options.html",
